@@ -1,4 +1,4 @@
-# I/O CNA Adobe Analytics Core SDK
+# I/O CNA Adobe Target Core SDK
 Javascript Core SDK wrapping [Adobe Target APIs](https://developers.adobetarget.com/api/).
 
 
