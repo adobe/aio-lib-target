@@ -751,7 +751,7 @@ class TargetCoreAPI {
   __createRequest (body, query) {
     return {
       requestBody: body,
-      server: 'https://analytics.adobe.io/api/{tenant-name}/',
+      server: 'https://mc.adobe.io/{tenant-name}/target',
       serverVariables: {
         'tenant-name': this.tenant
       }
