@@ -15,11 +15,11 @@ const Swagger = require('swagger-client')
 const fs = require('fs')
 const path = require('path')
 
-function init (companyId, apiKey, token) {
+function init (tenant, apiKey, token) {
   return new Promise((resolve, reject) => {
     const clientWrapper = new TargetCoreAPI()
 
-    clientWrapper.init(companyId, apiKey, token)
+    clientWrapper.init(tenant, apiKey, token)
       .then(initializedSDK => {
         console.log('sdk initialized successfully')
         resolve(initializedSDK)
