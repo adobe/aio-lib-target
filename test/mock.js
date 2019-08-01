@@ -8,18 +8,40 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-const nodeFetch = jest.requireActual('node-fetch')
-const fetchMock = require('fetch-mock').sandbox()
-Object.assign(fetchMock.config, nodeFetch, {
-  fetch: nodeFetch
-})
-module.exports = fetchMock
 
-function mockResponseWithMethod (url, method, response) {
-  fetchMock.mock((u, opts) => u === url && opts.method === method, response)
+const Bad_Request = {
+    err: {
+    throws: new Error('Bad Request')
+    },
+    message: "Bad Request"
+
+}
+const Unauthorized_Request = {
+    err: {
+    throws: new Error('Unauthorized')
+    },
+    message: "Unauthorized"
+}
+const Forbidden_Request = {
+    err: {
+    throws: new Error('Forbidden Request')
+    },
+    message: "Forbidden Request"
+}
+const Not_Found = {
+    err: {
+    throws: new Error('Not Found')
+    },
+    message: "Not Found"
+}
+const Internal_Server_Error = {
+    err: {
+    throws: new Error('Internal Server Error')
+    },
+    message: "Internal Server Error"
 }
 
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities', 'GET', {
+const activities = {
     "total": 2,
     "offset": 0,
     "limit": 10,
@@ -45,9 +67,9 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities', 'GET
             "workspace": "1234567"
         }
     ]
-})
+}
 
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/ab', 'POST', {
+const abActivity = {
     "id": 123,
     "name": "New API Activity",
     "startsAt": "2017-05-01T08:00Z",
@@ -66,9 +88,28 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/ab', '
             }
         ]
     }
-  })
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/xt', 'POST', {
+  }
+const abActivityUpdated = {
+    "id": 123,
+    "name": "Updated API Activity",
+    "startsAt": "2017-05-01T08:00Z",
+    "endsAt": "2017-09-01T07:59:59Z",
+    "state": "saved",
+    "priority": 10,
+    "autoAllocateTraffic": {
+        "enabled": false,
+        "successEvaluationCriteria": "conversion_rate"
+    },
+    "locations": {
+        "mboxes": [
+            {
+                "locationLocalId": 1,
+                "name": "x1-serverside-ab"
+            }
+        ]
+    }
+  }
+const xtActivity = {
     "id": 321,
     "name": "New XT Activity",
     "startsAt": "2017-05-01T08:00Z",
@@ -87,71 +128,8 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/xt', '
             }
         ]
     }
-  })
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/ab/123', 'GET', {
-    "id": 123,
-    "name": "New API Activity",
-    "startsAt": "2017-05-01T08:00Z",
-    "endsAt": "2017-09-01T07:59:59Z",
-    "state": "saved",
-    "priority": 100,
-    "autoAllocateTraffic": {
-        "enabled": false,
-        "successEvaluationCriteria": "conversion_rate"
-    },
-    "locations": {
-        "mboxes": [
-            {
-                "locationLocalId": 0,
-                "name": "x1-serverside-ab"
-            }
-        ]
-    }
-  })
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/xt/321', 'GET', {
-    "id": 321,
-    "name": "New API Activity",
-    "startsAt": "2017-05-01T08:00Z",
-    "endsAt": "2017-09-01T07:59:59Z",
-    "state": "saved",
-    "priority": 100,
-    "autoAllocateTraffic": {
-        "enabled": false,
-        "successEvaluationCriteria": "conversion_rate"
-    },
-    "locations": {
-        "mboxes": [
-            {
-                "locationLocalId": 0,
-                "name": "x1-serverside-ab"
-            }
-        ]
-    }
-  })
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/ab/123', 'PUT', {
-    "id": 123,
-    "name": "Updated API Activity",
-    "startsAt": "2017-05-01T08:00Z",
-    "endsAt": "2017-09-01T07:59:59Z",
-    "state": "saved",
-    "priority": 10,
-    "autoAllocateTraffic": {
-        "enabled": false,
-        "successEvaluationCriteria": "conversion_rate"
-    },
-    "locations": {
-        "mboxes": [
-            {
-                "locationLocalId": 1,
-                "name": "x1-serverside-ab"
-            }
-        ]
-    }
-  })
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/xt/321', 'PUT', {
+  }
+const xtActivityUpdated = {
     "id": 321,
     "name": "Updated XT Activity",
     "startsAt": "2017-05-01T08:00Z",
@@ -170,76 +148,17 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/xt/321
             }
         ]
     }
-  })
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/123/name', 'PUT', {
+  }
+const nameActivity = {
     "id": 123,
     "name": "new name",
-    "modifiedAt": "2017-01-01T00:00Z"
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/123/state', 'PUT', {
-    "id": 123,
     "state": "activated",
-    "modifiedAt": "2017-01-01T00:00Z"
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/123/priority', 'PUT', {
-    "id": 123,
     "priority": "5",
-    "modifiedAt": "2017-01-01T00:00Z"
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/123/schedule', 'PUT', {
-    "id": 123,
     "startsAt": "2017-05-01T08:00Z",
     "endsAt": "2017-09-01T07:59:59Z",
     "modifiedAt": "2017-01-01T00:00Z"
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/ab/123', 'DELETE', {
-    "id": 123,
-    "name": "Updated API Activity",
-    "startsAt": "2017-05-01T08:00Z",
-    "endsAt": "2017-09-01T07:59:59Z",
-    "state": "saved",
-    "priority": 10,
-    "autoAllocateTraffic": {
-        "enabled": false,
-        "successEvaluationCriteria": "conversion_rate"
-    },
-    "locations": {
-        "mboxes": [
-            {
-                "locationLocalId": 1,
-                "name": "x1-serverside-ab"
-            }
-        ]
-    }
-  })
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/xt/321', 'DELETE', {
-    "id": 321,
-    "name": "Updated XT Activity",
-    "startsAt": "2017-05-01T08:00Z",
-    "endsAt": "2017-09-01T07:59:59Z",
-    "state": "saved",
-    "priority": 10,
-    "autoAllocateTraffic": {
-        "enabled": false,
-        "successEvaluationCriteria": "conversion_rate"
-    },
-    "locations": {
-        "mboxes": [
-            {
-                "locationLocalId": 1,
-                "name": "x1-serverside-ab"
-            }
-        ]
-    }
-  })
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/123/changelog', 'GET', {
+}
+const changeLog = {
     "offset": 0,
     "limit": 2147483647,
     "total": 2,
@@ -263,9 +182,9 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/123/ch
             }
         }
     ]
-})
+}
 
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/offers', 'GET', {
+const offers = {
     "total": 2,
     "offset": 0,
     "limit": 10,
@@ -285,41 +204,32 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/offers', 'GET', {
             "workspace": "1234567"
         },
     ]
-})
+}
 
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/offers/content/111', 'GET', {
+const offer = {
     "id": 111,
     "name": "10OFF",
     "content": "Use 10OFF for $10 off for orders over $100",
     "modifiedAt": "2017-03-19T00:06:47Z",
     "workspace": "1234567"
-})
+}
 
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/offers/content', 'POST', {
+const newOffer = {
     "id": 123,
     "name": "My new offer",
     "content": "<div>The content of the offer</div>",
     "modifiedAt": "2017-07-10T20:46:53Z",
     "workspace": "1234567"
-})
+}
 
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/offers/content/123', 'PUT', {
+const updatedOffer = {
     "id": 123,
     "name": "My updated offer",
     "content": "<div>Updated content</div>",
     "modifiedAt": "2017-07-10T20:46:53Z",
     "workspace": "1234567"
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/offers/content/111', 'DELETE', {
-    "id": 111,
-    "name": "10OFF",
-    "content": "Use 10OFF for $10 off for orders over $100",
-    "modifiedAt": "2017-03-19T00:06:47Z",
-    "workspace": "1234567"
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/audiences', 'GET', {
+}
+const audiences = {
     "offset": 0,
     "limit": 10,
     "total": 2,
@@ -341,9 +251,8 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/audiences', 'GET'
             "workspace": "1234567"
         }
     ]
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/audiences/111', 'GET', {
+}
+const audience = {
     "id": 111,
     "name": "Gold Members in Califo-1495136673062",
     "description": "--",
@@ -366,9 +275,8 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/audiences/111', '
     },
     "modifiedAt": "2017-05-18T19:44:34Z",
     "workspace": "1234567"
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/audiences', 'POST', {
+}
+const newAudience = {
     "id": 123,
     "name": "Gold Members in Califo-1495136673062",
     "description": "--",
@@ -391,10 +299,8 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/audiences', 'POST
     },
     "modifiedAt": "2017-05-18T19:44:34Z",
     "workspace": "1234567"
-})
-
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/audiences/123', 'PUT', {
+}
+const updatedAudience = {
     "id": 123,
     "name": "Updated Gold Members in Califo-1495136673062",
     "description": "--",
@@ -417,34 +323,8 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/audiences/123', '
     },
     "modifiedAt": "2017-05-18T19:44:34Z",
     "workspace": "1234567"
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/audiences/111', 'DELETE', {
-    "id": 111,
-    "name": "Gold Members in Califo-1495136673062",
-    "description": "--",
-    "origin": "target",
-    "targetRule": {
-        "and": [
-            {
-                "profile": "memberLevel",
-                "equals": [
-                    "gold"
-                ]
-            },
-            {
-                "geo": "region",
-                "matches": [
-                    "california"
-                ]
-            }
-        ]
-    },
-    "modifiedAt": "2017-05-18T19:44:34Z",
-    "workspace": "1234567"
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/properties', 'GET', {
+}
+const properties = {
     "total": 2,
     "offset": 0,
     "limit": 10,
@@ -470,9 +350,8 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/properties', 'GET
             "modifiedAt": "2019-02-18T12:25:20.000Z"
         }
     ]
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/properties/111', 'GET', {
+}
+const property = {
 
     "id": 111,
     "name": "Email property",
@@ -483,27 +362,8 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/properties/111', 
         "1234567",
         "12345679"
     ]
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/mboxes', 'GET', {
-    "total": 2,
-    "offset": 0,
-    "limit": 5,
-    "mboxes": [
-        {
-            "name": "a1-mobile-aam",
-            "status": "active",
-            "lastRequestedAt": "2017-07-09T20:41:18.000Z"
-        },
-        {
-            "name": "a1-mobile-ab",
-            "status": "active",
-            "lastRequestedAt": "2017-07-04T10:22:59.000Z"
-        }
-    ]
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/mbox/a1-mobile-mboxparams', 'GET', {
+}
+const mbox = {
     "name": "a1-mobile-mboxparams",
     "mboxParameters": [
         {
@@ -519,9 +379,26 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/mbox/a1-mobile-mb
             "parameterType": "MBOX"
         }
     ]
-})
+}
+const mboxes = {
+    "total": 2,
+    "offset": 0,
+    "limit": 5,
+    "mboxes": [
+        {
+            "name": "a1-mobile-aam",
+            "status": "active",
+            "lastRequestedAt": "2017-07-09T20:41:18.000Z"
+        },
+        {
+            "name": "a1-mobile-ab",
+            "status": "active",
+            "lastRequestedAt": "2017-07-04T10:22:59.000Z"
+        }
+    ]
+}
 
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/profileattributes/mbox', 'GET', {
+const attributes = {
     "mboxProfileAttributes": [
         "activeAccounts",
         "country",
@@ -541,9 +418,25 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/profileattributes
         "qaExperience",
         "transformerType"
     ]
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/environments', 'GET', {
+}
+const mboxParams = {
+    "name": "a1-mobile-mboxparams",
+    "mboxParameters": [
+        {
+            "name": "a.AppID",
+            "parameterType": "MBOX"
+        },
+        {
+            "name": "a.CarrierName",
+            "parameterType": "MBOX"
+        },
+        {
+            "name": "a.CrashEvent",
+            "parameterType": "MBOX"
+        }
+    ]
+}
+const environments = {
     "total": 3,
     "offset": 0,
     "limit": 2147483647,
@@ -561,9 +454,8 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/environments', 'G
             "name": "Staging"
         }
     ]
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/ab/111/report/performance', 'GET', {
+}
+abPerformance = {
     "reportParameters": {
         "activityId": 111,
         "environmentId": 8818,
@@ -611,9 +503,8 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/ab/111
             }
         }
     }
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/xt/123/report/performance', 'GET', {
+}
+const xtPerformance = {
     "reportParameters": {
         "activityId": 123,
         "environmentId": 8818,
@@ -661,10 +552,8 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/xt/123
             }
         }
     }
-})
-
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/abt/123/report/performance', 'GET', {
+}
+const performance = {
     "reportParameters": {
         "activityId": 123,
         "environmentId": 8818,
@@ -712,9 +601,8 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/abt/12
             }
         }
     }
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/ab/123/report/orders', 'GET', {
+}
+const report = {
     "reportParameters": {
         "activityId": 123,
         "environmentId": 8818,
@@ -762,9 +650,8 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/activities/ab/123
             }
         }
     }
-})
-
-mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/batch', 'POST', {
+}
+const batch = {
   "results": [
     {
       "operationId": 1,
@@ -781,4 +668,44 @@ mockResponseWithMethod('https://mc.adobe.io/test-tenant/target/batch', 'POST', {
       }
     }
   ]
-})
+}
+const data = {
+    activities: activities,
+    abActivity: abActivity,
+    xtActivity: xtActivity,
+    abActivityUpdated: abActivityUpdated,
+    xtActivityUpdated: xtActivityUpdated,
+    nameActivity: nameActivity,
+    changeLog: changeLog,
+    offers: offers,
+    offer: offer,
+    newOffer: newOffer,
+    updatedOffer: updatedOffer,
+    audiences: audiences,
+    audience: audience,
+    newAudience: newAudience,
+    updatedAudience: updatedAudience,
+    properties: properties,
+    property: property,
+    mboxes: mboxes,
+    mbox: mbox,
+    attributes: attributes,
+    mboxParams: mboxParams,
+    environments: environments,
+    abPerformance: abPerformance,
+    xtPerformance: xtPerformance,
+    performance: performance,
+    report: report,
+    batch: batch
+}
+
+module.exports = {
+  data: data,
+  errors :  {
+    Bad_Request : Bad_Request,
+    Unauthorized_Request : Unauthorized_Request,
+    Forbidden_Request: Forbidden_Request,
+    Not_Found: Not_Found,
+    Internal_Server_Error: Internal_Server_Error
+  }
+}
