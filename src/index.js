@@ -13,11 +13,11 @@ governing permissions and limitations under the License.
 
 const Swagger = require('swagger-client')
 
-function init (companyId, apiKey, token) {
+function init (tenant, apiKey, token) {
   return new Promise((resolve, reject) => {
     const clientWrapper = new TargetCoreAPI()
 
-    clientWrapper.init(companyId, apiKey, token)
+    clientWrapper.init(tenant, apiKey, token)
       .then(initializedSDK => {
         console.log('sdk initialized successfully')
         resolve(initializedSDK)
