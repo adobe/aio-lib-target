@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm run lint && npm run unit-tests",
     "lint": "eslint './src/**/*.js'",
-    "unit-tests": "jest --ci -w=2"
+    "unit-tests": "jest --ci -w=2",
+    "generate-docs": "./node_modules/.bin/jsdoc ./src/index.js -d ./docs"
   },
   "dependencies": {
     "fs": "0.0.1-security",
@@ -25,6 +26,7 @@
     "jest-cli": "^24.8.0",
     "jest-junit": "^6.3.0",
     "jest-plugin-fs": "^2.9.0",
-    "fetch-mock": "^7.3.3"
+    "fetch-mock": "^7.3.3",
+    "jsdoc": "^3.6.3"
   }
 }

@@ -2,20 +2,27 @@
 Javascript Core SDK wrapping [Adobe Target APIs](https://developers.adobetarget.com/api/).
 
 
-### Installing 
+### Installing
 
 ```bash
 $ npm install
 ```
 
 ### Usage
-```
+1) Initialize the SDK
 
+```
 var sdk = require('adobeio-cna-core-target');
 
 //initialize sdk
 const targetClient = await sdk.init('<tenant>', 'x-api-key', '<valid auth token>')
+```
+Init method returns an Instance of Class [TargetCoreAPI](./docs/TargetCoreAPI.html)
 
+2) Call methods using initialized sdk
+Methods available under sdk are documented [here](./docs/TargetCoreAPI.html)
+
+```
 //call methods
 
     //get activities
@@ -30,11 +37,11 @@ const targetClient = await sdk.init('<tenant>', 'x-api-key', '<valid auth token>
      //get offer by id activity
      const offer = await targetClient.getOfferById(123)
      console.log(util.inspect(offer));
-``` 
+```
 
 ### Contributing
 
-Contributions are welcome! Read the [Contributing Guide](./.github/CONTRIBUTING.md) for more information.
+Contributions are welcome! Read the [Contributing Guide](./.github/CONTRIBUTING) for more information.
 
 ### Licensing
 
