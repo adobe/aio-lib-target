@@ -17,10 +17,10 @@ var sdk = require('adobeio-cna-core-target');
 //initialize sdk
 const targetClient = await sdk.init('<tenant>', 'x-api-key', '<valid auth token>')
 ```
-Init method returns an Instance of Class [TargetCoreAPI](./docs/TargetCoreAPI.html)
+Init method returns an Instance of Class [TargetCoreAPI](./docs/SDK)
 
 2) Call methods using initialized sdk
-Methods available under sdk are documented [here](./docs/TargetCoreAPI.html)
+Methods available under sdk are documented [here](./docs/SDK)
 
 ```
 //call methods
