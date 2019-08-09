@@ -35,7 +35,6 @@ function init (tenant, apiKey, token) {
 */
 class TargetCoreAPI {
   /** Initialize sdk.
-  * Get a list of activities created in your Target account, with the ability to filter and sort by attributes.
   *
   * @param tenant {string} Adobe Target tenant name.
   * @param apiKey {string} Your api key
