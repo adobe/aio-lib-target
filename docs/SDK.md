@@ -49,7 +49,6 @@ with valid tenant, apiKey and auth token
 
 ### targetCoreAPI.init(tenant, apiKey, token)
 Initialize sdk.
-Get a list of activities created in your Target account, with the ability to filter and sort by attributes.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
 
