@@ -28,7 +28,18 @@ function init (tenant, apiKey, token) {
   })
 }
 
+/**
+* This class provides methods to call Adobe Target APIs.
+* Before calling any method initialize the instance by calling init method on it
+* with valid tenant, apiKey and auth token
+*/
 class TargetCoreAPI {
+  /** Initialize sdk.
+  *
+  * @param tenant {string} Adobe Target tenant name.
+  * @param apiKey {string} Your api key
+  * @param token {string} Valid auth token
+  */
   async init (tenant, apiKey, token) {
     // init swagger client
     const spec = require('../spec/target_api.json')
