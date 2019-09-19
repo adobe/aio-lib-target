@@ -22,7 +22,6 @@ async function sdkTest() {
 Init method returns an Instance of Class [<code>TargetCoreAPI</code>](#TargetCoreAPI)
 
 2) Call methods using initialized sdk
-Methods available under sdk are documented [here](./docs/SDK.md)
 
 ```
 var sdk = require('adobeio-cna-core-target')
