@@ -12,6 +12,9 @@ governing permissions and limitations under the License.
 'use strict'
 
 const Swagger = require('swagger-client')
+const { codes } = require('./SDKErrors')
+const debugNamespace = 'aio-cna-core-target'
+const debug = require('debug')(debugNamespace)
 
 function init (tenant, apiKey, token) {
   return new Promise((resolve, reject) => {
@@ -19,11 +22,12 @@ function init (tenant, apiKey, token) {
 
     clientWrapper.init(tenant, apiKey, token)
       .then(initializedSDK => {
-        console.log('sdk initialized successfully')
+        debug('sdk initialized successfully')
         resolve(initializedSDK)
       })
       .catch(err => {
-        console.log('sdk init error ' + err)
+        debug(`sdk init error: ${err}`)
+        reject(err)
       })
   })
 }
@@ -41,20 +45,36 @@ class TargetCoreAPI {
   * @param token {string} Valid auth token
   */
   async init (tenant, apiKey, token) {
-    // init swagger client
-    const spec = require('../spec/target_api.json')
-    const swagger = new Swagger({
-      spec: spec,
-      requestInterceptor: req => {
-        this.__setHeaders(req, this)
-      },
-      usePromise: true
-    })
-    this.sdk = (await swagger)
-    this.tenant = tenant
-    this.apiKey = apiKey
-    this.token = token
-    return this
+    const initErrors = []
+    if (!tenant) {
+      initErrors.push('tenant')
+    }
+    if (!apiKey) {
+      initErrors.push('apiKey')
+    }
+    if (!token) {
+      initErrors.push('token')
+    }
+
+    if (initErrors.length) {
+      const sdkDetails = { tenant, apiKey, token }
+      throw new codes.ERROR_SDK_INITIALIZATION({ sdkDetails, messageValues: `${initErrors.join(', ')}` })
+    } else {
+      // init swagger client
+      const spec = require('../spec/target_api.json')
+      const swagger = new Swagger({
+        spec: spec,
+        requestInterceptor: req => {
+          this.__setHeaders(req, this)
+        },
+        usePromise: true
+      })
+      this.sdk = (await swagger)
+      this.tenant = tenant
+      this.apiKey = apiKey
+      this.token = token
+      return this
+    }
   }
 
   /** List activities.
@@ -767,7 +787,7 @@ class TargetCoreAPI {
   }
 
   __setHeaders (req, coreAPIInstance) {
-    // set headers required for Analytics API calls
+    // set headers required for Target API calls
     if (!req.headers['x-api-key']) {
       req.headers['x-api-key'] = coreAPIInstance.apiKey
     }
