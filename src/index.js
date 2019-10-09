@@ -86,14 +86,14 @@ class TargetCoreAPI {
   * @param options.sortBy Defines the sorting criteria on the returned items.
   */
   getActivities ({ limit = 2147483647, offset = 0, sortBy } = {}) {
+    const sdkDetails = arguments[0]
     return new Promise((resolve, reject) => {
       this.sdk.apis.activities.getActivities(arguments[0], this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getActivities - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_ACTIVITIES({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -104,14 +104,14 @@ class TargetCoreAPI {
   * @param body {Object} Activity JSON.
   */
   createABActivity (body) {
+    const sdkDetails = body
     return new Promise((resolve, reject) => {
       this.sdk.apis.abactivity.createABActivity({}, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target createABActivity - ' + err)
-          reject(err)
+          reject(new codes.ERROR_CREATE_AB_ACTIVITY({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -122,14 +122,14 @@ class TargetCoreAPI {
   * @param body {Object} Activity JSON.
   */
   createXTActivity (body) {
+    const sdkDetails = body
     return new Promise((resolve, reject) => {
       this.sdk.apis.xtactivity.createXTActivity({}, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target createXTActivity - ' + err)
-          reject(err)
+          reject(new codes.ERROR_CREATE_XT_ACTIVITY({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -142,14 +142,14 @@ class TargetCoreAPI {
   getABActivityById (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.abactivity.getABActivity(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getABActivityById - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_AB_ACTIVITY_BY_ID({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -162,14 +162,14 @@ class TargetCoreAPI {
   getXTActivityById (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.xtactivity.getXTActivity(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getXTActivityById - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_XT_ACTIVITY_BY_ID({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -182,15 +182,14 @@ class TargetCoreAPI {
   updateABActivity (id, body) {
     var params = {}
     params.id = id
-
+    const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
       this.sdk.apis.abactivity.updateABActivity(params, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target updateABActivity - ' + err)
-          reject(err)
+          reject(new codes.ERROR_UPDATE_AB_ACTIVITY({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -203,15 +202,14 @@ class TargetCoreAPI {
   updateXTActivity (id, body) {
     var params = {}
     params.id = id
-
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.xtactivity.updateXTActivity(params, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target updateXTActivity - ' + err)
-          reject(err)
+          reject(new codes.ERROR_UPDATE_XT_ACTIVITY({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -225,18 +223,17 @@ class TargetCoreAPI {
   setActivityName (id, name) {
     var params = {}
     params.id = id
-
     var body = {
       name: name
     }
+    const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
       this.sdk.apis.activity.setName(params, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target setActivityName - ' + err)
-          reject(err)
+          reject(new codes.ERROR_SET_ACTIVITY_NAME({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -254,14 +251,14 @@ class TargetCoreAPI {
     var body = {
       state: state
     }
+    const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
       this.sdk.apis.activity.setState(params, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target setActivityState - ' + err)
-          reject(err)
+          reject(new codes.ERROR_SET_ACTIVITY_STATE({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -279,14 +276,14 @@ class TargetCoreAPI {
     var body = {
       priority: priority
     }
+    const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
       this.sdk.apis.activity.setPriority(params, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target setActivityPriority - ' + err)
-          reject(err)
+          reject(new codes.ERROR_SET_ACTIVITY_PRIORITY({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -304,14 +301,14 @@ class TargetCoreAPI {
     var body = {
       schedule: schedule
     }
+    const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
       this.sdk.apis.activity.setSchedule(params, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target setActivitySchedule - ' + err)
-          reject(err)
+          reject(new codes.ERROR_SET_ACTIVITY_SCHEDULE({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -324,14 +321,14 @@ class TargetCoreAPI {
   deleteABActivity (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.abactivity.deleteABActivity(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target deleteABActivity - ' + err)
-          reject(err)
+          reject(new codes.ERROR_DELETE_AB_ACTIVITY({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -344,14 +341,14 @@ class TargetCoreAPI {
   deleteXTActivity (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.xtactivity.deleteXTActivity(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target deleteXTActivity - ' + err)
-          reject(err)
+          reject(new codes.ERROR_DELETE_XT_ACTIVITY({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -364,14 +361,14 @@ class TargetCoreAPI {
   getActivityChangeLog (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.activity.getChangeLog(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getActivityChangeLog - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_ACTIVITY_CHANGELOG({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -385,14 +382,14 @@ class TargetCoreAPI {
   * @param options.sortBy Defines the sorting criteria on the returned items.
   */
   getOffers ({ limit = 2147483647, offset = 0, sortBy } = {}) {
+    const sdkDetails = arguments[0]
     return new Promise((resolve, reject) => {
       this.sdk.apis.offers.getOffers(arguments[0], this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getOffers - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_OFFERS({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -405,14 +402,14 @@ class TargetCoreAPI {
   getOfferById (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.offer.getOfferById(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getOfferById - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_OFFER_BY_ID({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -423,14 +420,14 @@ class TargetCoreAPI {
   * @param body {Object} Offer JSON.
   */
   createOffer (body) {
+    const sdkDetails = body
     return new Promise((resolve, reject) => {
       this.sdk.apis.offers.createOffer({}, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target createOffer - ' + err)
-          reject(err)
+          reject(new codes.ERROR_CREATE_OFFER({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -443,15 +440,14 @@ class TargetCoreAPI {
   updateOffer (id, body) {
     var params = {}
     params.id = id
-
+    const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
       this.sdk.apis.offer.updateOffer(params, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target updateOffer - ' + err)
-          reject(err)
+          reject(new codes.ERROR_UPDATE_OFFER({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -464,14 +460,14 @@ class TargetCoreAPI {
   deleteOffer (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.offer.deleteOffer(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target deleteOffer - ' + err)
-          reject(err)
+          reject(new codes.ERROR_DELETE_OFFER({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -485,14 +481,14 @@ class TargetCoreAPI {
   * @param options.sortBy Defines the sorting criteria on the returned items.
   */
   getAudiences ({ limit = 2147483647, offset = 0, sortBy } = {}) {
+    const sdkDetails = arguments[0]
     return new Promise((resolve, reject) => {
       this.sdk.apis.audiences.getAudiences(arguments[0], this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getAudiences - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_AUDIENCES({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -503,14 +499,14 @@ class TargetCoreAPI {
   * @param body {Object} Audience JSON.
   */
   createAudience (body) {
+    const sdkDetails = body
     return new Promise((resolve, reject) => {
       this.sdk.apis.audiences.createAudience({}, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target createAudience - ' + err)
-          reject(err)
+          reject(new codes.ERROR_CREATE_AUDIENCE({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -523,14 +519,14 @@ class TargetCoreAPI {
   getAudienceById (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.audiences.getAudienceById(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getAudienceById - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_AUDIENCE_BY_ID({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -543,15 +539,14 @@ class TargetCoreAPI {
   updateAudience (id, body) {
     var params = {}
     params.id = id
-
+    const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
       this.sdk.apis.audience.updateAudience(params, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target updateAudience - ' + err)
-          reject(err)
+          reject(new codes.ERROR_UPDATE_AUDIENCE({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -564,14 +559,14 @@ class TargetCoreAPI {
   deleteAudience (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.audience.deleteAudience(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target deleteAudience - ' + err)
-          reject(err)
+          reject(new codes.ERROR_DELETE_AUDIENCE({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -580,14 +575,14 @@ class TargetCoreAPI {
   * Get a list of properties.
   */
   getProperties () {
+    const sdkDetails = {}
     return new Promise((resolve, reject) => {
       this.sdk.apis.properties.getProperties({}, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getProperties - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_PROPERTIES({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -600,14 +595,14 @@ class TargetCoreAPI {
   getPropertyById (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.properties.getAPropertyById(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getPropertyById - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_PROPERTY_BY_ID({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -616,14 +611,14 @@ class TargetCoreAPI {
   * List all available mboxes for a specific client with the options to filter and sort.
   */
   getMBoxes () {
+    const sdkDetails = {}
     return new Promise((resolve, reject) => {
       this.sdk.apis.mboxes.getMBoxes({}, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getMBoxes - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_MBOXES({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -636,14 +631,14 @@ class TargetCoreAPI {
   getMBoxByName (name) {
     var params = {}
     params.mboxName = name
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.mboxes.getMBoxByName(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getMBoxByName - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_MBOX_BY_NAME({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -652,14 +647,14 @@ class TargetCoreAPI {
   * Retrieve the list of available profile attributes and mbox parameters of type profile.
   */
   getMBoxProfileAttributes () {
+    const sdkDetails = {}
     return new Promise((resolve, reject) => {
       this.sdk.apis.mbox.getProfileAttributes({}, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getMBoxProfileAttributes - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_MBOX_PROFILE_ATTRIBUTES({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -668,14 +663,14 @@ class TargetCoreAPI {
   * List all available environments with the options to filter and sort. Use the Environments API to retrieve the environment IDs corresponding to the various host groups set for the client.
   */
   getEnvironments () {
+    const sdkDetails = {}
     return new Promise((resolve, reject) => {
       this.sdk.apis.environments.getEnvironments({}, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getEnvironments - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_ENVIRONMENTS({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -688,14 +683,14 @@ class TargetCoreAPI {
   getABActivityPerformance (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.reports.getABPerformance(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getABActivityPerformance - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_AB_ACTIVITY_PERFORMANCE({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -708,14 +703,14 @@ class TargetCoreAPI {
   getXTActivityPerformance (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.reports.getXTPerformance(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getXTActivityPerformance - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_XT_ACTIVITY_PERFORMANCE({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -728,14 +723,14 @@ class TargetCoreAPI {
   getActivityPerformance (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.reports.getABTPerformance(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getActivityPerformance - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_ACTIVITY_PERFORMANCE({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -748,14 +743,14 @@ class TargetCoreAPI {
   getOrdersReport (id) {
     var params = {}
     params.id = id
+    const sdkDetails = params
     return new Promise((resolve, reject) => {
       this.sdk.apis.reports.getAuditReport(params, this.__createRequest({}))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target getOrdersReport - ' + err)
-          reject(err)
+          reject(new codes.ERROR_GET_ORDERS_REPORT({ sdkDetails, messageValues: err }))
         })
     })
   }
@@ -764,14 +759,14 @@ class TargetCoreAPI {
   * Multiple Admin APIs can be executed as a single batch request.
   */
   executeBatch (body) {
+    const sdkDetails = body
     return new Promise((resolve, reject) => {
       this.sdk.apis.batch.executeBatch({}, this.__createRequest(body))
         .then(response => {
           resolve(response.body)
         })
         .catch(err => {
-          console.log('Error while calling Adobe Target executeBatch - ' + err)
-          reject(err)
+          reject(new codes.ERROR_EXECUTE_BATCH({ sdkDetails, messageValues: err }))
         })
     })
   }

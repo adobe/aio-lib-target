@@ -11,6 +11,8 @@ governing permissions and limitations under the License.
 const fetchMock = require('fetch-mock');
 const mock = require("./mock")
 const sdk = require('../src')
+const errorSDK = require('../src/SDKErrors')
+const util = require('util')
 const tenant = "test-tenant"
 const apiKey = "test-apikey"
 const token = "test-token"
@@ -47,11 +49,11 @@ test('test getActivities', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITIES)
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITIES)
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITIES)
 
 });
 
@@ -86,11 +88,11 @@ test('test createABActivity', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_AB_ACTIVITY)
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_AB_ACTIVITY)
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_AB_ACTIVITY)
 
 });
 
@@ -125,11 +127,11 @@ test('test createXTActivity', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_XT_ACTIVITY)
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_XT_ACTIVITY)
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_XT_ACTIVITY)
 
 });
 
@@ -145,13 +147,13 @@ test('test getABActivityById', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AB_ACTIVITY_BY_ID,[123])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AB_ACTIVITY_BY_ID,[123])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AB_ACTIVITY_BY_ID,[123])
   mockResponseWithMethod(url, method, mock.errors.Not_Found.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Not_Found.message,[123])
+  res = await checkErrorResponse(api, url, method,new errorSDK.codes.ERROR_GET_AB_ACTIVITY_BY_ID,[123])
 
 });
 
@@ -167,13 +169,13 @@ test('test getXTActivityById', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[321])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_XT_ACTIVITY_BY_ID,[321])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[321])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_XT_ACTIVITY_BY_ID,[321])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[321])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_XT_ACTIVITY_BY_ID,[321])
   mockResponseWithMethod(url, method, mock.errors.Not_Found.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Not_Found.message,[321])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_XT_ACTIVITY_BY_ID,[321])
 
 });
 
@@ -209,11 +211,11 @@ test('test updateABActivity', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message, [123, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_AB_ACTIVITY, [123, obj])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message, [123, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_AB_ACTIVITY, [123, obj])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message, [123, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_AB_ACTIVITY, [123, obj])
 
 });
 
@@ -249,11 +251,11 @@ test('test updateXTActivity', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message, [321, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_XT_ACTIVITY, [321, obj])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message, [321, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_XT_ACTIVITY, [321, obj])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message, [321, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_XT_ACTIVITY, [321, obj])
 
 });
 
@@ -270,11 +272,11 @@ test('test setActivityName', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message, [123, "new name"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_NAME, [123, "new name"])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message, [123, "new name"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_NAME, [123, "new name"])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message, [123, "new name"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_NAME, [123, "new name"])
 
 });
 
@@ -291,11 +293,11 @@ test('test setActivityState', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message, [123, "activated"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_STATE, [123, "activated"])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message, [123, "activated"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_STATE, [123, "activated"])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message, [123, "activated"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_STATE, [123, "activated"])
 
 });
 
@@ -312,11 +314,11 @@ test('test setActivityPriority', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message, [123, "5"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_PRIORITY, [123, "5"])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message, [123, "5"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_PRIORITY, [123, "5"])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message, [123, "5"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_PRIORITY, [123, "5"])
 
 });
 
@@ -339,11 +341,11 @@ test('test setActivitySchedule', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message, [123, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_SCHEDULE, [123, obj])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message, [123, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_SCHEDULE, [123, obj])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message, [123, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_SCHEDULE, [123, obj])
 
 });
 
@@ -359,13 +361,13 @@ test('test deleteABActivity', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_AB_ACTIVITY,[123])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_AB_ACTIVITY,[123])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_AB_ACTIVITY,[123])
   mockResponseWithMethod(url, method, mock.errors.Not_Found.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Not_Found.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_AB_ACTIVITY,[123])
 
 });
 
@@ -381,13 +383,13 @@ test('test deleteXTActivity', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[321])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_XT_ACTIVITY,[321])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[321])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_XT_ACTIVITY,[321])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[321])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_XT_ACTIVITY,[321])
   mockResponseWithMethod(url, method, mock.errors.Not_Found.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Not_Found.message,[321])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_XT_ACTIVITY,[321])
 
 });
 
@@ -404,13 +406,13 @@ test('test getActivityChangeLog', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITY_CHANGELOG,[123])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITY_CHANGELOG,[123])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITY_CHANGELOG,[123])
   mockResponseWithMethod(url, method, mock.errors.Not_Found.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Not_Found.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITY_CHANGELOG,[123])
 
 });
 
@@ -428,11 +430,11 @@ test('test getOffers', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_OFFERS)
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_OFFERS)
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_OFFERS)
 
 });
 
@@ -448,13 +450,13 @@ test('test getOfferById', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_OFFER_BY_ID,[111])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_OFFER_BY_ID,[111])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_OFFER_BY_ID,[111])
   mockResponseWithMethod(url, method, mock.errors.Not_Found.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Not_Found.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_OFFER_BY_ID,[111])
 
 });
 
@@ -476,11 +478,11 @@ test('test createOffer', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message, [obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_OFFER, [obj])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message, [obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_OFFER, [obj])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message, [obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_OFFER, [obj])
 
 });
 
@@ -501,11 +503,11 @@ test('test updateOffer', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message, [123, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_OFFER, [123, obj])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message, [123, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_OFFER, [123, obj])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message, [123, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_OFFER, [123, obj])
 
 });
 
@@ -521,13 +523,13 @@ test('test deleteOffer', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_OFFER,[111])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_OFFER,[111])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_OFFER,[111])
   mockResponseWithMethod(url, method, mock.errors.Not_Found.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Not_Found.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_OFFER,[111])
 
 });
 
@@ -545,33 +547,11 @@ test('test getAudiences', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AUDIENCES)
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AUDIENCES)
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message)
-
-});
-
-test('test getAudienceById', async () => {
-  const url = "https://mc.adobe.io/test-tenant/target/audiences/111"
-  const method = "GET"
-  const api = "getAudienceById"
-
-  mockResponseWithMethod(url, method, mock.data.audience)
-  //check success response
-  var res = await sdkClient.getAudienceById(111)
-  expect(res.id).toBe(111)
-
-  //check error responses
-  mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[111])
-  mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[111])
-  mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[111])
-  mockResponseWithMethod(url, method, mock.errors.Not_Found.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Not_Found.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AUDIENCES)
 
 });
 
@@ -602,20 +582,43 @@ test('test createAudience', async () => {
       "workspace": "1234567"
   }
 
-  mockResponseWithMethod(url, method, mock.data.newAudience)
+  mockResponseWithMethod(url, method, mock.data.newOffer)
   //check success response
   var res = await sdkClient.createAudience(obj)
   expect(res.id).toBe(123)
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message, [obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_AUDIENCE, [obj])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message, [obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_AUDIENCE, [obj])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message, [obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_AUDIENCE, [obj])
 
 });
+
+test('test getAudienceById', async () => {
+  const url = "https://mc.adobe.io/test-tenant/target/audiences/111"
+  const method = "GET"
+  const api = "getAudienceById"
+
+  mockResponseWithMethod(url, method, mock.data.audience)
+  //check success response
+  var res = await sdkClient.getAudienceById(111)
+  expect(res.id).toBe(111)
+
+  //check error responses
+  mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AUDIENCE_BY_ID,[111])
+  mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AUDIENCE_BY_ID,[111])
+  mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AUDIENCE_BY_ID,[111])
+  mockResponseWithMethod(url, method, mock.errors.Not_Found.err)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AUDIENCE_BY_ID,[111])
+
+});
+
 test('test updateAudience', async () => {
   const url = "https://mc.adobe.io/test-tenant/target/audiences/123"
   const method = "PUT"
@@ -633,11 +636,11 @@ test('test updateAudience', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message, [123, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_AUDIENCE, [123, obj])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message, [123, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_AUDIENCE, [123, obj])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message, [123, obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_AUDIENCE, [123, obj])
 
 });
 
@@ -653,13 +656,13 @@ test('test deleteAudience', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_AUDIENCE,[111])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_AUDIENCE,[111])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_AUDIENCE,[111])
   mockResponseWithMethod(url, method, mock.errors.Not_Found.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Not_Found.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_AUDIENCE,[111])
 
 });
 
@@ -677,11 +680,11 @@ test('test getProperties', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_PROPERTIES)
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_PROPERTIES)
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_PROPERTIES)
 
 });
 
@@ -697,13 +700,13 @@ test('test getPropertyById', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_PROPERTY_BY_ID,[111])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_PROPERTY_BY_ID,[111])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_PROPERTY_BY_ID,[111])
   mockResponseWithMethod(url, method, mock.errors.Not_Found.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Not_Found.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_PROPERTY_BY_ID,[111])
 
 });
 
@@ -721,11 +724,11 @@ test('test getMBoxes', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOXES)
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOXES)
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOXES)
 
 });
 
@@ -742,13 +745,13 @@ test('test getMBoxByName', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,["a1-mobile-mboxparams"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOX_BY_NAME,["a1-mobile-mboxparams"])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,["a1-mobile-mboxparams"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOX_BY_NAME,["a1-mobile-mboxparams"])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,["a1-mobile-mboxparams"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOX_BY_NAME,["a1-mobile-mboxparams"])
   mockResponseWithMethod(url, method, mock.errors.Not_Found.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Not_Found.message,["a1-mobile-mboxparams"])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOX_BY_NAME,["a1-mobile-mboxparams"])
 
 });
 
@@ -764,11 +767,11 @@ test('test getMBoxProfileAttributes', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOX_PROFILE_ATTRIBUTES)
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOX_PROFILE_ATTRIBUTES)
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOX_PROFILE_ATTRIBUTES)
 
 });
 
@@ -786,11 +789,11 @@ test('test getEnvironments', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ENVIRONMENTS)
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ENVIRONMENTS)
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message)
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ENVIRONMENTS)
 
 });
 
@@ -809,11 +812,11 @@ test('test getABActivityPerformance', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AB_ACTIVITY_PERFORMANCE,[111])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AB_ACTIVITY_PERFORMANCE,[111])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[111])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AB_ACTIVITY_PERFORMANCE,[111])
 
 });
 
@@ -832,11 +835,11 @@ test('test getXTActivityPerformance', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_XT_ACTIVITY_PERFORMANCE,[123])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_XT_ACTIVITY_PERFORMANCE,[123])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_XT_ACTIVITY_PERFORMANCE,[123])
 
 });
 
@@ -854,11 +857,11 @@ test('test getActivityPerformance', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITY_PERFORMANCE,[123])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITY_PERFORMANCE,[123])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITY_PERFORMANCE,[123])
 
 });
 
@@ -876,11 +879,11 @@ test('test getOrdersReport', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ORDERS_REPORT,[123])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ORDERS_REPORT,[123])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[123])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ORDERS_REPORT,[123])
 
 });
 
@@ -915,11 +918,11 @@ test('test executeBatch', async () => {
 
   //check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Unauthorized_Request.message,[obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_EXECUTE_BATCH,[obj])
   mockResponseWithMethod(url, method, mock.errors.Forbidden_Request.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Forbidden_Request.message,[obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_EXECUTE_BATCH,[obj])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
-  res = await checkErrorResponse(api, url, method, mock.errors.Internal_Server_Error.message,[obj])
+  res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_EXECUTE_BATCH,[obj])
 
 });
 
@@ -933,7 +936,8 @@ function checkErrorResponse(fn, url, method, error, args = []) {
       reject(" No error response")
     })
     .catch(e => {
-      expect(e).toEqual(new Error(error))
+      expect(e.name).toEqual(error.name)
+      expect(e.code).toEqual(error.code)
       resolve()
     })
   })
