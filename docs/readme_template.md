@@ -12,7 +12,7 @@ $ npm install
 1) Initialize the SDK
 
 ```
-var sdk = require('adobeio-cna-core-target')
+var sdk = require('@adobe/aio-lib-target')
 
 async function sdkTest() {
   //initialize sdk
@@ -24,7 +24,7 @@ Init method returns an Instance of Class [<code>TargetCoreAPI</code>](#TargetCor
 2) Call methods using initialized sdk
 
 ```
-var sdk = require('adobeio-cna-core-target')
+var sdk = require('@adobe/aio-lib-target')
 
 async function sdkTest() {
     //initialize sdk
@@ -48,6 +48,10 @@ All Methods available under sdk are documented [<code>here</code>](#TargetCoreAP
 {{>main-index~}}
 
 {{>all-docs~}}
+
+### Debug Logs
+
+LOG_LEVEL=debug  <your_call_here>
 
 ### Contributing
 

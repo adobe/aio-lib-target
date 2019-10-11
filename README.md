@@ -12,7 +12,7 @@ $ npm install
 1) Initialize the SDK
 
 ```
-var sdk = require('adobeio-cna-core-target')
+var sdk = require('@adobe/aio-lib-target')
 
 async function sdkTest() {
   //initialize sdk
@@ -24,7 +24,7 @@ Init method returns an Instance of Class [<code>TargetCoreAPI</code>](#TargetCor
 2) Call methods using initialized sdk
 
 ```
-var sdk = require('adobeio-cna-core-target')
+var sdk = require('@adobe/aio-lib-target')
 
 async function sdkTest() {
     //initialize sdk
@@ -513,6 +513,10 @@ Execute Batch APIs.
 Multiple Admin APIs can be executed as a single batch request.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+### Debug Logs
+
+LOG_LEVEL=debug  <your_call_here>
+
 ### Contributing
 
 Contributions are welcome! Read the [Contributing Guide](./.github/CONTRIBUTING.md) for more information.
