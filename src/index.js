@@ -785,8 +785,8 @@ class TargetCoreAPI {
     if (!req.headers['x-api-key']) {
       req.headers['x-api-key'] = coreAPIInstance.apiKey
     }
-    if (!req.headers['Authorization']) {
-      req.headers['Authorization'] = 'Bearer ' + coreAPIInstance.token
+    if (!req.headers.Authorization) {
+      req.headers.Authorization = 'Bearer ' + coreAPIInstance.token
     }
     if (!req.headers['Content-Type']) {
       req.headers['Content-Type'] = 'application/json'
