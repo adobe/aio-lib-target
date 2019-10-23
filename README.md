@@ -23,7 +23,7 @@ Javascript SDK wrapping [Adobe Target APIs](https://developers.adobetarget.com/a
 ### Installing
 
 ```bash
-$ npm install
+$ npm install @adobe/aio-lib-target
 ```
 
 ### Usage
