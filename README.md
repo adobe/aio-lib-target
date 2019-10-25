@@ -1,23 +1,5 @@
-<!--
-Copyright 2019 Adobe. All rights reserved.
-This file is licensed to you under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License. You may obtain a copy
-of the License at http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under
-the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-OF ANY KIND, either express or implied. See the License for the specific language
-governing permissions and limitations under the License.
--->
-
-[![Version](https://img.shields.io/npm/v/@adobe/aio-lib-target.svg)](https://npmjs.org/package/@adobe/aio-lib-target)
-[![Downloads/week](https://img.shields.io/npm/dw/@adobe/aio-lib-target.svg)](https://npmjs.org/package/@adobe/aio-lib-target)
-[![Build Status](https://travis-ci.com/adobe/aio-lib-target.svg?branch=master)](https://travis-ci.com/adobe/aio-lib-target)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Greenkeeper badge](https://badges.greenkeeper.io/adobe/aio-lib-target.svg)](https://greenkeeper.io/)
-[![Codecov Coverage](https://img.shields.io/codecov/c/github/adobe/aio-lib-target/master.svg?style=flat-square)](https://codecov.io/gh/adobe/aio-lib-target/)
-
-# Adobe I/O - Adobe Target SDK
-Javascript SDK wrapping [Adobe Target APIs](https://developers.adobetarget.com/api/).
+# I/O CNA Adobe Target Core SDK
+Javascript Core SDK wrapping [Adobe Target APIs](https://developers.adobetarget.com/api/).
 
 
 ### Installing
@@ -63,6 +45,24 @@ async function sdkTest() {
 ```
 All Methods available under sdk are documented [<code>here</code>](#TargetCoreAPI)
 
+## Classes
+
+<dl>
+<dt><a href="#TargetCoreAPI">TargetCoreAPI</a></dt>
+<dd><p>This class provides methods to call Adobe Target APIs.
+Before calling any method initialize the instance by calling init method on it
+with valid tenant, apiKey and auth token</p>
+</dd>
+</dl>
+
+## Functions
+
+<dl>
+<dt><a href="#init">init(tenant, apiKey, token)</a> ⇒ <code><a href="#TargetCoreAPI">Promise.&lt;TargetCoreAPI&gt;</a></code></dt>
+<dd><p>Returns a Promise that resolves with a new TargetCoreAPI object.</p>
+</dd>
+</dl>
+
 <a name="TargetCoreAPI"></a>
 
 ## TargetCoreAPI
@@ -73,7 +73,7 @@ with valid tenant, apiKey and auth token
 **Kind**: global class  
 
 * [TargetCoreAPI](#TargetCoreAPI)
-    * [.init(tenant, apiKey, token)](#TargetCoreAPI+init)
+    * [.init(tenant, apiKey, token)](#TargetCoreAPI+init) ⇒ [<code>TargetCoreAPI</code>](#TargetCoreAPI)
     * [.getActivities(options)](#TargetCoreAPI+getActivities)
     * [.createABActivity(body)](#TargetCoreAPI+createABActivity)
     * [.createXTActivity(body)](#TargetCoreAPI+createXTActivity)
@@ -112,7 +112,7 @@ with valid tenant, apiKey and auth token
 
 <a name="TargetCoreAPI+init"></a>
 
-### targetCoreAPI.init(tenant, apiKey, token)
+### targetCoreAPI.init(tenant, apiKey, token) ⇒ [<code>TargetCoreAPI</code>](#TargetCoreAPI)
 Initialize sdk.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
@@ -531,6 +531,19 @@ Execute Batch APIs.
 Multiple Admin APIs can be executed as a single batch request.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+<a name="init"></a>
+
+## init(tenant, apiKey, token) ⇒ [<code>Promise.&lt;TargetCoreAPI&gt;</code>](#TargetCoreAPI)
+Returns a Promise that resolves with a new TargetCoreAPI object.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| tenant | <code>string</code> | Adobe Target tenant name. |
+| apiKey | <code>string</code> | Your api key |
+| token | <code>string</code> | Valid auth token |
+
 ### Debug Logs
 
 LOG_LEVEL=debug  <your_call_here>
