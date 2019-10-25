@@ -15,6 +15,14 @@ const Swagger = require('swagger-client')
 const { codes } = require('./SDKErrors')
 const logger = require('@adobe/aio-lib-core-logging')('aio-lib-target', { level: process.env.LOG_LEVEL })
 
+/**
+  * Returns a Promise that resolves with a new TargetCoreAPI object.
+  *
+  * @param tenant {string} Adobe Target tenant name.
+  * @param apiKey {string} Your api key
+  * @param token {string} Valid auth token
+  * @returns {Promise<TargetCoreAPI>}
+  */
 function init (tenant, apiKey, token) {
   return new Promise((resolve, reject) => {
     const clientWrapper = new TargetCoreAPI()
@@ -42,6 +50,7 @@ class TargetCoreAPI {
   * @param tenant {string} Adobe Target tenant name.
   * @param apiKey {string} Your api key
   * @param token {string} Valid auth token
+  * @returns {TargetCoreAPI}
   */
   async init (tenant, apiKey, token) {
     const initErrors = []
