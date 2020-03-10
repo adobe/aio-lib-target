@@ -30,6 +30,18 @@ test('sdk init test', async () => {
   expect(sdkClient.token).toBe(token)
 })
 
+test('sdk init error, no tenant passed', async () => {
+  await expect(sdk.init(null, apiKey, token)).rejects.toThrow('[TargetSDK:ERROR_SDK_INITIALIZATION] SDK initialization error(s). Missing arguments: tenant')
+})
+
+test('sdk init error, no apiKey passed', async () => {
+  await expect(sdk.init(tenant, null, token)).rejects.toThrow('[TargetSDK:ERROR_SDK_INITIALIZATION] SDK initialization error(s). Missing arguments: apiKey')
+})
+
+test('sdk init error, no token passed', async () => {
+  await expect(sdk.init(tenant, apiKey)).rejects.toThrow('[TargetSDK:ERROR_SDK_INITIALIZATION] SDK initialization error(s). Missing arguments: token')
+})
+
 test('test getActivities', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities'
   const method = 'GET'
@@ -844,6 +856,20 @@ test('test getOrdersReport', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ORDERS_REPORT(), [123])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ORDERS_REPORT(), [123])
+})
+
+test('test __setHeader preset api key header', async () => {
+  sdkClient = await sdk.init(tenant, apiKey, token)
+  const req = { headers: { 'x-api-key': 'test' } }
+  sdkClient.__setHeaders(req, sdkClient, {})
+  expect(req.headers['x-api-key']).toBe('test')
+})
+
+test('test __setHeader preset authorization header', async () => {
+  sdkClient = await sdk.init(tenant, apiKey, token)
+  const req = { headers: { Authorization: 'test' } }
+  sdkClient.__setHeaders(req, sdkClient, {})
+  expect(req.headers.Authorization).toBe('test')
 })
 
 test('test executeBatch', async () => {

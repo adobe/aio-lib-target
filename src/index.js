@@ -15,6 +15,12 @@ const Swagger = require('swagger-client')
 const { codes } = require('./SDKErrors')
 const logger = require('@adobe/aio-lib-core-logging')('aio-lib-target', { level: process.env.LOG_LEVEL })
 
+const ACCEPT_HEADERS = {
+  V1: 'application/vnd.adobe.target.v1+json',
+  V2: 'application/vnd.adobe.target.v2+json',
+  V3: 'application/vnd.adobe.target.v3+json'
+}
+
 /**
   * Returns a Promise that resolves with a new TargetCoreAPI object.
   *
@@ -72,9 +78,6 @@ class TargetCoreAPI {
       const spec = require('../spec/target_api.json')
       const swagger = new Swagger({
         spec: spec,
-        requestInterceptor: req => {
-          this.__setHeaders(req, this)
-        },
         usePromise: true
       })
       this.sdk = (await swagger)
@@ -96,7 +99,7 @@ class TargetCoreAPI {
   getActivities ({ limit = 2147483647, offset = 0, sortBy } = {}) {
     const sdkDetails = arguments[0]
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activities.getActivities(arguments[0], this.__createRequest({}))
+      this.sdk.apis.activities.getActivities(arguments[0], this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response.body)
         })
@@ -152,7 +155,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.getABActivity(params, this.__createRequest({}))
+      this.sdk.apis.abactivity.getABActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response.body)
         })
@@ -172,7 +175,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.getXTActivity(params, this.__createRequest({}))
+      this.sdk.apis.xtactivity.getXTActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response.body)
         })
@@ -371,7 +374,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.getChangeLog(params, this.__createRequest({}))
+      this.sdk.apis.activity.getChangeLog(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response.body)
         })
@@ -392,7 +395,7 @@ class TargetCoreAPI {
   getOffers ({ limit = 2147483647, offset = 0, sortBy } = {}) {
     const sdkDetails = arguments[0]
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offers.getOffers(arguments[0], this.__createRequest({}))
+      this.sdk.apis.offers.getOffers(arguments[0], this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response.body)
         })
@@ -412,7 +415,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.getOfferById(params, this.__createRequest({}))
+      this.sdk.apis.offer.getOfferById(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response.body)
         })
@@ -491,7 +494,7 @@ class TargetCoreAPI {
   getAudiences ({ limit = 2147483647, offset = 0, sortBy } = {}) {
     const sdkDetails = arguments[0]
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.getAudiences(arguments[0], this.__createRequest({}))
+      this.sdk.apis.audiences.getAudiences(arguments[0], this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response.body)
         })
@@ -529,7 +532,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.getAudienceById(params, this.__createRequest({}))
+      this.sdk.apis.audiences.getAudienceById(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response.body)
         })
@@ -585,7 +588,7 @@ class TargetCoreAPI {
   getProperties () {
     const sdkDetails = {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.properties.getProperties({}, this.__createRequest({}))
+      this.sdk.apis.properties.getProperties({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response.body)
         })
@@ -605,7 +608,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.properties.getAPropertyById(params, this.__createRequest({}))
+      this.sdk.apis.properties.getAPropertyById(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response.body)
         })
@@ -621,7 +624,7 @@ class TargetCoreAPI {
   getMBoxes () {
     const sdkDetails = {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mboxes.getMBoxes({}, this.__createRequest({}))
+      this.sdk.apis.mboxes.getMBoxes({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response.body)
         })
@@ -641,7 +644,7 @@ class TargetCoreAPI {
     params.mboxName = name
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mboxes.getMBoxByName(params, this.__createRequest({}))
+      this.sdk.apis.mboxes.getMBoxByName(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response.body)
         })
@@ -657,7 +660,7 @@ class TargetCoreAPI {
   getMBoxProfileAttributes () {
     const sdkDetails = {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mbox.getProfileAttributes({}, this.__createRequest({}))
+      this.sdk.apis.mbox.getProfileAttributes({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response.body)
         })
@@ -673,7 +676,7 @@ class TargetCoreAPI {
   getEnvironments () {
     const sdkDetails = {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.environments.getEnvironments({}, this.__createRequest({}))
+      this.sdk.apis.environments.getEnvironments({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response.body)
         })
@@ -779,17 +782,20 @@ class TargetCoreAPI {
     })
   }
 
-  __createRequest (body, query) {
+  __createRequest (body, headers) {
     return {
       requestBody: body,
       server: 'https://mc.adobe.io/{tenant-name}/target',
       serverVariables: {
         'tenant-name': this.tenant
+      },
+      requestInterceptor: req => {
+        this.__setHeaders(req, this, headers)
       }
     }
   }
 
-  __setHeaders (req, coreAPIInstance) {
+  __setHeaders (req, coreAPIInstance, headers) {
     // set headers required for Target API calls
     if (!req.headers['x-api-key']) {
       req.headers['x-api-key'] = coreAPIInstance.apiKey
@@ -800,6 +806,15 @@ class TargetCoreAPI {
     if (!req.headers['Content-Type']) {
       req.headers['Content-Type'] = 'application/json'
     }
+    if ((headers !== undefined)) {
+      Object.keys(headers).forEach(function (key) {
+        req.headers[key] = headers[key]
+      })
+    }
+  }
+
+  __getAcceptHeader (value) {
+    return { accept: value }
   }
 }
 
