@@ -9,7 +9,8 @@
     "beautify": "eslint src test --fix",
     "unit-tests": "jest --coverage --ci -w=2",
     "e2e": "jest --testRegex './e2e/e2e.js'",
-    "generate-docs": "jsdoc2md -t ./docs/readme_template.md ./src/index.js > README.md"
+    "generate-docs": "jsdoc2md -t ./docs/readme_template.md ./src/index.js > README.md",
+    "validate": "bin/validate_spec.js spec/target_api.json"
   },
   "dependencies": {
     "swagger-client": "^3.9.0",
@@ -30,6 +31,17 @@
     "jest-cli": "^24.8.0",
     "jest-junit": "^10.0.0",
     "jest-plugin-fs": "^2.9.0",
-    "jsdoc-to-markdown": "^5.0.0"
+    "jsdoc-to-markdown": "^5.0.0",
+    "openapi-schema-validator": "^3.0.3"
+  },
+  "jest": {
+
+    "testPathIgnorePatterns": [
+      "<rootDir>/test/jest.setup.js"
+    ],
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/jest.setup.js"
+    ]
   }
 }

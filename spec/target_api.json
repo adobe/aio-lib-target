@@ -1,96 +1,96 @@
-{  
+{
    "openapi":"3.0.0",
-   "info":{  
+   "info":{
       "description":"Target’s RESTful APIs enable you to manage and deliver personalized experiences across channels.",
       "version":"v1",
       "title":"Adobe Target APIs"
    },
-   "servers":[  
-      {  
+   "servers":[
+      {
          "url":"https://mc.adobe.io/{tenant-name}/",
-         "variables":{  
-            "tenant-name":{  
+         "variables":{
+            "tenant-name":{
                "default":"changeme",
                "description":"The Tenant Name for Adobe Target"
             }
          }
       }
    ],
-   "tags":[  
-      {  
+   "tags":[
+      {
          "name":"activities"
       },
-      {  
+      {
          "name":"abactivity"
       },
-      {  
+      {
          "name":"activity"
       },
-      {  
+      {
          "name":"xtactivity"
       },
-      {  
+      {
          "name":"offers"
       },
-      {  
+      {
          "name":"audiences"
       },
-      {  
+      {
          "name":"properties"
       },
-      {  
+      {
          "name":"reports"
       },
-      {  
+      {
          "name":"mboxes"
       },
-      {  
+      {
          "name":"environments"
       },
-      {  
+      {
          "name":"batch"
       }
    ],
-   "paths":{  
-      "/target/activities":{  
-         "get":{  
-            "tags":[  
+   "paths":{
+      "/target/activities":{
+         "get":{
+            "tags":[
                "activities"
             ],
             "summary":"Get a list of activities.",
             "description":"Get a list of activities created in your Target account, with the ability to filter and sort by attributes.",
             "operationId":"getActivities",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"limit",
                   "in":"query",
                   "description":"Defines the number of items to return.",
                   "required":false,
-                  "schema":{  
+                  "schema":{
                      "type":"integer",
                      "format":"int32"
                   }
                },
-               {  
+               {
                   "name":"offset",
                   "in":"query",
                   "description":"Defines the first activity to return from the list of total activities. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of activities.",
                   "required":false,
-                  "schema":{  
+                  "schema":{
                      "type":"integer",
                      "format":"int32"
                   }
                },
-               {  
+               {
                   "name":"sortBy",
                   "in":"query",
                   "description":"Defines the sorting criteria on the returned items.",
                   "required":false,
-                  "schema":{  
+                  "schema":{
                      "type":"array",
-                     "items":{  
+                     "items":{
                         "type":"string",
-                        "enum":[  
+                        "enum":[
                            "name",
                            "id",
                            "endsAt",
@@ -100,7 +100,7 @@
                            "priority"
                         ]
                      },
-                     "enum":[  
+                     "enum":[
                         "name",
                         "id",
                         "endsAt",
@@ -112,52 +112,52 @@
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ActivityList"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve list of activities",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Activities retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -166,69 +166,69 @@
             }
          }
       },
-      "/target/activities/ab":{  
-         "post":{  
-            "tags":[  
+      "/target/activities/ab":{
+         "post":{
+            "tags":[
                "abactivity"
             ],
             "summary":"Create an AB activity.",
             "description":"Creates a new AB activity with the specified contents and returns the created activity.",
             "operationId":"createABActivity",
-            "requestBody":{  
-               "content":{  
-                  "application/vnd.adobe.target.v3+json":{  
-                     "schema":{  
+            "requestBody":{
+               "content":{
+                  "application/vnd.adobe.target.v3+json":{
+                     "schema":{
                         "$ref":"#/components/schemas/Activity"
                      }
                   }
                }
             },
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Activity"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve list of activities",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Activities retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -237,71 +237,71 @@
             }
          }
       },
-      "/target/activities/ab/{id}":{  
-         "get":{  
-            "tags":[  
+      "/target/activities/ab/{id}":{
+         "get":{
+            "tags":[
                "abactivity"
             ],
             "summary":"Get AB activity.",
             "description":"Fetch the current definition of an AB activity if it is found as referenced by the id.",
             "operationId":"getABActivity",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The id of the AB activity",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Activity"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve AB activity",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; AB activity retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -309,79 +309,79 @@
                }
             }
          },
-         "put":{  
-            "tags":[  
+         "put":{
+            "tags":[
                "abactivity"
             ],
             "summary":"Update AB activity.",
             "description":"Update the current definition of an AB activity if it is found as referenced by the id.",
             "operationId":"updateABActivity",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The id of the AB activity",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "requestBody":{  
-               "content":{  
-                  "application/vnd.adobe.target.v3+json":{  
-                     "schema":{  
+            "requestBody":{
+               "content":{
+                  "application/vnd.adobe.target.v3+json":{
+                     "schema":{
                         "$ref":"#/components/schemas/Activity"
                      }
                   }
                }
             },
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Activity"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to update AB activity",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; AB activity retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -389,70 +389,70 @@
                }
             }
          },
-         "delete":{  
-            "tags":[  
+         "delete":{
+            "tags":[
                "abactivity"
             ],
             "summary":"Delete AB activity.",
             "description":"Delete the current definition of an AB activity if it is found as referenced by the id.",
             "operationId":"deleteABActivity",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The id of the AB activity",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Activity"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to delete AB activity",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; AB activity deletion failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -461,80 +461,80 @@
             }
          }
       },
-      "/target/activities/{id}/name":{  
-         "put":{  
-            "tags":[  
+      "/target/activities/{id}/name":{
+         "put":{
+            "tags":[
                "activity"
             ],
             "summary":"Update AB activity name.",
             "description":"Update name of an activity if it is found as referenced by the id.",
             "operationId":"setName",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The Activity id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "requestBody":{  
-               "content":{  
-                  "application/vnd.adobe.target.v1+json":{  
-                     "schema":{  
-                        "name":"string"
+            "requestBody":{
+               "content":{
+                  "application/vnd.adobe.target.v1+json":{
+                     "schema":{
+                        "$ref": "#/components/schemas/Activity"
                      }
                   }
                }
             },
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Activity"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to update name of activity",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Activity name update failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -543,80 +543,80 @@
             }
          }
       },
-      "/target/activities/{id}/state":{  
-         "put":{  
-            "tags":[  
+      "/target/activities/{id}/state":{
+         "put":{
+            "tags":[
                "activity"
             ],
             "summary":"Update Activity state.",
             "description":"Update state of an activity if it is found as referenced by the id.",
             "operationId":"setState",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The Activity id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "requestBody":{  
-               "content":{  
-                  "application/vnd.adobe.target.v1+json":{  
-                     "schema":{  
-                        "state":"string"
+            "requestBody":{
+               "content":{
+                  "application/vnd.adobe.target.v1+json":{
+                     "schema":{
+                        "$ref": "#/components/schemas/ActivityState"
                      }
                   }
                }
             },
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Activity"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to update state of activity",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Activity state update failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -625,80 +625,80 @@
             }
          }
       },
-      "/target/activities/{id}/priority":{  
-         "put":{  
-            "tags":[  
+      "/target/activities/{id}/priority":{
+         "put":{
+            "tags":[
                "activity"
             ],
             "summary":"Update Activity priority.",
             "description":"Update priority of an activity if it is found as referenced by the id.",
             "operationId":"setPriority",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The Activity id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "requestBody":{  
-               "content":{  
-                  "application/vnd.adobe.target.v1+json":{  
-                     "schema":{  
-                        "priority":"string"
+            "requestBody":{
+               "content":{
+                  "application/vnd.adobe.target.v1+json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/ActivityPriority"
                      }
                   }
                }
             },
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Activity"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to update priority of activity",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Activity priority update failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -707,81 +707,80 @@
             }
          }
       },
-      "/target/activities/{id}/schedule":{  
-         "put":{  
-            "tags":[  
+      "/target/activities/{id}/schedule":{
+         "put":{
+            "tags":[
                "activity"
             ],
             "summary":"Update activity schedule.",
             "description":"Update schedule of an activity if it is found as referenced by the id.",
             "operationId":"setSchedule",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The Activity id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "requestBody":{  
-               "content":{  
-                  "application/vnd.adobe.target.v1+json":{  
-                     "schema":{  
-                        "startsAt":"string",
-                        "endsAt":"string"
+            "requestBody":{
+               "content":{
+                  "application/vnd.adobe.target.v1+json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/ActivitySchedule"
                      }
                   }
                }
             },
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Activity"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to update schedule of activity",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Activity schedule update failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -790,71 +789,71 @@
             }
          }
       },
-      "/target/activities/{id}/changelog":{  
-         "get":{  
-            "tags":[  
+      "/target/activities/{id}/changelog":{
+         "get":{
+            "tags":[
                "activity"
             ],
             "summary":"Get activity changelog.",
             "description":"Returns the changelog for a given activity id.",
             "operationId":"getChangeLog",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The Activity id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ActivityChangeLogList"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to get changelog of activity",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Activity changelog fetch failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -863,69 +862,69 @@
             }
          }
       },
-      "/target/activities/xt":{  
-         "post":{  
-            "tags":[  
+      "/target/activities/xt":{
+         "post":{
+            "tags":[
                "xtactivity"
             ],
             "summary":"Create XT activity.",
             "description":"Creates a new XT activity with the specified contents and returns the created activity.",
             "operationId":"createXTActivity",
-            "requestBody":{  
-               "content":{  
-                  "application/vnd.adobe.target.v3+json":{  
-                     "schema":{  
+            "requestBody":{
+               "content":{
+                  "application/vnd.adobe.target.v3+json":{
+                     "schema":{
                         "$ref":"#/components/schemas/Activity"
                      }
                   }
                }
             },
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Activity"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to create XT activity",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Activities retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -934,71 +933,71 @@
             }
          }
       },
-      "/target/activities/xt/{id}":{  
-         "get":{  
-            "tags":[  
+      "/target/activities/xt/{id}":{
+         "get":{
+            "tags":[
                "xtactivity"
             ],
             "summary":"Get XT activity.",
             "description":"Fetch the current definition of XT activity if it is found as referenced by the id.",
             "operationId":"getXTActivity",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The id of the XT activity",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Activity"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve XT activity",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; XT activity retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1006,79 +1005,79 @@
                }
             }
          },
-         "put":{  
-            "tags":[  
+         "put":{
+            "tags":[
                "xtactivity"
             ],
             "summary":"Update XT activity.",
             "description":"Update the current definition of XT activity if it is found as referenced by the id.",
             "operationId":"updateXTActivity",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The id of the XT activity",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "requestBody":{  
-               "content":{  
-                  "application/vnd.adobe.target.v3+json":{  
-                     "schema":{  
+            "requestBody":{
+               "content":{
+                  "application/vnd.adobe.target.v3+json":{
+                     "schema":{
                         "$ref":"#/components/schemas/Activity"
                      }
                   }
                }
             },
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Activity"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to update XT activity",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; XT activity retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1086,70 +1085,70 @@
                }
             }
          },
-         "delete":{  
-            "tags":[  
+         "delete":{
+            "tags":[
                "xtactivity"
             ],
             "summary":"Delete XT activity.",
             "description":"Delete the current definition of an XT activity if it is found as referenced by the id.",
             "operationId":"deleteXTActivity",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The id of the XT activity",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Activity"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to delete XT activity",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; XT activity deletion failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1158,71 +1157,71 @@
             }
          }
       },
-      "/target/offers/content/{id}":{  
-         "get":{  
-            "tags":[  
+      "/target/offers/content/{id}":{
+         "get":{
+            "tags":[
                "offer"
             ],
             "summary":"Get Offer.",
             "description":"Retrieves the contents of an offer given an offer id.",
             "operationId":"getOfferById",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The Offer id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/vnd.adobe.target.v2+json":{  
-                        "schema":{  
+                  "content":{
+                     "application/vnd.adobe.target.v2+json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Offer"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve Offer",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Offer retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1230,73 +1229,73 @@
                }
             }
          },
-         "put":{  
-            "tags":[  
+         "put":{
+            "tags":[
                "offer"
             ],
             "summary":"Update Offer",
             "description":"Updates the content offer referenced by the id specified in the URL.",
             "operationId":"updateOffer",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The Offer id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/vnd.adobe.target.v2+json":{  
-                        "schema":{  
+                  "content":{
+                     "application/vnd.adobe.target.v2+json":{
+                        "schema":{
                            "type":"array",
-                           "items":{  
+                           "items":{
                               "$ref":"#/components/schemas/Offer"
                            }
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to update Offer",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Offer retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1304,73 +1303,73 @@
                }
             }
          },
-         "delete":{  
-            "tags":[  
+         "delete":{
+            "tags":[
                "offer"
             ],
             "summary":"Delete Offer.",
             "description":"Deletes the content offer referenced by the provided id.",
             "operationId":"deleteOffer",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The Offer id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/vnd.adobe.target.v2+json":{  
-                        "schema":{  
+                  "content":{
+                     "application/vnd.adobe.target.v2+json":{
+                        "schema":{
                            "type":"array",
-                           "items":{  
+                           "items":{
                               "$ref":"#/components/schemas/Offer"
                            }
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to delete Offer",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Offer deletion failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1379,45 +1378,45 @@
             }
          }
       },
-      "/target/offers":{  
-         "get":{  
-            "tags":[  
+      "/target/offers":{
+         "get":{
+            "tags":[
                "offers"
             ],
             "summary":"Get a list of Offers.",
             "description":"Retrieve the list of previously-created content offers. The parameters passed through the query string are optional and are used to indicate the sorting and filtering options.",
             "operationId":"getOffers",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"limit",
                   "in":"query",
                   "description":"Defines the number of items to return.",
                   "required":false,
-                  "schema":{  
+                  "schema":{
                      "type":"integer",
                      "format":"int32"
                   }
                },
-               {  
+               {
                   "name":"offset",
                   "in":"query",
                   "description":"Defines the first offers to return from the list of Offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.",
                   "required":false,
-                  "schema":{  
+                  "schema":{
                      "type":"integer",
                      "format":"int32"
                   }
                },
-               {  
+               {
                   "name":"sortBy",
                   "in":"query",
                   "description":"Defines the sorting criteria on the returned items.",
                   "required":false,
-                  "schema":{  
+                  "schema":{
                      "type":"array",
-                     "items":{  
+                     "items":{
                         "type":"string",
-                        "enum":[  
+                        "enum":[
                            "name",
                            "id",
                            "modifiedAt",
@@ -1425,7 +1424,7 @@
                            "workspace"
                         ]
                      },
-                     "enum":[  
+                     "enum":[
                         "name",
                         "id",
                         "modifiedAt",
@@ -1435,52 +1434,52 @@
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/OfferList"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve list of Offers",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Offers retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1489,69 +1488,69 @@
             }
          }
       },
-      "/target/offers/content":{  
-         "post":{  
-            "tags":[  
+      "/target/offers/content":{
+         "post":{
+            "tags":[
                "offers"
             ],
             "summary":"Create an Offer.",
             "description":"Creates a new content offer as defined by the request data.",
             "operationId":"createOffer",
-            "requestBody":{  
-               "content":{  
-                  "application/vnd.adobe.target.v2+json":{  
-                     "schema":{  
+            "requestBody":{
+               "content":{
+                  "application/vnd.adobe.target.v2+json":{
+                     "schema":{
                         "$ref":"#/components/schemas/Offer"
                      }
                   }
                }
             },
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Offer"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to create offer",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Offer creation failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1560,74 +1559,74 @@
             }
          }
       },
-      "/target/audiences/{id}":{  
-         "get":{  
-            "tags":[  
+      "/target/audiences/{id}":{
+         "get":{
+            "tags":[
                "audiences"
             ],
             "summary":"Get Audience.",
             "description":"Get the audience definition specified by the provided id.",
             "operationId":"getAudienceById",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The Audience id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "type":"array",
-                           "items":{  
+                           "items":{
                               "$ref":"#/components/schemas/Audience"
                            }
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve Audience",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Audience retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1635,82 +1634,82 @@
                }
             }
          },
-         "put":{  
-            "tags":[  
+         "put":{
+            "tags":[
                "audience"
             ],
             "summary":"Update Audience",
             "description":"Update an audience with the new rules specified by the request data.",
             "operationId":"updateAudience",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The Audience id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "requestBody":{  
-               "content":{  
-                  "application/vnd.adobe.target.v3+json":{  
-                     "schema":{  
+            "requestBody":{
+               "content":{
+                  "application/vnd.adobe.target.v3+json":{
+                     "schema":{
                         "$ref":"#/components/schemas/Audience"
                      }
                   }
                }
             },
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "type":"array",
-                           "items":{  
+                           "items":{
                               "$ref":"#/components/schemas/Audience"
                            }
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to update Audience",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Audience retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1718,73 +1717,73 @@
                }
             }
          },
-         "delete":{  
-            "tags":[  
+         "delete":{
+            "tags":[
                "audience"
             ],
             "summary":"Delete Audience.",
             "description":"Delete the audience referenced by the specified id.",
             "operationId":"deleteAudience",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The Audience id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "type":"array",
-                           "items":{  
+                           "items":{
                               "$ref":"#/components/schemas/Audience"
                            }
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to delete Audience",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Audience deletion failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1793,45 +1792,45 @@
             }
          }
       },
-      "/target/audiences":{  
-         "get":{  
-            "tags":[  
+      "/target/audiences":{
+         "get":{
+            "tags":[
                "audiences"
             ],
             "summary":"Get a list of Audience.",
             "description":"List all available audiences with options to filter and sort by each available field.",
             "operationId":"getAudiences",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"limit",
                   "in":"query",
                   "description":"Defines the number of items to return.",
                   "required":false,
-                  "schema":{  
+                  "schema":{
                      "type":"integer",
                      "format":"int32"
                   }
                },
-               {  
+               {
                   "name":"offset",
                   "in":"query",
                   "description":"Defines the first audience to return from the list of total offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.",
                   "required":false,
-                  "schema":{  
+                  "schema":{
                      "type":"integer",
                      "format":"int32"
                   }
                },
-               {  
+               {
                   "name":"sortBy",
                   "in":"query",
                   "description":"Defines the sorting criteria on the returned items.",
                   "required":false,
-                  "schema":{  
+                  "schema":{
                      "type":"array",
-                     "items":{  
+                     "items":{
                         "type":"string",
-                        "enum":[  
+                        "enum":[
                            "name",
                            "id",
                            "modifiedAt",
@@ -1839,7 +1838,7 @@
                            "workspace"
                         ]
                      },
-                     "enum":[  
+                     "enum":[
                         "name",
                         "id",
                         "modifiedAt",
@@ -1849,52 +1848,52 @@
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/AudienceList"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve list of Audience",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Audiences retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1902,68 +1901,68 @@
                }
             }
          },
-         "post":{  
-            "tags":[  
+         "post":{
+            "tags":[
                "audiences"
             ],
             "summary":"Create Audience.",
             "description":"Create a new audience as specified by the contents of the request and return the newly-created audience definition.",
             "operationId":"createAudience",
-            "requestBody":{  
-               "content":{  
-                  "application/vnd.adobe.target.v3+json":{  
-                     "schema":{  
+            "requestBody":{
+               "content":{
+                  "application/vnd.adobe.target.v3+json":{
+                     "schema":{
                         "$ref":"#/components/schemas/Audience"
                      }
                   }
                }
             },
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Audience"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to create Audience",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Audience creation failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -1972,60 +1971,60 @@
             }
          }
       },
-      "/target/properties":{  
-         "get":{  
-            "tags":[  
+      "/target/properties":{
+         "get":{
+            "tags":[
                "properties"
             ],
             "summary":"Get a list of properties.",
             "description":"Retrieve list of all properties.",
             "operationId":"getProperties",
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/PropertyList"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve list of Properties",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Properties retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -2034,71 +2033,71 @@
             }
          }
       },
-      "/target/properties/{id}":{  
-         "get":{  
-            "tags":[  
+      "/target/properties/{id}":{
+         "get":{
+            "tags":[
                "properties"
             ],
             "summary":"Get property.",
             "description":"Retrieve property by property Id.",
             "operationId":"getAPropertyById",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The Property id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Property"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve Property",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Property retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -2107,71 +2106,71 @@
             }
          }
       },
-      "/target/activities/ab/{id}/report/performance":{  
-         "get":{  
-            "tags":[  
+      "/target/activities/ab/{id}/report/performance":{
+         "get":{
+            "tags":[
                "reports"
             ],
             "summary":"Get activity performance.",
             "description":"Retrieve the performance report data for the AB activity referenced by the provided id.",
             "operationId":"getABPerformance",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The activity id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Report"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve performance",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; performance retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -2180,71 +2179,71 @@
             }
          }
       },
-      "/target/activities/xt/{id}/report/performance":{  
-         "get":{  
-            "tags":[  
+      "/target/activities/xt/{id}/report/performance":{
+         "get":{
+            "tags":[
                "reports"
             ],
             "summary":"Get activity performance.",
             "description":"Retrieve the performance report data for the Experience activity referenced by the provided id.",
             "operationId":"getXTPerformance",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The activity id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Report"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve performance",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; performance retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -2253,71 +2252,71 @@
             }
          }
       },
-      "/target/activities/abt/{id}/report/performance":{  
-         "get":{  
-            "tags":[  
+      "/target/activities/abt/{id}/report/performance":{
+         "get":{
+            "tags":[
                "reports"
             ],
             "summary":"Get activity performance.",
             "description":"Retrieve the performance report data for the Automated Personalization activity referenced by the provided id.",
             "operationId":"getABTPerformance",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The activity id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Report"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve performance",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; performance retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -2326,71 +2325,71 @@
             }
          }
       },
-      "/target/activities/ab/{id}/report/orders":{  
-         "get":{  
-            "tags":[  
+      "/target/activities/ab/{id}/report/orders":{
+         "get":{
+            "tags":[
                "reports"
             ],
             "summary":"Get Orders report.",
             "description":"Retrieve the orders/audit report data for an AB, XT or Autotmated Personalization Activity",
             "operationId":"getAuditReport",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"id",
                   "in":"path",
                   "required":true,
                   "description":"The activity id",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/Report"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve Audit Report",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Audit Report retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -2399,60 +2398,60 @@
             }
          }
       },
-      "/target/mboxes":{  
-         "get":{  
-            "tags":[  
+      "/target/mboxes":{
+         "get":{
+            "tags":[
                "mboxes"
             ],
             "summary":"List Mboxes",
             "description":"List all available mboxes for a specific client with the options to filter and sort.",
             "operationId":"getMBoxes",
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/MBoxList"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve performance",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; performance retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -2461,71 +2460,71 @@
             }
          }
       },
-      "/target/mbox/{mboxName}":{  
-         "get":{  
-            "tags":[  
+      "/target/mbox/{mboxName}":{
+         "get":{
+            "tags":[
                "mboxes"
             ],
             "summary":"Get mbox parameters.",
             "description":"Get the list of mbox parameters.",
             "operationId":"getMBoxByName",
-            "parameters":[  
-               {  
+            "parameters":[
+               {
                   "name":"mboxName",
                   "in":"path",
                   "required":true,
                   "description":"The MBox name",
-                  "schema":{  
+                  "schema":{
                      "type":"string"
                   }
                }
             ],
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/MBoxParameterList"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve MBox attributes",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; MBox attributes retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -2534,60 +2533,60 @@
             }
          }
       },
-      "/target/profileattributes/mbox":{  
-         "get":{  
-            "tags":[  
+      "/target/profileattributes/mbox":{
+         "get":{
+            "tags":[
                "mbox"
             ],
             "summary":"Get Profile Attributes.",
             "description":"Retrieve the list of available profile attributes and mbox parameters of type profile",
             "operationId":"getProfileAttributes",
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/MBoxAttributesList"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve Profile Attributes",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Profile Attributes retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -2596,60 +2595,60 @@
             }
          }
       },
-      "/target/environments":{  
-         "get":{  
-            "tags":[  
+      "/target/environments":{
+         "get":{
+            "tags":[
                "environments"
             ],
             "summary":"Get environments",
             "description":"List all available environments with the options to filter and sort. Use the Environments API to retrieve the environment IDs corresponding to the various host groups set for the client.",
             "operationId":"getEnvironments",
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/EnvironmentList"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve Environments",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; Environments retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -2658,69 +2657,69 @@
             }
          }
       },
-      "/target/batch":{  
-         "post":{  
-            "tags":[  
+      "/target/batch":{
+         "post":{
+            "tags":[
                "batch"
             ],
             "summary":"Execute Batch APIs",
             "description":"Multiple Admin APIs can be executed as a single batch request.",
             "operationId":"executeBatch",
-            "requestBody":{  
-               "content":{  
-                  "application/vnd.adobe.target.v1+json":{  
-                     "schema":{  
-                        "$ref":"#/components/schemas/BatchReq"
+            "requestBody":{
+               "content":{
+                  "application/vnd.adobe.target.v1+json":{
+                     "schema":{
+                        "$ref":"#/components/schemas/Batchs"
                      }
                   }
                }
             },
-            "responses":{  
-               "200":{  
+            "responses":{
+               "200":{
                   "description":"successful operation",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
-                           "$ref":"#/components/schemas/Batch"
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "$ref":"#/components/schemas/BatchResponse"
                         }
                      }
                   }
                },
-               "400":{  
+               "400":{
                   "description":"Unable to retrieve performance",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "401":{  
+               "401":{
                   "description":"Unauthorized",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "403":{  
+               "403":{
                   "description":"Forbidden",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
                   }
                },
-               "500":{  
+               "500":{
                   "description":"External API error; performance retrieval failed",
-                  "content":{  
-                     "application/json":{  
-                        "schema":{  
+                  "content":{
+                     "application/json":{
+                        "schema":{
                            "$ref":"#/components/schemas/ErrorStatus"
                         }
                      }
@@ -2730,441 +2729,519 @@
          }
       }
    },
-   "components":{  
-      "schemas":{  
-         "ListActivityItem":{  
-            "properties":{  
-               "id":{  
+   "components":{
+      "schemas":{
+         "ListActivityItem":{
+            "properties":{
+               "id":{
                   "type":"integer",
                   "format":"int64"
                },
-               "thirdPartyId":{  
+               "thirdPartyId":{
                   "type":"string"
                },
-               "type":{  
+               "type":{
                   "type":"string"
                },
-               "state":{  
+               "state":{
                   "type":"string"
                },
-               "name":{  
+               "name":{
                   "type":"string"
                },
-               "priority":{  
+               "priority":{
                   "type":"integer",
                   "format":"int64"
                },
-               "modifiedAt":{  
+               "modifiedAt":{
                   "type":"string"
                },
-               "workspace":{  
+               "workspace":{
                   "type":"string"
                }
             }
          },
-         "Activity":{  
-            "properties":{  
-               "id":{  
+         "Activity":{
+            "properties":{
+               "id":{
                   "type":"integer",
                   "format":"int64"
                },
-               "thirdPartyId":{  
+               "thirdPartyId":{
                   "type":"string"
                },
-               "type":{  
+               "type":{
                   "type":"string"
                },
-               "state":{  
+               "state":{
                   "type":"string"
                },
-               "name":{  
+               "name":{
                   "type":"string"
                },
-               "priority":{  
+               "priority":{
                   "type":"integer",
                   "format":"int64"
                },
-               "modifiedAt":{  
+               "modifiedAt":{
                   "type":"string"
                },
-               "startsAt":{  
+               "startsAt":{
                   "type":"string"
                },
-               "endsAt":{  
+               "endsAt":{
                   "type":"string"
                },
-               "workspace":{  
+               "workspace":{
                   "type":"string"
                },
-               "propertyIds":{  
+               "propertyIds":{
                   "type":"array",
-                  "items":{  
+                  "items":{
                      "type":"integer"
                   }
                },
-               "autoAllocateTraffic":{  
-                  "properties":{  
-                     "enabled":{  
+               "autoAllocateTraffic":{
+                  "properties":{
+                     "enabled":{
                         "type":"boolean"
                      },
-                     "successEvaluationCriteria":{  
+                     "successEvaluationCriteria":{
                         "type":"string"
-                     }
-                  },
-                  "locations":{  
-                     "type":"array",
-                     "items":{  
-                        "$ref":"#/components/schemas/Mboxes"
-                     }
-                  },
-                  "experiences":{  
-                     "type":"array",
-                     "items":{  
-                        "$ref":"#/components/schemas/Experience"
-                     }
-                  },
-                  "metrics":{  
-                     "type":"array",
-                     "items":{  
-                        "$ref":"#/components/schemas/MetricsItem"
                      }
                   }
                }
             }
          },
-         "ActivityList":{  
-            "properties":{  
-               "total":{  
+         "ActivityList":{
+            "properties":{
+               "total":{
                   "type":"integer",
                   "format":"int64"
                },
-               "offset":{  
+               "offset":{
                   "type":"string"
                },
-               "limit":{  
+               "limit":{
                   "type":"integer",
                   "format":"int64"
                },
-               "activities":{  
+               "activities":{
                   "type":"array",
-                  "items":{  
+                  "items":{
                      "$ref":"#/components/schemas/ListActivityItem"
                   }
                }
             }
          },
-         "ActivityChangeLog":{  
-            "properties":{  
-               "modifiedAt":{  
+         "ActivityChangeLog":{
+            "properties":{
+               "modifiedAt":{
                   "type":"string"
                },
-               "activityParameters":{  
+               "activityParameters":{
                   "type":"object"
                }
             }
          },
-         "ActivityChangeLogList":{  
-            "properties":{  
-               "total":{  
+         "ActivityChangeLogList":{
+            "properties":{
+               "total":{
                   "type":"integer",
                   "format":"int64"
                },
-               "offset":{  
+               "offset":{
                   "type":"string"
                },
-               "limit":{  
+               "limit":{
                   "type":"integer",
                   "format":"int64"
                },
-               "activityChangelogs":{  
+               "activityChangelogs":{
                   "type":"array",
-                  "items":{  
+                  "items":{
                      "$ref":"#/components/schemas/ActivityChangeLog"
                   }
                }
             }
          },
-         "Offer":{  
-            "properties":{  
-               "id":{  
+         "ActivityState": {
+
+              "properties":{
+                 "id":{
+                    "type":"integer",
+                    "format":"int64"
+                 },
+                 "state":{
+                    "type":"string"
+                 },
+                 "modifiedAt":{
+                    "type":"string"
+                 }
+          }
+        },
+        "ActivityPriority": {
+
+             "properties":{
+                "id":{
+                   "type":"integer",
+                   "format":"int64"
+                },
+                "priority":{
+                   "type":"string"
+                },
+                "modifiedAt":{
+                   "type":"string"
+                }
+         }
+       },
+       "ActivityName": {
+
+            "properties":{
+               "id":{
                   "type":"integer",
                   "format":"int64"
                },
-               "type":{  
+               "name":{
                   "type":"string"
                },
-               "name":{  
+               "modifiedAt":{
+                  "type":"string"
+               }
+        }
+      },
+      "ActivitySchedule": {
+
+           "properties":{
+              "id":{
+                 "type":"integer",
+                 "format":"int64"
+              },
+              "startsAt":{
+                 "type":"string"
+              },
+              "endsAt":{
+                 "type":"string"
+              },
+              "modifiedAt":{
+                 "type":"string"
+              }
+       }
+     },
+         "Offer":{
+            "properties":{
+               "id":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "type":{
                   "type":"string"
                },
-               "content":{  
+               "name":{
                   "type":"string"
                },
-               "modifiedAt":{  
+               "content":{
                   "type":"string"
                },
-               "workspace":{  
+               "modifiedAt":{
+                  "type":"string"
+               },
+               "workspace":{
                   "type":"string"
                }
             }
          },
-         "OfferList":{  
-            "properties":{  
-               "total":{  
+         "OfferList":{
+            "properties":{
+               "total":{
                   "type":"integer",
                   "format":"int64"
                },
-               "offset":{  
+               "offset":{
                   "type":"string"
                },
-               "limit":{  
+               "limit":{
                   "type":"integer",
                   "format":"int64"
                },
-               "offers":{  
+               "offers":{
                   "type":"array",
-                  "items":{  
+                  "items":{
                      "$ref":"#/components/schemas/Offer"
                   }
                }
             }
          },
-         "Audience":{  
-            "properties":{  
-               "id":{  
+         "Audience":{
+            "properties":{
+               "id":{
                   "type":"integer",
                   "format":"int64"
                },
-               "origin":{  
+               "origin":{
                   "type":"string"
                },
-               "name":{  
+               "name":{
                   "type":"string"
                },
-               "description":{  
+               "description":{
                   "type":"string"
                },
-               "modifiedAt":{  
+               "modifiedAt":{
                   "type":"string"
                },
-               "workspace":{  
+               "workspace":{
                   "type":"string"
                },
-               "targetRule":{  
+               "targetRule":{
                   "type":"object"
                }
             }
          },
-         "AudienceList":{  
-            "properties":{  
-               "total":{  
+         "AudienceList":{
+            "properties":{
+               "total":{
                   "type":"integer",
                   "format":"int64"
                },
-               "offset":{  
+               "offset":{
                   "type":"string"
                },
-               "limit":{  
+               "limit":{
                   "type":"integer",
                   "format":"int64"
                },
-               "offers":{  
+               "offers":{
                   "type":"array",
-                  "items":{  
+                  "items":{
                      "$ref":"#/components/schemas/Audience"
                   }
                }
             }
          },
-         "Property":{  
-            "properties":{  
-               "id":{  
+         "Property":{
+            "properties":{
+               "id":{
                   "type":"integer",
                   "format":"int64"
                },
-               "channel":{  
+               "channel":{
                   "type":"string"
                },
-               "name":{  
+               "name":{
                   "type":"string"
                },
-               "description":{  
+               "description":{
                   "type":"string"
                },
-               "segmentId":{  
+               "segmentId":{
                   "type":"integer"
                },
-               "workspaces":{  
+               "workspaces":{
                   "type":"array"
                }
             }
          },
-         "PropertyList":{  
-            "properties":{  
-               "total":{  
+         "PropertyList":{
+            "properties":{
+               "total":{
                   "type":"integer",
                   "format":"int64"
                },
-               "offset":{  
+               "offset":{
                   "type":"string"
                },
-               "limit":{  
+               "limit":{
                   "type":"integer",
                   "format":"int64"
                },
-               "offers":{  
+               "offers":{
                   "type":"array",
-                  "items":{  
+                  "items":{
                      "$ref":"#/components/schemas/Property"
                   }
                }
             }
          },
-         "MBox":{  
-            "properties":{  
-               "lastRequestedAt":{  
+         "MBox":{
+            "properties":{
+               "lastRequestedAt":{
                   "type":"string"
                },
-               "name":{  
+               "name":{
                   "type":"string"
                },
-               "status":{  
+               "status":{
                   "type":"string"
                }
             }
          },
-         "MBoxList":{  
-            "properties":{  
-               "total":{  
+         "MBoxList":{
+            "properties":{
+               "total":{
                   "type":"integer",
                   "format":"int64"
                },
-               "offset":{  
+               "offset":{
                   "type":"string"
                },
-               "limit":{  
+               "limit":{
                   "type":"integer",
                   "format":"int64"
                },
-               "offers":{  
+               "offers":{
                   "type":"array",
-                  "items":{  
+                  "items":{
                      "$ref":"#/components/schemas/MBox"
                   }
                }
             }
          },
-         "MBoxParameter":{  
-            "properties":{  
-               "name":{  
+         "MBoxParameter":{
+            "properties":{
+               "name":{
                   "type":"string"
                },
-               "parameterType":{  
+               "parameterType":{
                   "type":"string"
                }
             }
          },
-         "MBoxParameterList":{  
-            "properties":{  
-               "name":{  
+         "MBoxParameterList":{
+            "properties":{
+               "name":{
                   "type":"string"
                },
-               "offers":{  
+               "offers":{
                   "type":"array",
-                  "items":{  
+                  "items":{
                      "$ref":"#/components/schemas/MBoxParameter"
                   }
                }
             }
          },
-         "MBoxAttributesList":{  
-            "properties":{  
-               "mboxProfileAttributes":{  
+         "MBoxAttributesList":{
+            "properties":{
+               "mboxProfileAttributes":{
                   "type":"array",
-                  "items":{  
+                  "items":{
                      "type":"string"
                   }
                }
             }
          },
-         "Environment":{  
-            "properties":{  
-               "id":{  
+         "Environment":{
+            "properties":{
+               "id":{
                   "type":"integer"
                },
-               "name":{  
+               "name":{
                   "type":"string"
                }
             }
          },
-         "EnvironmentList":{  
-            "properties":{  
-               "total":{  
+         "EnvironmentList":{
+            "properties":{
+               "total":{
                   "type":"integer",
                   "format":"int64"
                },
-               "offset":{  
+               "offset":{
                   "type":"string"
                },
-               "limit":{  
+               "limit":{
                   "type":"integer",
                   "format":"int64"
                },
-               "offers":{  
+               "offers":{
                   "type":"array",
-                  "items":{  
+                  "items":{
                      "$ref":"#/components/schemas/Environment"
                   }
                }
             }
          },
-         "Header":{  
-            "properties":{  
-               "name":{  
+         "Header":{
+            "properties":{
+               "name":{
                   "type":"string"
                },
-               "value":{  
+               "value":{
                   "type":"string"
                }
             }
          },
-         "BatchResult":{  
-            "properties":{  
-               "operationId":{  
+         "BatchOperation":{
+            "properties":{
+               "operationId":{
                   "type":"integer",
                   "format":"int64"
                },
-               "skipped":{  
-                  "type":"boolean"
+               "dependsOnOperationIds~":{
+                  "type":"array"
                },
-               "statusCode":{  
-                  "type":"integer",
-                  "format":"int64"
+               "method":{
+                  "type":"string"
                },
-               "headers":{  
-                  "type":"array",
-                  "items":{  
-                     "$ref":"#/components/schemas/Header"
-                  }
+               "relativeUrl":{
+                  "type":"string"
                },
-               "body":{  
+               "headers~":{
+                  "type":"array"
+               },
+               "body":{
                   "type":"object"
                }
             }
          },
-         "BatchResponse":{  
-            "properties":{  
-               "results":{  
+         "Batchs":{
+            "properties":{
+               "results":{
                   "type":"array",
-                  "items":{  
-                     "$ref":"#/components/schemas/Results"
+                  "items":{
+                     "$ref":"#/components/schemas/BatchOperation"
                   }
                }
             }
          },
-         "Report":{  
+         "BatchResult":{
+            "properties":{
+               "operationId":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "skipped":{
+                  "type":"boolean"
+               },
+               "statusCode":{
+                  "type":"integer",
+                  "format":"int64"
+               },
+               "headers":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/Header"
+                  }
+               },
+               "body":{
+                  "type":"object"
+               }
+            }
+         },
+         "BatchResponse":{
+            "properties":{
+               "results":{
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/components/schemas/BatchResult"
+                  }
+               }
+            }
+         },
+         "Report":{
             "type":"object"
          },
-         "ErrorStatus":{  
+         "ErrorStatus":{
             "type":"object"
          }
       }
