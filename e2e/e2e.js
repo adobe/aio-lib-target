@@ -11,85 +11,83 @@ governing permissions and limitations under the License.
 */
 
 const sdk = require('../src/index')
-const util = require("util")
+const path = require('path')
+
+// load .env values in the e2e folder, if any
+require('dotenv').config({ path: path.join(__dirname, '.env') })
 
 var sdkClient = {}
-const tenant = process.env['TARGET_TENANT']
-const apiKey = process.env['TARGET_APIKEY']
-const token = process.env['TARGET_TOKEN']
+const tenant = process.env.TARGET_TENANT
+const apiKey = process.env.TARGET_APIKEY
+const token = process.env.TARGET_TOKEN
 
 test('sdk init test', async () => {
-
   sdkClient = await sdk.init(tenant, apiKey, token)
 
   expect(sdkClient.tenant).toBe(tenant)
   expect(sdkClient.apiKey).toBe(apiKey)
   expect(sdkClient.token).toBe(token)
-
-});
+})
 
 test('test getActivities', async () => {
   var res = await sdkClient.getActivities()
-  expect(res.total).toBe(10)
+  expect(res.status).toEqual(200)
 })
 
 test('test getABActivityById', async () => {
   var res = await sdkClient.getABActivityById(204051)
-  expect(res.id).toBe(204051)
-
+  expect(res.status).toEqual(200)
 })
 
 test('test getXTActivityById', async () => {
   var res = await sdkClient.getXTActivityById(197961)
-  expect(res.id).toBe(197961)
-
+  expect(res.status).toEqual(200)
 })
 
 test('test getABActivitChangeLog', async () => {
   var res = await sdkClient.getActivityChangeLog(204051)
-  expect(res.total).toBe(19)
-  expect(res.activityChangelogs.length).toBe(19)
+  expect(res.status).toEqual(200)
 })
 
 test('test getOffers', async () => {
   var res = await sdkClient.getOffers()
-  expect(res.total).toBe(4)
+  expect(res.status).toEqual(200)
 })
 
 test('test getOfferById', async () => {
   var res = await sdkClient.getOfferById(453100)
-  expect(res.id).toBe(453100)
+  expect(res.status).toEqual(200)
 })
 
 test('test getAudiences', async () => {
   var res = await sdkClient.getAudiences()
-  expect(res.total).toBe(25)
+  expect(res.status).toEqual(200)
 })
 
 test('test getAudienceById', async () => {
   var res = await sdkClient.getAudienceById(3307106)
-  expect(res.id).toBe(3307106)
+  expect(res.status).toEqual(200)
 })
 
 test('test getProperties', async () => {
   var res = await sdkClient.getProperties()
-  expect(res.total).toBe(1)
+  expect(res.status).toEqual(200)
 })
 
 test('test getPropertyById', async () => {
   var res = await sdkClient.getPropertyById(1251)
-  expect(res.id).toBe(1251)
+  expect(res.status).toEqual(200)
 })
 
 test('test getMBoxes', async () => {
   var res = await sdkClient.getMBoxes()
-  expect(res.total).toBe(0)
+  expect(res.status).toEqual(200)
 })
 test('test getMBoxProfileAttributes', async () => {
   var res = await sdkClient.getMBoxProfileAttributes()
-  expect(res.mboxProfileAttributes.length).toBe(20)
+  expect(res.status).toEqual(200)
 })
 test('test getEnvironments', async () => {
   var res = await sdkClient.getEnvironments()
-  expect(res.total).toBe(3)
+  expect(res.status).toEqual(200)
 })
