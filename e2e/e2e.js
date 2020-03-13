@@ -29,54 +29,70 @@ test('sdk init test', async () => {
   expect(sdkClient.token).toBe(token)
 })
 
-test('test getActivities', async () => {
+test('test getActivities and getABActivityById', async () => {
   var res = await sdkClient.getActivities()
   expect(res.status).toEqual(200)
+  if (res.body.total > 0) {
+    const activities = res.body.activities
+    let processedABActivity = false
+    let processedXTActivity = false
+    // make one call get activity by id for xt and ab type
+    for (let i = 0; i < activities.length; i++) {
+      const element = activities[i]
+      if (element.type === 'ab' && !processedABActivity) {
+        res = await sdkClient.getABActivityById(element.id)
+        expect(res.status).toEqual(200)
+        processedABActivity = true
+      } else if (element.type === 'xt' && !processedXTActivity) {
+        res = await sdkClient.getXTActivityById(element.id)
+        expect(res.status).toEqual(200)
+        processedXTActivity = true
+      }
+    }
+  }
 })
 
-test('test getABActivityById', async () => {
-  var res = await sdkClient.getABActivityById(204051)
-  expect(res.status).toEqual(200)
-})
-
-test('test getXTActivityById', async () => {
-  var res = await sdkClient.getXTActivityById(197961)
-  expect(res.status).toEqual(200)
-})
-
-test('test getABActivitChangeLog', async () => {
-  var res = await sdkClient.getActivityChangeLog(204051)
-  expect(res.status).toEqual(200)
-})
-
-test('test getOffers', async () => {
+test('test getOffers and getOfferById', async () => {
   var res = await sdkClient.getOffers()
   expect(res.status).toEqual(200)
+  if (res.body.total > 0) {
+    const offers = res.body.offers
+
+    for (let i = 0; i < offers.length; i++) {
+      const element = offers[i]
+      // get offer by id only works for content type offers
+      if (element.type === 'content') {
+        res = await sdkClient.getOfferById(element.id)
+        expect(res.status).toEqual(200)
+        break
+      }
+    }
+  }
 })
 
-test('test getOfferById', async () => {
-  var res = await sdkClient.getOfferById(453100)
-  expect(res.status).toEqual(200)
-})
-
-test('test getAudiences', async () => {
+test('test getAudiences and getAudienceById', async () => {
   var res = await sdkClient.getAudiences()
   expect(res.status).toEqual(200)
+  if (res.body.total > 0) {
+    const audiences = res.body.audiences
+
+    const element = audiences[0]
+    // get audience by id
+    res = await sdkClient.getAudienceById(element.id)
+    expect(res.status).toEqual(200)
+  }
 })
 
-test('test getAudienceById', async () => {
-  var res = await sdkClient.getAudienceById(3307106)
-  expect(res.status).toEqual(200)
-})
-
-test('test getProperties', async () => {
+test('test getProperties and getPropertyById', async () => {
   var res = await sdkClient.getProperties()
   expect(res.status).toEqual(200)
-})
-
-test('test getPropertyById', async () => {
-  var res = await sdkClient.getPropertyById(1251)
-  expect(res.status).toEqual(200)
+  if (res.body.total > 0) {
+    const properties = res.body.properties
+    const element = properties[0]
+    // get property by id
+    res = await sdkClient.getPropertyById(element.id)
+    expect(res.status).toEqual(200)
+  }
 })
 
 test('test getMBoxes', async () => {

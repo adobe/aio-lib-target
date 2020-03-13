@@ -117,7 +117,7 @@ class TargetCoreAPI {
   createABActivity (body) {
     const sdkDetails = body
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.createABActivity({}, this.__createRequest(body))
+      this.sdk.apis.abactivity.createABActivity({}, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -135,7 +135,7 @@ class TargetCoreAPI {
   createXTActivity (body) {
     const sdkDetails = body
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.createXTActivity({}, this.__createRequest(body))
+      this.sdk.apis.xtactivity.createXTActivity({}, this.__createRequest(body), this.__getContentTypeHeader(ACCEPT_HEADERS.V3))
         .then(response => {
           resolve(response)
         })
@@ -215,7 +215,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.updateXTActivity(params, this.__createRequest(body))
+      this.sdk.apis.xtactivity.updateXTActivity(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -239,7 +239,7 @@ class TargetCoreAPI {
     }
     const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setName(params, this.__createRequest(body))
+      this.sdk.apis.activity.setName(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -264,7 +264,7 @@ class TargetCoreAPI {
     }
     const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setState(params, this.__createRequest(body))
+      this.sdk.apis.activity.setState(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -289,7 +289,7 @@ class TargetCoreAPI {
     }
     const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setPriority(params, this.__createRequest(body))
+      this.sdk.apis.activity.setPriority(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -314,7 +314,7 @@ class TargetCoreAPI {
     }
     const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setSchedule(params, this.__createRequest(body))
+      this.sdk.apis.activity.setSchedule(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -334,7 +334,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.deleteABActivity(params, this.__createRequest({}))
+      this.sdk.apis.abactivity.deleteABActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -354,7 +354,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.deleteXTActivity(params, this.__createRequest({}))
+      this.sdk.apis.xtactivity.deleteXTActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -433,7 +433,7 @@ class TargetCoreAPI {
   createOffer (body) {
     const sdkDetails = body
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offers.createOffer({}, this.__createRequest(body))
+      this.sdk.apis.offers.createOffer({}, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -453,7 +453,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.updateOffer(params, this.__createRequest(body))
+      this.sdk.apis.offer.updateOffer(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -473,7 +473,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.deleteOffer(params, this.__createRequest({}))
+      this.sdk.apis.offer.deleteOffer(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -512,7 +512,7 @@ class TargetCoreAPI {
   createAudience (body) {
     const sdkDetails = body
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.createAudience({}, this.__createRequest(body))
+      this.sdk.apis.audiences.createAudience({}, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -552,7 +552,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audience.updateAudience(params, this.__createRequest(body))
+      this.sdk.apis.audience.updateAudience(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -572,7 +572,7 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audience.deleteAudience(params, this.__createRequest({}))
+      this.sdk.apis.audience.deleteAudience(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -815,6 +815,10 @@ class TargetCoreAPI {
 
   __getAcceptHeader (value) {
     return { accept: value }
+  }
+
+  __getContentTypeHeader (value) {
+    return { 'Content-Type': value }
   }
 }
 
