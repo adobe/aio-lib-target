@@ -15,6 +15,12 @@ const Swagger = require('swagger-client')
 const { codes } = require('./SDKErrors')
 const logger = require('@adobe/aio-lib-core-logging')('aio-lib-target', { level: process.env.LOG_LEVEL })
 
+const ACCEPT_HEADERS = {
+  V1: 'application/vnd.adobe.target.v1+json',
+  V2: 'application/vnd.adobe.target.v2+json',
+  V3: 'application/vnd.adobe.target.v3+json'
+}
+
 /**
   * Returns a Promise that resolves with a new TargetCoreAPI object.
   *
@@ -72,9 +78,6 @@ class TargetCoreAPI {
       const spec = require('../spec/target_api.json')
       const swagger = new Swagger({
         spec: spec,
-        requestInterceptor: req => {
-          this.__setHeaders(req, this)
-        },
         usePromise: true
       })
       this.sdk = (await swagger)
@@ -96,9 +99,9 @@ class TargetCoreAPI {
   getActivities ({ limit = 2147483647, offset = 0, sortBy } = {}) {
     const sdkDetails = arguments[0]
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activities.getActivities(arguments[0], this.__createRequest({}))
+      this.sdk.apis.activities.getActivities(arguments[0], this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_ACTIVITIES({ sdkDetails, messageValues: err }))
@@ -114,9 +117,9 @@ class TargetCoreAPI {
   createABActivity (body) {
     const sdkDetails = body
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.createABActivity({}, this.__createRequest(body))
+      this.sdk.apis.abactivity.createABActivity({}, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_CREATE_AB_ACTIVITY({ sdkDetails, messageValues: err }))
@@ -132,9 +135,9 @@ class TargetCoreAPI {
   createXTActivity (body) {
     const sdkDetails = body
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.createXTActivity({}, this.__createRequest(body))
+      this.sdk.apis.xtactivity.createXTActivity({}, this.__createRequest(body), this.__getContentTypeHeader(ACCEPT_HEADERS.V3))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_CREATE_XT_ACTIVITY({ sdkDetails, messageValues: err }))
@@ -152,9 +155,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.getABActivity(params, this.__createRequest({}))
+      this.sdk.apis.abactivity.getABActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_AB_ACTIVITY_BY_ID({ sdkDetails, messageValues: err }))
@@ -172,9 +175,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.getXTActivity(params, this.__createRequest({}))
+      this.sdk.apis.xtactivity.getXTActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_XT_ACTIVITY_BY_ID({ sdkDetails, messageValues: err }))
@@ -194,7 +197,7 @@ class TargetCoreAPI {
     return new Promise((resolve, reject) => {
       this.sdk.apis.abactivity.updateABActivity(params, this.__createRequest(body))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_UPDATE_AB_ACTIVITY({ sdkDetails, messageValues: err }))
@@ -212,9 +215,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.updateXTActivity(params, this.__createRequest(body))
+      this.sdk.apis.xtactivity.updateXTActivity(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_UPDATE_XT_ACTIVITY({ sdkDetails, messageValues: err }))
@@ -236,9 +239,9 @@ class TargetCoreAPI {
     }
     const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setName(params, this.__createRequest(body))
+      this.sdk.apis.activity.setName(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_SET_ACTIVITY_NAME({ sdkDetails, messageValues: err }))
@@ -261,9 +264,9 @@ class TargetCoreAPI {
     }
     const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setState(params, this.__createRequest(body))
+      this.sdk.apis.activity.setState(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_SET_ACTIVITY_STATE({ sdkDetails, messageValues: err }))
@@ -286,9 +289,9 @@ class TargetCoreAPI {
     }
     const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setPriority(params, this.__createRequest(body))
+      this.sdk.apis.activity.setPriority(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_SET_ACTIVITY_PRIORITY({ sdkDetails, messageValues: err }))
@@ -311,9 +314,9 @@ class TargetCoreAPI {
     }
     const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setSchedule(params, this.__createRequest(body))
+      this.sdk.apis.activity.setSchedule(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_SET_ACTIVITY_SCHEDULE({ sdkDetails, messageValues: err }))
@@ -331,9 +334,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.deleteABActivity(params, this.__createRequest({}))
+      this.sdk.apis.abactivity.deleteABActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_DELETE_AB_ACTIVITY({ sdkDetails, messageValues: err }))
@@ -351,9 +354,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.deleteXTActivity(params, this.__createRequest({}))
+      this.sdk.apis.xtactivity.deleteXTActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_DELETE_XT_ACTIVITY({ sdkDetails, messageValues: err }))
@@ -371,9 +374,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.getChangeLog(params, this.__createRequest({}))
+      this.sdk.apis.activity.getChangeLog(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_ACTIVITY_CHANGELOG({ sdkDetails, messageValues: err }))
@@ -392,9 +395,9 @@ class TargetCoreAPI {
   getOffers ({ limit = 2147483647, offset = 0, sortBy } = {}) {
     const sdkDetails = arguments[0]
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offers.getOffers(arguments[0], this.__createRequest({}))
+      this.sdk.apis.offers.getOffers(arguments[0], this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_OFFERS({ sdkDetails, messageValues: err }))
@@ -412,9 +415,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.getOfferById(params, this.__createRequest({}))
+      this.sdk.apis.offer.getOfferById(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_OFFER_BY_ID({ sdkDetails, messageValues: err }))
@@ -430,9 +433,9 @@ class TargetCoreAPI {
   createOffer (body) {
     const sdkDetails = body
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offers.createOffer({}, this.__createRequest(body))
+      this.sdk.apis.offers.createOffer({}, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_CREATE_OFFER({ sdkDetails, messageValues: err }))
@@ -450,9 +453,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.updateOffer(params, this.__createRequest(body))
+      this.sdk.apis.offer.updateOffer(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_UPDATE_OFFER({ sdkDetails, messageValues: err }))
@@ -470,9 +473,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.deleteOffer(params, this.__createRequest({}))
+      this.sdk.apis.offer.deleteOffer(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_DELETE_OFFER({ sdkDetails, messageValues: err }))
@@ -491,9 +494,9 @@ class TargetCoreAPI {
   getAudiences ({ limit = 2147483647, offset = 0, sortBy } = {}) {
     const sdkDetails = arguments[0]
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.getAudiences(arguments[0], this.__createRequest({}))
+      this.sdk.apis.audiences.getAudiences(arguments[0], this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_AUDIENCES({ sdkDetails, messageValues: err }))
@@ -509,9 +512,9 @@ class TargetCoreAPI {
   createAudience (body) {
     const sdkDetails = body
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.createAudience({}, this.__createRequest(body))
+      this.sdk.apis.audiences.createAudience({}, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_CREATE_AUDIENCE({ sdkDetails, messageValues: err }))
@@ -529,9 +532,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.getAudienceById(params, this.__createRequest({}))
+      this.sdk.apis.audiences.getAudienceById(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_AUDIENCE_BY_ID({ sdkDetails, messageValues: err }))
@@ -549,9 +552,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = { params, body }
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audience.updateAudience(params, this.__createRequest(body))
+      this.sdk.apis.audience.updateAudience(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_UPDATE_AUDIENCE({ sdkDetails, messageValues: err }))
@@ -569,9 +572,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audience.deleteAudience(params, this.__createRequest({}))
+      this.sdk.apis.audience.deleteAudience(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_DELETE_AUDIENCE({ sdkDetails, messageValues: err }))
@@ -585,9 +588,9 @@ class TargetCoreAPI {
   getProperties () {
     const sdkDetails = {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.properties.getProperties({}, this.__createRequest({}))
+      this.sdk.apis.properties.getProperties({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_PROPERTIES({ sdkDetails, messageValues: err }))
@@ -605,9 +608,9 @@ class TargetCoreAPI {
     params.id = id
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.properties.getAPropertyById(params, this.__createRequest({}))
+      this.sdk.apis.properties.getAPropertyById(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_PROPERTY_BY_ID({ sdkDetails, messageValues: err }))
@@ -621,9 +624,9 @@ class TargetCoreAPI {
   getMBoxes () {
     const sdkDetails = {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mboxes.getMBoxes({}, this.__createRequest({}))
+      this.sdk.apis.mboxes.getMBoxes({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_MBOXES({ sdkDetails, messageValues: err }))
@@ -641,9 +644,9 @@ class TargetCoreAPI {
     params.mboxName = name
     const sdkDetails = params
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mboxes.getMBoxByName(params, this.__createRequest({}))
+      this.sdk.apis.mboxes.getMBoxByName(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_MBOX_BY_NAME({ sdkDetails, messageValues: err }))
@@ -657,9 +660,9 @@ class TargetCoreAPI {
   getMBoxProfileAttributes () {
     const sdkDetails = {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mbox.getProfileAttributes({}, this.__createRequest({}))
+      this.sdk.apis.mbox.getProfileAttributes({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_MBOX_PROFILE_ATTRIBUTES({ sdkDetails, messageValues: err }))
@@ -673,9 +676,9 @@ class TargetCoreAPI {
   getEnvironments () {
     const sdkDetails = {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.environments.getEnvironments({}, this.__createRequest({}))
+      this.sdk.apis.environments.getEnvironments({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_ENVIRONMENTS({ sdkDetails, messageValues: err }))
@@ -695,7 +698,7 @@ class TargetCoreAPI {
     return new Promise((resolve, reject) => {
       this.sdk.apis.reports.getABPerformance(params, this.__createRequest({}))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_AB_ACTIVITY_PERFORMANCE({ sdkDetails, messageValues: err }))
@@ -715,7 +718,7 @@ class TargetCoreAPI {
     return new Promise((resolve, reject) => {
       this.sdk.apis.reports.getXTPerformance(params, this.__createRequest({}))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_XT_ACTIVITY_PERFORMANCE({ sdkDetails, messageValues: err }))
@@ -735,7 +738,7 @@ class TargetCoreAPI {
     return new Promise((resolve, reject) => {
       this.sdk.apis.reports.getABTPerformance(params, this.__createRequest({}))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_ACTIVITY_PERFORMANCE({ sdkDetails, messageValues: err }))
@@ -755,7 +758,7 @@ class TargetCoreAPI {
     return new Promise((resolve, reject) => {
       this.sdk.apis.reports.getAuditReport(params, this.__createRequest({}))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_GET_ORDERS_REPORT({ sdkDetails, messageValues: err }))
@@ -771,7 +774,7 @@ class TargetCoreAPI {
     return new Promise((resolve, reject) => {
       this.sdk.apis.batch.executeBatch({}, this.__createRequest(body))
         .then(response => {
-          resolve(response.body)
+          resolve(response)
         })
         .catch(err => {
           reject(new codes.ERROR_EXECUTE_BATCH({ sdkDetails, messageValues: err }))
@@ -779,17 +782,20 @@ class TargetCoreAPI {
     })
   }
 
-  __createRequest (body, query) {
+  __createRequest (body, headers) {
     return {
       requestBody: body,
       server: 'https://mc.adobe.io/{tenant-name}/target',
       serverVariables: {
         'tenant-name': this.tenant
+      },
+      requestInterceptor: req => {
+        this.__setHeaders(req, this, headers)
       }
     }
   }
 
-  __setHeaders (req, coreAPIInstance) {
+  __setHeaders (req, coreAPIInstance, headers) {
     // set headers required for Target API calls
     if (!req.headers['x-api-key']) {
       req.headers['x-api-key'] = coreAPIInstance.apiKey
@@ -800,6 +806,19 @@ class TargetCoreAPI {
     if (!req.headers['Content-Type']) {
       req.headers['Content-Type'] = 'application/json'
     }
+    if ((headers !== undefined)) {
+      Object.keys(headers).forEach(function (key) {
+        req.headers[key] = headers[key]
+      })
+    }
+  }
+
+  __getAcceptHeader (value) {
+    return { accept: value }
+  }
+
+  __getContentTypeHeader (value) {
+    return { 'Content-Type': value }
   }
 }
 

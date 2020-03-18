@@ -30,6 +30,18 @@ test('sdk init test', async () => {
   expect(sdkClient.token).toBe(token)
 })
 
+test('sdk init error, no tenant passed', async () => {
+  await expect(sdk.init(null, apiKey, token)).rejects.toThrow('[TargetSDK:ERROR_SDK_INITIALIZATION] SDK initialization error(s). Missing arguments: tenant')
+})
+
+test('sdk init error, no apiKey passed', async () => {
+  await expect(sdk.init(tenant, null, token)).rejects.toThrow('[TargetSDK:ERROR_SDK_INITIALIZATION] SDK initialization error(s). Missing arguments: apiKey')
+})
+
+test('sdk init error, no token passed', async () => {
+  await expect(sdk.init(tenant, apiKey)).rejects.toThrow('[TargetSDK:ERROR_SDK_INITIALIZATION] SDK initialization error(s). Missing arguments: token')
+})
+
 test('test getActivities', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities'
   const method = 'GET'
@@ -38,9 +50,9 @@ test('test getActivities', async () => {
   mockResponseWithMethod(url, method, mock.data.activities)
   // check success response
   var res = await sdkClient.getActivities()
-  expect(res.total).toBe(2)
-  expect(res.limit).toBe(10)
-  expect(res.activities.length).toBe(2)
+  expect(res.body.total).toBe(2)
+  expect(res.body.limit).toBe(10)
+  expect(res.body.activities.length).toBe(2)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -78,7 +90,7 @@ test('test createABActivity', async () => {
   mockResponseWithMethod(url, method, mock.data.abActivity)
   // check success response
   var res = await sdkClient.createABActivity(obj)
-  expect(res.id).toBe(123)
+  expect(res.body.id).toBe(123)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -116,7 +128,7 @@ test('test createXTActivity', async () => {
   mockResponseWithMethod(url, method, mock.data.xtActivity)
   // check success response
   var res = await sdkClient.createXTActivity(obj)
-  expect(res.id).toBe(321)
+  expect(res.body.id).toBe(321)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -135,7 +147,7 @@ test('test getABActivityById', async () => {
   mockResponseWithMethod(url, method, mock.data.abActivity)
   // check success response
   var res = await sdkClient.getABActivityById(123)
-  expect(res.id).toBe(123)
+  expect(res.body.id).toBe(123)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -156,7 +168,7 @@ test('test getXTActivityById', async () => {
   mockResponseWithMethod(url, method, mock.data.xtActivity)
   // check success response
   var res = await sdkClient.getXTActivityById(321)
-  expect(res.id).toBe(321)
+  expect(res.body.id).toBe(321)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -197,7 +209,7 @@ test('test updateABActivity', async () => {
   mockResponseWithMethod(url, method, mock.data.abActivityUpdated)
   // check success response
   var res = await sdkClient.updateABActivity(123, obj)
-  expect(res.id).toBe(123)
+  expect(res.body.id).toBe(123)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -236,7 +248,7 @@ test('test updateXTActivity', async () => {
   mockResponseWithMethod(url, method, mock.data.xtActivityUpdated)
   // check success response
   var res = await sdkClient.updateXTActivity(321, obj)
-  expect(res.id).toBe(321)
+  expect(res.body.id).toBe(321)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -255,8 +267,8 @@ test('test setActivityName', async () => {
   mockResponseWithMethod(url, method, mock.data.nameActivity)
   // check success response
   var res = await sdkClient.setActivityName(123, 'new name')
-  expect(res.id).toBe(123)
-  expect(res.name).toBe('new name')
+  expect(res.body.id).toBe(123)
+  expect(res.body.name).toBe('new name')
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -275,8 +287,8 @@ test('test setActivityState', async () => {
   mockResponseWithMethod(url, method, mock.data.nameActivity)
   // check success response
   var res = await sdkClient.setActivityState(123, 'activated')
-  expect(res.id).toBe(123)
-  expect(res.state).toBe('activated')
+  expect(res.body.id).toBe(123)
+  expect(res.body.state).toBe('activated')
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -295,8 +307,8 @@ test('test setActivityPriority', async () => {
   mockResponseWithMethod(url, method, mock.data.nameActivity)
   // check success response
   var res = await sdkClient.setActivityPriority(123, '5')
-  expect(res.id).toBe(123)
-  expect(res.priority).toBe('5')
+  expect(res.body.id).toBe(123)
+  expect(res.body.priority).toBe('5')
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -320,9 +332,9 @@ test('test setActivitySchedule', async () => {
   mockResponseWithMethod(url, method, mock.data.nameActivity)
   // check success response
   var res = await sdkClient.setActivitySchedule(123, obj)
-  expect(res.id).toBe(123)
-  expect(res.startsAt).toBe('2017-05-01T08:00Z')
-  expect(res.endsAt).toBe('2017-09-01T07:59:59Z')
+  expect(res.body.id).toBe(123)
+  expect(res.body.startsAt).toBe('2017-05-01T08:00Z')
+  expect(res.body.endsAt).toBe('2017-09-01T07:59:59Z')
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -341,7 +353,7 @@ test('test deleteABActivity', async () => {
   mockResponseWithMethod(url, method, mock.data.abActivity)
   // check success response
   var res = await sdkClient.deleteABActivity(123)
-  expect(res.id).toBe(123)
+  expect(res.body.id).toBe(123)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -362,7 +374,7 @@ test('test deleteXTActivity', async () => {
   mockResponseWithMethod(url, method, mock.data.xtActivity)
   // check success response
   var res = await sdkClient.deleteXTActivity(321)
-  expect(res.id).toBe(321)
+  expect(res.body.id).toBe(321)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -383,8 +395,8 @@ test('test getActivityChangeLog', async () => {
   mockResponseWithMethod(url, method, mock.data.changeLog)
   // check success response
   var res = await sdkClient.getActivityChangeLog(123)
-  expect(res.total).toBe(2)
-  expect(res.activityChangelogs.length).toBe(2)
+  expect(res.body.total).toBe(2)
+  expect(res.body.activityChangelogs.length).toBe(2)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -405,9 +417,9 @@ test('test getOffers', async () => {
   mockResponseWithMethod(url, method, mock.data.offers)
   // check success response
   var res = await sdkClient.getOffers()
-  expect(res.total).toBe(2)
-  expect(res.limit).toBe(10)
-  expect(res.offers.length).toBe(2)
+  expect(res.body.total).toBe(2)
+  expect(res.body.limit).toBe(10)
+  expect(res.body.offers.length).toBe(2)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -426,7 +438,7 @@ test('test getOfferById', async () => {
   mockResponseWithMethod(url, method, mock.data.offer)
   // check success response
   var res = await sdkClient.getOfferById(111)
-  expect(res.id).toBe(111)
+  expect(res.body.id).toBe(111)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -453,7 +465,7 @@ test('test createOffer', async () => {
   mockResponseWithMethod(url, method, mock.data.newOffer)
   // check success response
   var res = await sdkClient.createOffer(obj)
-  expect(res.id).toBe(123)
+  expect(res.body.id).toBe(123)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -477,7 +489,7 @@ test('test updateOffer', async () => {
   mockResponseWithMethod(url, method, mock.data.updatedOffer)
   // check success response
   var res = await sdkClient.updateOffer(123, obj)
-  expect(res.content).toBe('<div>Updated content</div>')
+  expect(res.body.content).toBe('<div>Updated content</div>')
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -496,7 +508,7 @@ test('test deleteOffer', async () => {
   mockResponseWithMethod(url, method, mock.data.offer)
   // check success response
   var res = await sdkClient.deleteOffer(111)
-  expect(res.id).toBe(111)
+  expect(res.body.id).toBe(111)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -517,9 +529,9 @@ test('test getAudiences', async () => {
   mockResponseWithMethod(url, method, mock.data.audiences)
   // check success response
   var res = await sdkClient.getAudiences()
-  expect(res.total).toBe(2)
-  expect(res.limit).toBe(10)
-  expect(res.audiences.length).toBe(2)
+  expect(res.body.total).toBe(2)
+  expect(res.body.limit).toBe(10)
+  expect(res.body.audiences.length).toBe(2)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -560,7 +572,7 @@ test('test createAudience', async () => {
   mockResponseWithMethod(url, method, mock.data.newOffer)
   // check success response
   var res = await sdkClient.createAudience(obj)
-  expect(res.id).toBe(123)
+  expect(res.body.id).toBe(123)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -579,7 +591,7 @@ test('test getAudienceById', async () => {
   mockResponseWithMethod(url, method, mock.data.audience)
   // check success response
   var res = await sdkClient.getAudienceById(111)
-  expect(res.id).toBe(111)
+  expect(res.body.id).toBe(111)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -605,7 +617,7 @@ test('test updateAudience', async () => {
   mockResponseWithMethod(url, method, mock.data.updatedAudience)
   // check success response
   var res = await sdkClient.updateAudience(123, obj)
-  expect(res.name).toBe('Updated Gold Members in Califo-1495136673062')
+  expect(res.body.name).toBe('Updated Gold Members in Califo-1495136673062')
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -624,7 +636,7 @@ test('test deleteAudience', async () => {
   mockResponseWithMethod(url, method, mock.data.audience)
   // check success response
   var res = await sdkClient.deleteAudience(111)
-  expect(res.id).toBe(111)
+  expect(res.body.id).toBe(111)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -645,9 +657,9 @@ test('test getProperties', async () => {
   mockResponseWithMethod(url, method, mock.data.properties)
   // check success response
   var res = await sdkClient.getProperties()
-  expect(res.total).toBe(2)
-  expect(res.limit).toBe(10)
-  expect(res.properties.length).toBe(2)
+  expect(res.body.total).toBe(2)
+  expect(res.body.limit).toBe(10)
+  expect(res.body.properties.length).toBe(2)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -666,7 +678,7 @@ test('test getPropertyById', async () => {
   mockResponseWithMethod(url, method, mock.data.property)
   // check success response
   var res = await sdkClient.getPropertyById(111)
-  expect(res.id).toBe(111)
+  expect(res.body.id).toBe(111)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -687,9 +699,9 @@ test('test getMBoxes', async () => {
   mockResponseWithMethod(url, method, mock.data.mboxes)
   // check success response
   var res = await sdkClient.getMBoxes()
-  expect(res.total).toBe(2)
-  expect(res.limit).toBe(5)
-  expect(res.mboxes.length).toBe(2)
+  expect(res.body.total).toBe(2)
+  expect(res.body.limit).toBe(5)
+  expect(res.body.mboxes.length).toBe(2)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -708,8 +720,8 @@ test('test getMBoxByName', async () => {
   mockResponseWithMethod(url, method, mock.data.mbox)
   // check success response
   var res = await sdkClient.getMBoxByName('a1-mobile-mboxparams')
-  expect(res.name).toBe('a1-mobile-mboxparams')
-  expect(res.mboxParameters.length).toBe(3)
+  expect(res.body.name).toBe('a1-mobile-mboxparams')
+  expect(res.body.mboxParameters.length).toBe(3)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -730,7 +742,7 @@ test('test getMBoxProfileAttributes', async () => {
   mockResponseWithMethod(url, method, mock.data.mboxParams)
   // check success response
   var res = await sdkClient.getMBoxProfileAttributes()
-  expect(res.mboxParameters.length).toBe(3)
+  expect(res.body.mboxParameters.length).toBe(3)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -749,9 +761,9 @@ test('test getEnvironments', async () => {
   mockResponseWithMethod(url, method, mock.data.environments)
   // check success response
   var res = await sdkClient.getEnvironments()
-  expect(res.total).toBe(3)
-  expect(res.limit).toBe(2147483647)
-  expect(res.environments.length).toBe(3)
+  expect(res.body.total).toBe(3)
+  expect(res.body.limit).toBe(2147483647)
+  expect(res.body.environments.length).toBe(3)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -770,9 +782,9 @@ test('test getABActivityPerformance', async () => {
   mockResponseWithMethod(url, method, mock.data.abPerformance)
   // check success response
   var res = await sdkClient.getABActivityPerformance(111)
-  expect(res.reportParameters.activityId).toBe(111)
-  expect(res.activity.metrics.length).toBe(1)
-  expect(res.activity.experiences.length).toBe(1)
+  expect(res.body.reportParameters.activityId).toBe(111)
+  expect(res.body.activity.metrics.length).toBe(1)
+  expect(res.body.activity.experiences.length).toBe(1)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -791,9 +803,9 @@ test('test getXTActivityPerformance', async () => {
   mockResponseWithMethod(url, method, mock.data.xtPerformance)
   // check success response
   var res = await sdkClient.getXTActivityPerformance(123)
-  expect(res.reportParameters.activityId).toBe(123)
-  expect(res.activity.metrics.length).toBe(1)
-  expect(res.activity.experiences.length).toBe(1)
+  expect(res.body.reportParameters.activityId).toBe(123)
+  expect(res.body.activity.metrics.length).toBe(1)
+  expect(res.body.activity.experiences.length).toBe(1)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -812,9 +824,9 @@ test('test getActivityPerformance', async () => {
   mockResponseWithMethod(url, method, mock.data.performance)
   // check success response
   var res = await sdkClient.getActivityPerformance(123)
-  expect(res.reportParameters.activityId).toBe(123)
-  expect(res.activity.metrics.length).toBe(1)
-  expect(res.activity.experiences.length).toBe(1)
+  expect(res.body.reportParameters.activityId).toBe(123)
+  expect(res.body.activity.metrics.length).toBe(1)
+  expect(res.body.activity.experiences.length).toBe(1)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -833,9 +845,9 @@ test('test getOrdersReport', async () => {
   mockResponseWithMethod(url, method, mock.data.report)
   // check success response
   var res = await sdkClient.getOrdersReport(123)
-  expect(res.reportParameters.activityId).toBe(123)
-  expect(res.activity.metrics.length).toBe(1)
-  expect(res.activity.experiences.length).toBe(1)
+  expect(res.body.reportParameters.activityId).toBe(123)
+  expect(res.body.activity.metrics.length).toBe(1)
+  expect(res.body.activity.experiences.length).toBe(1)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
@@ -844,6 +856,20 @@ test('test getOrdersReport', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ORDERS_REPORT(), [123])
   mockResponseWithMethod(url, method, mock.errors.Internal_Server_Error.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ORDERS_REPORT(), [123])
+})
+
+test('test __setHeader preset api key header', async () => {
+  sdkClient = await sdk.init(tenant, apiKey, token)
+  const req = { headers: { 'x-api-key': 'test' } }
+  sdkClient.__setHeaders(req, sdkClient, {})
+  expect(req.headers['x-api-key']).toBe('test')
+})
+
+test('test __setHeader preset authorization header', async () => {
+  sdkClient = await sdk.init(tenant, apiKey, token)
+  const req = { headers: { Authorization: 'test' } }
+  sdkClient.__setHeaders(req, sdkClient, {})
+  expect(req.headers.Authorization).toBe('test')
 })
 
 test('test executeBatch', async () => {
@@ -873,7 +899,7 @@ test('test executeBatch', async () => {
   mockResponseWithMethod(url, method, mock.data.batch)
   // check success response
   var res = await sdkClient.executeBatch(obj)
-  expect(res.results.length).toBe(1)
+  expect(res.body.results.length).toBe(1)
 
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
