@@ -21,6 +21,10 @@ const tenant = process.env.TARGET_TENANT
 const apiKey = process.env.TARGET_APIKEY
 const token = process.env.TARGET_TOKEN
 
+beforeAll(async () => {
+  jest.setTimeout(240000)
+})
+
 test('sdk init test', async () => {
   sdkClient = await sdk.init(tenant, apiKey, token)
 
