@@ -842,11 +842,9 @@ class TargetCoreAPI {
     if (!req.headers['Content-Type']) {
       req.headers['Content-Type'] = 'application/json'
     }
-    if ((headers !== undefined)) {
-      Object.keys(headers).forEach(function (key) {
-        req.headers[key] = headers[key]
-      })
-    }
+    Object.keys(headers).forEach(function (key) {
+      req.headers[key] = headers[key]
+    })
   }
 
   __getAcceptHeader (value) {
