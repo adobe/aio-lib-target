@@ -94,12 +94,14 @@ class TargetCoreAPI {
   * @param options {Object} to control activity search.
   * @param options.limit Defines the number of items to return. Default value is 2147483647
   * @param options.offset Defines the first activity to return from the list of total activities. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of activities.
-  * @param options.sortBy Defines the sorting criteria on the returned items.
+  * @param options.sortBy Defines the sorting criteria on the returned items
+  * @param options.headers headers to pass to API call.
   */
-  getActivities ({ limit = 2147483647, offset = 0, sortBy } = {}) {
-    const sdkDetails = arguments[0]
+  getActivities (options = { limit: 2147483647, offset: 0 }) {
+    const sdkDetails = options
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activities.getActivities(arguments[0], this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.activities.getActivities(arguments[0], this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -114,10 +116,11 @@ class TargetCoreAPI {
   *
   * @param body {Object} Activity JSON.
   */
-  createABActivity (body) {
+  createABActivity (body, options = {}) {
     const sdkDetails = body
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.createABActivity({}, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.abactivity.createABActivity({}, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -132,10 +135,11 @@ class TargetCoreAPI {
   *
   * @param body {Object} Activity JSON.
   */
-  createXTActivity (body) {
+  createXTActivity (body, options = {}) {
     const sdkDetails = body
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.createXTActivity({}, this.__createRequest(body), this.__getContentTypeHeader(ACCEPT_HEADERS.V3))
+      this.sdk.apis.xtactivity.createXTActivity({}, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -150,12 +154,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Activity id.
   */
-  getABActivityById (id) {
+  getABActivityById (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.getABActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.abactivity.getABActivity(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -170,12 +175,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Activity id.
   */
-  getXTActivityById (id) {
+  getXTActivityById (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.getXTActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.xtactivity.getXTActivity(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -190,12 +196,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Activity id.
   */
-  updateABActivity (id, body) {
+  updateABActivity (id, body, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.updateABActivity(params, this.__createRequest(body))
+      this.sdk.apis.abactivity.updateABActivity(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -210,12 +217,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Activity id.
   */
-  updateXTActivity (id, body) {
+  updateXTActivity (id, body, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.updateXTActivity(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.xtactivity.updateXTActivity(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -231,15 +239,16 @@ class TargetCoreAPI {
   * @param id {integer} Activity id.
   * @param name {string} New Activity name.
   */
-  setActivityName (id, name) {
+  setActivityName (id, name, options = {}) {
     var params = {}
     params.id = id
     var body = {
       name: name
     }
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setName(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.activity.setName(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -255,7 +264,7 @@ class TargetCoreAPI {
   * @param id {integer} Activity id.
   * @param state {string} New Activity state.
   */
-  setActivityState (id, state) {
+  setActivityState (id, state, options = {}) {
     var params = {}
     params.id = id
 
@@ -263,8 +272,9 @@ class TargetCoreAPI {
       state: state
     }
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setState(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.activity.setState(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -280,7 +290,7 @@ class TargetCoreAPI {
   * @param id {integer} Activity id.
   * @param priority {string} New Activity priority.
   */
-  setActivityPriority (id, priority) {
+  setActivityPriority (id, priority, options = {}) {
     var params = {}
     params.id = id
 
@@ -288,8 +298,9 @@ class TargetCoreAPI {
       priority: priority
     }
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setPriority(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.activity.setPriority(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -305,7 +316,7 @@ class TargetCoreAPI {
   * @param id {integer} Activity id.
   * @param schedule {string} New Activity schedule.
   */
-  setActivitySchedule (id, schedule) {
+  setActivitySchedule (id, schedule, options = {}) {
     var params = {}
     params.id = id
 
@@ -313,8 +324,9 @@ class TargetCoreAPI {
       schedule: schedule
     }
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setSchedule(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.activity.setSchedule(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -329,12 +341,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Activity id.
   */
-  deleteABActivity (id) {
+  deleteABActivity (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.deleteABActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.abactivity.deleteABActivity(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -349,12 +362,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Activity id.
   */
-  deleteXTActivity (id) {
+  deleteXTActivity (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.deleteXTActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.xtactivity.deleteXTActivity(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -369,12 +383,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Activity id.
   */
-  getActivityChangeLog (id) {
+  getActivityChangeLog (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.getChangeLog(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.activity.getChangeLog(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -392,10 +407,11 @@ class TargetCoreAPI {
   * @param options.offset Defines the first offers to return from the list of Offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.
   * @param options.sortBy Defines the sorting criteria on the returned items.
   */
-  getOffers ({ limit = 2147483647, offset = 0, sortBy } = {}) {
-    const sdkDetails = arguments[0]
+  getOffers (options = { limit: 2147483647, offset: 0 }) {
+    const sdkDetails = options
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offers.getOffers(arguments[0], this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
+      this.sdk.apis.offers.getOffers(arguments[0], this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -410,12 +426,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Offer id.
   */
-  getOfferById (id) {
+  getOfferById (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.getOfferById(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
+      this.sdk.apis.offer.getOfferById(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -430,10 +447,11 @@ class TargetCoreAPI {
   *
   * @param body {Object} Offer JSON.
   */
-  createOffer (body) {
+  createOffer (body, options = {}) {
     const sdkDetails = body
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offers.createOffer({}, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V2)))
+      this.sdk.apis.offers.createOffer({}, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -448,12 +466,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Offer id.
   */
-  updateOffer (id, body) {
+  updateOffer (id, body, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.updateOffer(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V2)))
+      this.sdk.apis.offer.updateOffer(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -468,12 +487,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Offer id.
   */
-  deleteOffer (id) {
+  deleteOffer (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.deleteOffer(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
+      this.sdk.apis.offer.deleteOffer(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -491,10 +511,11 @@ class TargetCoreAPI {
   * @param options.offset Defines the first audience to return from the list of total offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.
   * @param options.sortBy Defines the sorting criteria on the returned items.
   */
-  getAudiences ({ limit = 2147483647, offset = 0, sortBy } = {}) {
-    const sdkDetails = arguments[0]
+  getAudiences (options = { limit: 2147483647, offset: 0 }) {
+    const sdkDetails = options
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.getAudiences(arguments[0], this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.audiences.getAudiences(arguments[0], this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -509,10 +530,11 @@ class TargetCoreAPI {
   *
   * @param body {Object} Audience JSON.
   */
-  createAudience (body) {
+  createAudience (body, options = {}) {
     const sdkDetails = body
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.createAudience({}, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.audiences.createAudience({}, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -527,12 +549,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Audience id.
   */
-  getAudienceById (id) {
+  getAudienceById (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.getAudienceById(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.audiences.getAudienceById(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -547,12 +570,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Audience id.
   */
-  updateAudience (id, body) {
+  updateAudience (id, body, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audience.updateAudience(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.audience.updateAudience(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -567,12 +591,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Audience id.
   */
-  deleteAudience (id) {
+  deleteAudience (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audience.deleteAudience(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.audience.deleteAudience(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -585,10 +610,11 @@ class TargetCoreAPI {
   /** List Properties.
   * Get a list of properties.
   */
-  getProperties () {
-    const sdkDetails = {}
+  getProperties (options = {}) {
+    const sdkDetails = options
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.properties.getProperties({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.properties.getProperties({}, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -603,12 +629,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Property id.
   */
-  getPropertyById (id) {
+  getPropertyById (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.properties.getAPropertyById(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.properties.getAPropertyById(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -621,10 +648,11 @@ class TargetCoreAPI {
   /** List MBoxes.
   * List all available mboxes for a specific client with the options to filter and sort.
   */
-  getMBoxes () {
+  getMBoxes (options = {}) {
     const sdkDetails = {}
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mboxes.getMBoxes({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.mboxes.getMBoxes({}, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -639,12 +667,13 @@ class TargetCoreAPI {
   *
   * @param name {integer} MBox name.
   */
-  getMBoxByName (name) {
+  getMBoxByName (name, options = {}) {
     var params = {}
     params.mboxName = name
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mboxes.getMBoxByName(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.mboxes.getMBoxByName(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -657,10 +686,11 @@ class TargetCoreAPI {
   /** Get Profile Attributes.
   * Retrieve the list of available profile attributes and mbox parameters of type profile.
   */
-  getMBoxProfileAttributes () {
-    const sdkDetails = {}
+  getMBoxProfileAttributes (options = {}) {
+    const sdkDetails = options
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mbox.getProfileAttributes({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.mbox.getProfileAttributes({}, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -673,10 +703,11 @@ class TargetCoreAPI {
   /** Get Environments.
   * List all available environments with the options to filter and sort. Use the Environments API to retrieve the environment IDs corresponding to the various host groups set for the client.
   */
-  getEnvironments () {
-    const sdkDetails = {}
+  getEnvironments (options = {}) {
+    const sdkDetails = options
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.environments.getEnvironments({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.environments.getEnvironments({}, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -691,12 +722,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Activity id.
   */
-  getABActivityPerformance (id) {
+  getABActivityPerformance (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.reports.getABPerformance(params, this.__createRequest({}))
+      this.sdk.apis.reports.getABPerformance(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -711,12 +743,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Activity id.
   */
-  getXTActivityPerformance (id) {
+  getXTActivityPerformance (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.reports.getXTPerformance(params, this.__createRequest({}))
+      this.sdk.apis.reports.getXTPerformance(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -731,12 +764,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Activity id.
   */
-  getActivityPerformance (id) {
+  getActivityPerformance (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.reports.getABTPerformance(params, this.__createRequest({}))
+      this.sdk.apis.reports.getABTPerformance(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -751,12 +785,13 @@ class TargetCoreAPI {
   *
   * @param id {integer} Activity id.
   */
-  getOrdersReport (id) {
+  getOrdersReport (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.reports.getAuditReport(params, this.__createRequest({}))
+      this.sdk.apis.reports.getAuditReport(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -782,7 +817,8 @@ class TargetCoreAPI {
     })
   }
 
-  __createRequest (body, headers) {
+  __createRequest (body, headers, defaultHeaders = {}) {
+    const finalHeaders = Object.assign(defaultHeaders, headers)
     return {
       requestBody: body,
       server: 'https://mc.adobe.io/{tenant-name}/target',
@@ -790,7 +826,7 @@ class TargetCoreAPI {
         'tenant-name': this.tenant
       },
       requestInterceptor: req => {
-        this.__setHeaders(req, this, headers)
+        this.__setHeaders(req, this, finalHeaders)
       }
     }
   }
