@@ -96,41 +96,41 @@ with valid tenant, apiKey and auth token
 
 * [TargetCoreAPI](#TargetCoreAPI)
     * [.init(tenant, apiKey, token)](#TargetCoreAPI+init) ⇒ [<code>TargetCoreAPI</code>](#TargetCoreAPI)
-    * [.getActivities([options])](#TargetCoreAPI+getActivities)
-    * [.createABActivity(body, [options])](#TargetCoreAPI+createABActivity)
-    * [.createXTActivity(body, [options])](#TargetCoreAPI+createXTActivity)
-    * [.getABActivityById(id, [options])](#TargetCoreAPI+getABActivityById)
-    * [.getXTActivityById(id, [options])](#TargetCoreAPI+getXTActivityById)
-    * [.updateABActivity(id, body, [options])](#TargetCoreAPI+updateABActivity)
-    * [.updateXTActivity(id, body, [options])](#TargetCoreAPI+updateXTActivity)
-    * [.setActivityName(id, name, [options])](#TargetCoreAPI+setActivityName)
-    * [.setActivityState(id, state, [options])](#TargetCoreAPI+setActivityState)
-    * [.setActivityPriority(id, priority, [options])](#TargetCoreAPI+setActivityPriority)
-    * [.setActivitySchedule(id, schedule, [options])](#TargetCoreAPI+setActivitySchedule)
-    * [.deleteABActivity(id, [options])](#TargetCoreAPI+deleteABActivity)
-    * [.deleteXTActivity(id, [options])](#TargetCoreAPI+deleteXTActivity)
-    * [.getActivityChangeLog(id, [options])](#TargetCoreAPI+getActivityChangeLog)
-    * [.getOffers([options])](#TargetCoreAPI+getOffers)
-    * [.getOfferById(id, [options])](#TargetCoreAPI+getOfferById)
-    * [.createOffer(body, [options])](#TargetCoreAPI+createOffer)
-    * [.updateOffer(id, body, [options])](#TargetCoreAPI+updateOffer)
-    * [.deleteOffer(id, [options])](#TargetCoreAPI+deleteOffer)
-    * [.getAudiences([options])](#TargetCoreAPI+getAudiences)
-    * [.createAudience(body, [options])](#TargetCoreAPI+createAudience)
-    * [.getAudienceById(id, [options])](#TargetCoreAPI+getAudienceById)
-    * [.updateAudience(id, body, [options])](#TargetCoreAPI+updateAudience)
-    * [.deleteAudience(id, [options])](#TargetCoreAPI+deleteAudience)
-    * [.getProperties([options])](#TargetCoreAPI+getProperties)
-    * [.getPropertyById(id, [options])](#TargetCoreAPI+getPropertyById)
-    * [.getMBoxes([options])](#TargetCoreAPI+getMBoxes)
-    * [.getMBoxByName(name, [options])](#TargetCoreAPI+getMBoxByName)
-    * [.getMBoxProfileAttributes([options])](#TargetCoreAPI+getMBoxProfileAttributes)
-    * [.getEnvironments([options])](#TargetCoreAPI+getEnvironments)
-    * [.getABActivityPerformance(id, [options])](#TargetCoreAPI+getABActivityPerformance)
-    * [.getXTActivityPerformance(id, [options])](#TargetCoreAPI+getXTActivityPerformance)
-    * [.getActivityPerformance(id, [options])](#TargetCoreAPI+getActivityPerformance)
-    * [.getOrdersReport(id, [options])](#TargetCoreAPI+getOrdersReport)
-    * [.executeBatch(body)](#TargetCoreAPI+executeBatch)
+    * [.getActivities([options])](#TargetCoreAPI+getActivities) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.createABActivity(body, [options])](#TargetCoreAPI+createABActivity) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.createXTActivity(body, [options])](#TargetCoreAPI+createXTActivity) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getABActivityById(id, [options])](#TargetCoreAPI+getABActivityById) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getXTActivityById(id, [options])](#TargetCoreAPI+getXTActivityById) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.updateABActivity(id, body, [options])](#TargetCoreAPI+updateABActivity) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.updateXTActivity(id, body, [options])](#TargetCoreAPI+updateXTActivity) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.setActivityName(id, name, [options])](#TargetCoreAPI+setActivityName) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.setActivityState(id, state, [options])](#TargetCoreAPI+setActivityState) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.setActivityPriority(id, priority, [options])](#TargetCoreAPI+setActivityPriority) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.setActivitySchedule(id, schedule, [options])](#TargetCoreAPI+setActivitySchedule) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.deleteABActivity(id, [options])](#TargetCoreAPI+deleteABActivity) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.deleteXTActivity(id, [options])](#TargetCoreAPI+deleteXTActivity) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getActivityChangeLog(id, [options])](#TargetCoreAPI+getActivityChangeLog) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getOffers([options])](#TargetCoreAPI+getOffers) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getOfferById(id, [options])](#TargetCoreAPI+getOfferById) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.createOffer(body, [options])](#TargetCoreAPI+createOffer) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.updateOffer(id, body, [options])](#TargetCoreAPI+updateOffer) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.deleteOffer(id, [options])](#TargetCoreAPI+deleteOffer) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getAudiences([options])](#TargetCoreAPI+getAudiences) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.createAudience(body, [options])](#TargetCoreAPI+createAudience) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getAudienceById(id, [options])](#TargetCoreAPI+getAudienceById) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.updateAudience(id, body, [options])](#TargetCoreAPI+updateAudience) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.deleteAudience(id, [options])](#TargetCoreAPI+deleteAudience) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getProperties([options])](#TargetCoreAPI+getProperties) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getPropertyById(id, [options])](#TargetCoreAPI+getPropertyById) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getMBoxes([options])](#TargetCoreAPI+getMBoxes) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getMBoxByName(name, [options])](#TargetCoreAPI+getMBoxByName) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getMBoxProfileAttributes([options])](#TargetCoreAPI+getMBoxProfileAttributes) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getEnvironments([options])](#TargetCoreAPI+getEnvironments) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getABActivityPerformance(id, [options])](#TargetCoreAPI+getABActivityPerformance) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getXTActivityPerformance(id, [options])](#TargetCoreAPI+getXTActivityPerformance) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getActivityPerformance(id, [options])](#TargetCoreAPI+getActivityPerformance) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.getOrdersReport(id, [options])](#TargetCoreAPI+getOrdersReport) ⇒ <code>Promise.&lt;Response&gt;</code>
+    * [.executeBatch(body)](#TargetCoreAPI+executeBatch) ⇒ <code>Promise.&lt;Response&gt;</code>
 
 <a name="TargetCoreAPI+init"></a>
 
@@ -138,6 +138,7 @@ with valid tenant, apiKey and auth token
 Initialize sdk.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: [<code>TargetCoreAPI</code>](#TargetCoreAPI) - a TargetCoreAPI instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -147,11 +148,12 @@ Initialize sdk.
 
 <a name="TargetCoreAPI+getActivities"></a>
 
-### targetCoreAPI.getActivities([options])
+### targetCoreAPI.getActivities([options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 List activities.
 Get a list of activities created in your Target account, with the ability to filter and sort by attributes.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -163,11 +165,12 @@ Get a list of activities created in your Target account, with the ability to fil
 
 <a name="TargetCoreAPI+createABActivity"></a>
 
-### targetCoreAPI.createABActivity(body, [options])
+### targetCoreAPI.createABActivity(body, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Create AB Activity.
 Creates a new AB activity with the specified contents and returns the created activity.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -177,11 +180,12 @@ Creates a new AB activity with the specified contents and returns the created ac
 
 <a name="TargetCoreAPI+createXTActivity"></a>
 
-### targetCoreAPI.createXTActivity(body, [options])
+### targetCoreAPI.createXTActivity(body, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Create XT Activity.
 Creates a new XT activity with the specified contents and returns the created activity.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -191,11 +195,12 @@ Creates a new XT activity with the specified contents and returns the created ac
 
 <a name="TargetCoreAPI+getABActivityById"></a>
 
-### targetCoreAPI.getABActivityById(id, [options])
+### targetCoreAPI.getABActivityById(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get AB activity.
 Fetch the current definition of an AB activity if it is found as referenced by the id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -205,11 +210,12 @@ Fetch the current definition of an AB activity if it is found as referenced by t
 
 <a name="TargetCoreAPI+getXTActivityById"></a>
 
-### targetCoreAPI.getXTActivityById(id, [options])
+### targetCoreAPI.getXTActivityById(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get XT activity.
 Fetch the current definition of XT activity if it is found as referenced by the id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -219,11 +225,12 @@ Fetch the current definition of XT activity if it is found as referenced by the 
 
 <a name="TargetCoreAPI+updateABActivity"></a>
 
-### targetCoreAPI.updateABActivity(id, body, [options])
+### targetCoreAPI.updateABActivity(id, body, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Update AB activity.
 Updates the AB activity definition with the contents as provided in the request. This can change the state and behaviour of an existing activity.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -234,11 +241,12 @@ Updates the AB activity definition with the contents as provided in the request.
 
 <a name="TargetCoreAPI+updateXTActivity"></a>
 
-### targetCoreAPI.updateXTActivity(id, body, [options])
+### targetCoreAPI.updateXTActivity(id, body, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Update XT activity.
 Update the current definition of XT activity if it is found as referenced by the id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -249,11 +257,12 @@ Update the current definition of XT activity if it is found as referenced by the
 
 <a name="TargetCoreAPI+setActivityName"></a>
 
-### targetCoreAPI.setActivityName(id, name, [options])
+### targetCoreAPI.setActivityName(id, name, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Update activity name.
 Updates the name of the AB activity that is referenced by the supplied id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -264,11 +273,12 @@ Updates the name of the AB activity that is referenced by the supplied id.
 
 <a name="TargetCoreAPI+setActivityState"></a>
 
-### targetCoreAPI.setActivityState(id, state, [options])
+### targetCoreAPI.setActivityState(id, state, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Update Activity state.
 Update state of an activity if it is found as referenced by the id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -279,11 +289,12 @@ Update state of an activity if it is found as referenced by the id.
 
 <a name="TargetCoreAPI+setActivityPriority"></a>
 
-### targetCoreAPI.setActivityPriority(id, priority, [options])
+### targetCoreAPI.setActivityPriority(id, priority, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Update Activity priority.
 Update priority of an activity if it is found as referenced by the id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -294,11 +305,12 @@ Update priority of an activity if it is found as referenced by the id.
 
 <a name="TargetCoreAPI+setActivitySchedule"></a>
 
-### targetCoreAPI.setActivitySchedule(id, schedule, [options])
+### targetCoreAPI.setActivitySchedule(id, schedule, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Update Activity schedule.
 Update schedule of an activity if it is found as referenced by the id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -309,11 +321,12 @@ Update schedule of an activity if it is found as referenced by the id.
 
 <a name="TargetCoreAPI+deleteABActivity"></a>
 
-### targetCoreAPI.deleteABActivity(id, [options])
+### targetCoreAPI.deleteABActivity(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Delete AB activity.
 Deletes the AB activity that is referenced by the id, if it is found.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -323,11 +336,12 @@ Deletes the AB activity that is referenced by the id, if it is found.
 
 <a name="TargetCoreAPI+deleteXTActivity"></a>
 
-### targetCoreAPI.deleteXTActivity(id, [options])
+### targetCoreAPI.deleteXTActivity(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Delete XT activity.
 Delete the current definition of an XT activity if it is found as referenced by the id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -337,11 +351,12 @@ Delete the current definition of an XT activity if it is found as referenced by 
 
 <a name="TargetCoreAPI+getActivityChangeLog"></a>
 
-### targetCoreAPI.getActivityChangeLog(id, [options])
+### targetCoreAPI.getActivityChangeLog(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get Activity changelog.
 Returns the changelog for a given activity id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -351,11 +366,12 @@ Returns the changelog for a given activity id.
 
 <a name="TargetCoreAPI+getOffers"></a>
 
-### targetCoreAPI.getOffers([options])
+### targetCoreAPI.getOffers([options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 List Offers.
 Retrieve the list of previously-created content offers. The parameters passed through the query string are optional and are used to indicate the sorting and filtering options.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -367,11 +383,12 @@ Retrieve the list of previously-created content offers. The parameters passed th
 
 <a name="TargetCoreAPI+getOfferById"></a>
 
-### targetCoreAPI.getOfferById(id, [options])
+### targetCoreAPI.getOfferById(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get Offer.
 Retrieves the contents of an offer given an offer id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -381,11 +398,12 @@ Retrieves the contents of an offer given an offer id.
 
 <a name="TargetCoreAPI+createOffer"></a>
 
-### targetCoreAPI.createOffer(body, [options])
+### targetCoreAPI.createOffer(body, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Create Offer.
 Creates a new content offer as defined by the request data.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -395,11 +413,12 @@ Creates a new content offer as defined by the request data.
 
 <a name="TargetCoreAPI+updateOffer"></a>
 
-### targetCoreAPI.updateOffer(id, body, [options])
+### targetCoreAPI.updateOffer(id, body, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Update Offer.
 Updates the content offer referenced by the id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -410,11 +429,12 @@ Updates the content offer referenced by the id.
 
 <a name="TargetCoreAPI+deleteOffer"></a>
 
-### targetCoreAPI.deleteOffer(id, [options])
+### targetCoreAPI.deleteOffer(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Delete Offer.
 Deletes the content offer referenced by the provided id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -424,11 +444,12 @@ Deletes the content offer referenced by the provided id.
 
 <a name="TargetCoreAPI+getAudiences"></a>
 
-### targetCoreAPI.getAudiences([options])
+### targetCoreAPI.getAudiences([options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 List Audiences.
 List all available audiences with options to filter and sort by each available field.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -440,11 +461,12 @@ List all available audiences with options to filter and sort by each available f
 
 <a name="TargetCoreAPI+createAudience"></a>
 
-### targetCoreAPI.createAudience(body, [options])
+### targetCoreAPI.createAudience(body, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Create Audience.
 Create a new audience as specified by the contents of the request and return the newly-created audience definition.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -454,11 +476,12 @@ Create a new audience as specified by the contents of the request and return the
 
 <a name="TargetCoreAPI+getAudienceById"></a>
 
-### targetCoreAPI.getAudienceById(id, [options])
+### targetCoreAPI.getAudienceById(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get Audience.
 Get the audience definition specified by the provided id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -468,11 +491,12 @@ Get the audience definition specified by the provided id.
 
 <a name="TargetCoreAPI+updateAudience"></a>
 
-### targetCoreAPI.updateAudience(id, body, [options])
+### targetCoreAPI.updateAudience(id, body, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Update Audience.
 Update an audience with the new rules specified by the request data.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -483,11 +507,12 @@ Update an audience with the new rules specified by the request data.
 
 <a name="TargetCoreAPI+deleteAudience"></a>
 
-### targetCoreAPI.deleteAudience(id, [options])
+### targetCoreAPI.deleteAudience(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Delete Audience.
 Delete the audience referenced by the specified id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -497,11 +522,12 @@ Delete the audience referenced by the specified id.
 
 <a name="TargetCoreAPI+getProperties"></a>
 
-### targetCoreAPI.getProperties([options])
+### targetCoreAPI.getProperties([options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 List Properties.
 Get a list of properties.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -510,11 +536,12 @@ Get a list of properties.
 
 <a name="TargetCoreAPI+getPropertyById"></a>
 
-### targetCoreAPI.getPropertyById(id, [options])
+### targetCoreAPI.getPropertyById(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get Property.
 Retrieve property by property Id..
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -524,11 +551,12 @@ Retrieve property by property Id..
 
 <a name="TargetCoreAPI+getMBoxes"></a>
 
-### targetCoreAPI.getMBoxes([options])
+### targetCoreAPI.getMBoxes([options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 List MBoxes.
 List all available mboxes for a specific client with the options to filter and sort.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -537,25 +565,27 @@ List all available mboxes for a specific client with the options to filter and s
 
 <a name="TargetCoreAPI+getMBoxByName"></a>
 
-### targetCoreAPI.getMBoxByName(name, [options])
+### targetCoreAPI.getMBoxByName(name, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get MBox by name.
 Get the list of mbox parameters.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| name | <code>number</code> | MBox name. |
+| name | <code>string</code> | MBox name. |
 | [options] | <code>object</code> | sdk options |
 | [options.headers] | <code>object</code> | headers to pass to API call |
 
 <a name="TargetCoreAPI+getMBoxProfileAttributes"></a>
 
-### targetCoreAPI.getMBoxProfileAttributes([options])
+### targetCoreAPI.getMBoxProfileAttributes([options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get Profile Attributes.
 Retrieve the list of available profile attributes and mbox parameters of type profile.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -564,11 +594,12 @@ Retrieve the list of available profile attributes and mbox parameters of type pr
 
 <a name="TargetCoreAPI+getEnvironments"></a>
 
-### targetCoreAPI.getEnvironments([options])
+### targetCoreAPI.getEnvironments([options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get Environments.
 List all available environments with the options to filter and sort. Use the Environments API to retrieve the environment IDs corresponding to the various host groups set for the client.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -577,11 +608,12 @@ List all available environments with the options to filter and sort. Use the Env
 
 <a name="TargetCoreAPI+getABActivityPerformance"></a>
 
-### targetCoreAPI.getABActivityPerformance(id, [options])
+### targetCoreAPI.getABActivityPerformance(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get AB activity performance.
 Retrieve property by property Id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -591,11 +623,12 @@ Retrieve property by property Id.
 
 <a name="TargetCoreAPI+getXTActivityPerformance"></a>
 
-### targetCoreAPI.getXTActivityPerformance(id, [options])
+### targetCoreAPI.getXTActivityPerformance(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get activity performance.
 Retrieve property by property Id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -605,11 +638,12 @@ Retrieve property by property Id.
 
 <a name="TargetCoreAPI+getActivityPerformance"></a>
 
-### targetCoreAPI.getActivityPerformance(id, [options])
+### targetCoreAPI.getActivityPerformance(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get activity performance.
 Retrieve the performance report data for the Automated Personalization activity referenced by the provided id.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -619,11 +653,12 @@ Retrieve the performance report data for the Automated Personalization activity 
 
 <a name="TargetCoreAPI+getOrdersReport"></a>
 
-### targetCoreAPI.getOrdersReport(id, [options])
+### targetCoreAPI.getOrdersReport(id, [options]) ⇒ <code>Promise.&lt;Response&gt;</code>
 Get Orders report.
 Retrieve the orders/audit report data for an AB, XT or Autotmated Personalization Activity.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -633,11 +668,12 @@ Retrieve the orders/audit report data for an AB, XT or Autotmated Personalizatio
 
 <a name="TargetCoreAPI+executeBatch"></a>
 
-### targetCoreAPI.executeBatch(body)
+### targetCoreAPI.executeBatch(body) ⇒ <code>Promise.&lt;Response&gt;</code>
 Execute Batch APIs.
 Multiple Admin APIs can be executed as a single batch request.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+**Returns**: <code>Promise.&lt;Response&gt;</code> - a Promise resolving to a Response  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -649,6 +685,7 @@ Multiple Admin APIs can be executed as a single batch request.
 Returns a Promise that resolves with a new TargetCoreAPI object.
 
 **Kind**: global function  
+**Returns**: [<code>Promise.&lt;TargetCoreAPI&gt;</code>](#TargetCoreAPI) - Promise resolving to a TargetCoreAPI instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
