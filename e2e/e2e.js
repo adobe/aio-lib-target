@@ -14,6 +14,7 @@ const sdk = require('../src/index')
 const path = require('path')
 
 // load .env values in the e2e folder, if any
+/* eslint-disable-next-line node/no-unpublished-require */
 require('dotenv').config({ path: path.join(__dirname, '.env') })
 
 var sdkClient = {}

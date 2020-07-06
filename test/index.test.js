@@ -8,6 +8,7 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
+/* eslint-disable-next-line node/no-unpublished-require */
 const fetchMock = require('fetch-mock')
 const mock = require('./mock')
 const sdk = require('../src')
@@ -15,8 +16,18 @@ const errorSDK = require('../src/SDKErrors')
 const tenant = 'test-tenant'
 const apiKey = 'test-apikey'
 const token = 'test-token'
+const ACCEPT_HEADERS = {
+  V1: 'application/vnd.adobe.target.v1+json',
+  V2: 'application/vnd.adobe.target.v2+json',
+  V3: 'application/vnd.adobe.target.v3+json'
+}
 var sdkClient = {}
 
+/**
+ * @param url
+ * @param method
+ * @param response
+ */
 function mockResponseWithMethod (url, method, response) {
   fetchMock.reset()
   fetchMock.mock((u, opts) => u === url && opts.method === method, response)
@@ -50,6 +61,11 @@ test('test getActivities', async () => {
   mockResponseWithMethod(url, method, mock.data.activities)
   // check success response
   var res = await sdkClient.getActivities()
+  expect(res.body.total).toBe(2)
+  expect(res.body.limit).toBe(10)
+  expect(res.body.activities.length).toBe(2)
+
+  res = await sdkClient.getActivities({ headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.total).toBe(2)
   expect(res.body.limit).toBe(10)
   expect(res.body.activities.length).toBe(2)
@@ -92,6 +108,9 @@ test('test createABActivity', async () => {
   var res = await sdkClient.createABActivity(obj)
   expect(res.body.id).toBe(123)
 
+  res = await sdkClient.createABActivity(obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.id).toBe(123)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_AB_ACTIVITY())
@@ -130,6 +149,9 @@ test('test createXTActivity', async () => {
   var res = await sdkClient.createXTActivity(obj)
   expect(res.body.id).toBe(321)
 
+  res = await sdkClient.createXTActivity(obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.id).toBe(321)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_XT_ACTIVITY())
@@ -147,6 +169,9 @@ test('test getABActivityById', async () => {
   mockResponseWithMethod(url, method, mock.data.abActivity)
   // check success response
   var res = await sdkClient.getABActivityById(123)
+  expect(res.body.id).toBe(123)
+
+  res = await sdkClient.getABActivityById(123, { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.id).toBe(123)
 
   // check error responses
@@ -168,6 +193,9 @@ test('test getXTActivityById', async () => {
   mockResponseWithMethod(url, method, mock.data.xtActivity)
   // check success response
   var res = await sdkClient.getXTActivityById(321)
+  expect(res.body.id).toBe(321)
+
+  res = await sdkClient.getXTActivityById(321, { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.id).toBe(321)
 
   // check error responses
@@ -211,6 +239,9 @@ test('test updateABActivity', async () => {
   var res = await sdkClient.updateABActivity(123, obj)
   expect(res.body.id).toBe(123)
 
+  res = await sdkClient.updateABActivity(123, obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.id).toBe(123)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_AB_ACTIVITY(), [123, obj])
@@ -250,6 +281,9 @@ test('test updateXTActivity', async () => {
   var res = await sdkClient.updateXTActivity(321, obj)
   expect(res.body.id).toBe(321)
 
+  res = await sdkClient.updateXTActivity(321, obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.id).toBe(321)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_XT_ACTIVITY(), [321, obj])
@@ -267,6 +301,10 @@ test('test setActivityName', async () => {
   mockResponseWithMethod(url, method, mock.data.nameActivity)
   // check success response
   var res = await sdkClient.setActivityName(123, 'new name')
+  expect(res.body.id).toBe(123)
+  expect(res.body.name).toBe('new name')
+
+  res = await sdkClient.setActivityName(123, 'new name', { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.id).toBe(123)
   expect(res.body.name).toBe('new name')
 
@@ -290,6 +328,10 @@ test('test setActivityState', async () => {
   expect(res.body.id).toBe(123)
   expect(res.body.state).toBe('activated')
 
+  res = await sdkClient.setActivityState(123, 'activated', { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.id).toBe(123)
+  expect(res.body.state).toBe('activated')
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_STATE(), [123, 'activated'])
@@ -307,6 +349,10 @@ test('test setActivityPriority', async () => {
   mockResponseWithMethod(url, method, mock.data.nameActivity)
   // check success response
   var res = await sdkClient.setActivityPriority(123, '5')
+  expect(res.body.id).toBe(123)
+  expect(res.body.priority).toBe('5')
+
+  res = await sdkClient.setActivityPriority(123, '5', { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.id).toBe(123)
   expect(res.body.priority).toBe('5')
 
@@ -336,6 +382,11 @@ test('test setActivitySchedule', async () => {
   expect(res.body.startsAt).toBe('2017-05-01T08:00Z')
   expect(res.body.endsAt).toBe('2017-09-01T07:59:59Z')
 
+  res = await sdkClient.setActivitySchedule(123, obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.id).toBe(123)
+  expect(res.body.startsAt).toBe('2017-05-01T08:00Z')
+  expect(res.body.endsAt).toBe('2017-09-01T07:59:59Z')
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_SCHEDULE(), [123, obj])
@@ -353,6 +404,9 @@ test('test deleteABActivity', async () => {
   mockResponseWithMethod(url, method, mock.data.abActivity)
   // check success response
   var res = await sdkClient.deleteABActivity(123)
+  expect(res.body.id).toBe(123)
+
+  res = await sdkClient.deleteABActivity(123, { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.id).toBe(123)
 
   // check error responses
@@ -376,6 +430,9 @@ test('test deleteXTActivity', async () => {
   var res = await sdkClient.deleteXTActivity(321)
   expect(res.body.id).toBe(321)
 
+  res = await sdkClient.deleteXTActivity(321, { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.id).toBe(321)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_XT_ACTIVITY(), [321])
@@ -395,6 +452,10 @@ test('test getActivityChangeLog', async () => {
   mockResponseWithMethod(url, method, mock.data.changeLog)
   // check success response
   var res = await sdkClient.getActivityChangeLog(123)
+  expect(res.body.total).toBe(2)
+  expect(res.body.activityChangelogs.length).toBe(2)
+
+  res = await sdkClient.getActivityChangeLog(123, { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.total).toBe(2)
   expect(res.body.activityChangelogs.length).toBe(2)
 
@@ -421,6 +482,11 @@ test('test getOffers', async () => {
   expect(res.body.limit).toBe(10)
   expect(res.body.offers.length).toBe(2)
 
+  res = await sdkClient.getOffers({ headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.total).toBe(2)
+  expect(res.body.limit).toBe(10)
+  expect(res.body.offers.length).toBe(2)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_OFFERS())
@@ -438,6 +504,9 @@ test('test getOfferById', async () => {
   mockResponseWithMethod(url, method, mock.data.offer)
   // check success response
   var res = await sdkClient.getOfferById(111)
+  expect(res.body.id).toBe(111)
+
+  res = await sdkClient.getOfferById(111, { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.id).toBe(111)
 
   // check error responses
@@ -467,6 +536,9 @@ test('test createOffer', async () => {
   var res = await sdkClient.createOffer(obj)
   expect(res.body.id).toBe(123)
 
+  res = await sdkClient.createOffer(obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.id).toBe(123)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_OFFER(), [obj])
@@ -491,6 +563,9 @@ test('test updateOffer', async () => {
   var res = await sdkClient.updateOffer(123, obj)
   expect(res.body.content).toBe('<div>Updated content</div>')
 
+  res = await sdkClient.updateOffer(123, obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.content).toBe('<div>Updated content</div>')
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_OFFER(), [123, obj])
@@ -508,6 +583,9 @@ test('test deleteOffer', async () => {
   mockResponseWithMethod(url, method, mock.data.offer)
   // check success response
   var res = await sdkClient.deleteOffer(111)
+  expect(res.body.id).toBe(111)
+
+  res = await sdkClient.deleteOffer(111, { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.id).toBe(111)
 
   // check error responses
@@ -529,6 +607,11 @@ test('test getAudiences', async () => {
   mockResponseWithMethod(url, method, mock.data.audiences)
   // check success response
   var res = await sdkClient.getAudiences()
+  expect(res.body.total).toBe(2)
+  expect(res.body.limit).toBe(10)
+  expect(res.body.audiences.length).toBe(2)
+
+  res = await sdkClient.getAudiences({ headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.total).toBe(2)
   expect(res.body.limit).toBe(10)
   expect(res.body.audiences.length).toBe(2)
@@ -574,6 +657,9 @@ test('test createAudience', async () => {
   var res = await sdkClient.createAudience(obj)
   expect(res.body.id).toBe(123)
 
+  res = await sdkClient.createAudience(obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.id).toBe(123)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_AUDIENCE(), [obj])
@@ -591,6 +677,9 @@ test('test getAudienceById', async () => {
   mockResponseWithMethod(url, method, mock.data.audience)
   // check success response
   var res = await sdkClient.getAudienceById(111)
+  expect(res.body.id).toBe(111)
+
+  res = await sdkClient.getAudienceById(111, { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.id).toBe(111)
 
   // check error responses
@@ -619,6 +708,9 @@ test('test updateAudience', async () => {
   var res = await sdkClient.updateAudience(123, obj)
   expect(res.body.name).toBe('Updated Gold Members in Califo-1495136673062')
 
+  res = await sdkClient.updateAudience(123, obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.name).toBe('Updated Gold Members in Califo-1495136673062')
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_AUDIENCE(), [123, obj])
@@ -636,6 +728,9 @@ test('test deleteAudience', async () => {
   mockResponseWithMethod(url, method, mock.data.audience)
   // check success response
   var res = await sdkClient.deleteAudience(111)
+  expect(res.body.id).toBe(111)
+
+  res = await sdkClient.deleteAudience(111, { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.id).toBe(111)
 
   // check error responses
@@ -661,6 +756,11 @@ test('test getProperties', async () => {
   expect(res.body.limit).toBe(10)
   expect(res.body.properties.length).toBe(2)
 
+  res = await sdkClient.getProperties({ headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.total).toBe(2)
+  expect(res.body.limit).toBe(10)
+  expect(res.body.properties.length).toBe(2)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_PROPERTIES())
@@ -678,6 +778,9 @@ test('test getPropertyById', async () => {
   mockResponseWithMethod(url, method, mock.data.property)
   // check success response
   var res = await sdkClient.getPropertyById(111)
+  expect(res.body.id).toBe(111)
+
+  res = await sdkClient.getPropertyById(111, { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.id).toBe(111)
 
   // check error responses
@@ -703,6 +806,11 @@ test('test getMBoxes', async () => {
   expect(res.body.limit).toBe(5)
   expect(res.body.mboxes.length).toBe(2)
 
+  res = await sdkClient.getMBoxes({ headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.total).toBe(2)
+  expect(res.body.limit).toBe(5)
+  expect(res.body.mboxes.length).toBe(2)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOXES())
@@ -720,6 +828,10 @@ test('test getMBoxByName', async () => {
   mockResponseWithMethod(url, method, mock.data.mbox)
   // check success response
   var res = await sdkClient.getMBoxByName('a1-mobile-mboxparams')
+  expect(res.body.name).toBe('a1-mobile-mboxparams')
+  expect(res.body.mboxParameters.length).toBe(3)
+
+  res = await sdkClient.getMBoxByName('a1-mobile-mboxparams', { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.name).toBe('a1-mobile-mboxparams')
   expect(res.body.mboxParameters.length).toBe(3)
 
@@ -744,6 +856,9 @@ test('test getMBoxProfileAttributes', async () => {
   var res = await sdkClient.getMBoxProfileAttributes()
   expect(res.body.mboxParameters.length).toBe(3)
 
+  res = await sdkClient.getMBoxProfileAttributes({ headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.mboxParameters.length).toBe(3)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOX_PROFILE_ATTRIBUTES())
@@ -761,6 +876,11 @@ test('test getEnvironments', async () => {
   mockResponseWithMethod(url, method, mock.data.environments)
   // check success response
   var res = await sdkClient.getEnvironments()
+  expect(res.body.total).toBe(3)
+  expect(res.body.limit).toBe(2147483647)
+  expect(res.body.environments.length).toBe(3)
+
+  res = await sdkClient.getEnvironments({ headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.total).toBe(3)
   expect(res.body.limit).toBe(2147483647)
   expect(res.body.environments.length).toBe(3)
@@ -786,6 +906,11 @@ test('test getABActivityPerformance', async () => {
   expect(res.body.activity.metrics.length).toBe(1)
   expect(res.body.activity.experiences.length).toBe(1)
 
+  res = await sdkClient.getABActivityPerformance(111, { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.reportParameters.activityId).toBe(111)
+  expect(res.body.activity.metrics.length).toBe(1)
+  expect(res.body.activity.experiences.length).toBe(1)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AB_ACTIVITY_PERFORMANCE(), [111])
@@ -803,6 +928,11 @@ test('test getXTActivityPerformance', async () => {
   mockResponseWithMethod(url, method, mock.data.xtPerformance)
   // check success response
   var res = await sdkClient.getXTActivityPerformance(123)
+  expect(res.body.reportParameters.activityId).toBe(123)
+  expect(res.body.activity.metrics.length).toBe(1)
+  expect(res.body.activity.experiences.length).toBe(1)
+
+  res = await sdkClient.getXTActivityPerformance(123, { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.reportParameters.activityId).toBe(123)
   expect(res.body.activity.metrics.length).toBe(1)
   expect(res.body.activity.experiences.length).toBe(1)
@@ -828,6 +958,11 @@ test('test getActivityPerformance', async () => {
   expect(res.body.activity.metrics.length).toBe(1)
   expect(res.body.activity.experiences.length).toBe(1)
 
+  res = await sdkClient.getActivityPerformance(123, { headers: { accept: ACCEPT_HEADERS.V1 } })
+  expect(res.body.reportParameters.activityId).toBe(123)
+  expect(res.body.activity.metrics.length).toBe(1)
+  expect(res.body.activity.experiences.length).toBe(1)
+
   // check error responses
   mockResponseWithMethod(url, method, mock.errors.Unauthorized_Request.err)
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITY_PERFORMANCE(), [123])
@@ -845,6 +980,11 @@ test('test getOrdersReport', async () => {
   mockResponseWithMethod(url, method, mock.data.report)
   // check success response
   var res = await sdkClient.getOrdersReport(123)
+  expect(res.body.reportParameters.activityId).toBe(123)
+  expect(res.body.activity.metrics.length).toBe(1)
+  expect(res.body.activity.experiences.length).toBe(1)
+
+  res = await sdkClient.getOrdersReport(123, { headers: { accept: ACCEPT_HEADERS.V1 } })
   expect(res.body.reportParameters.activityId).toBe(123)
   expect(res.body.activity.metrics.length).toBe(1)
   expect(res.body.activity.experiences.length).toBe(1)
@@ -910,6 +1050,13 @@ test('test executeBatch', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_EXECUTE_BATCH(), [obj])
 })
 
+/**
+ * @param fn
+ * @param url
+ * @param method
+ * @param error
+ * @param args
+ */
 function checkErrorResponse (fn, url, method, error, args = []) {
   const client = sdkClient
   return new Promise((resolve, reject) => {

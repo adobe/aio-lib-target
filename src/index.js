@@ -22,13 +22,13 @@ const ACCEPT_HEADERS = {
 }
 
 /**
-  * Returns a Promise that resolves with a new TargetCoreAPI object.
-  *
-  * @param tenant {string} Adobe Target tenant name.
-  * @param apiKey {string} Your api key
-  * @param token {string} Valid auth token
-  * @returns {Promise<TargetCoreAPI>}
-  */
+ * Returns a Promise that resolves with a new TargetCoreAPI object.
+ *
+ * @param {string} tenant tenant Adobe Target tenant name
+ * @param {string} apiKey apiKey Your api key
+ * @param {string} token Valid auth token
+ * @returns {Promise<TargetCoreAPI>}
+ */
 function init (tenant, apiKey, token) {
   return new Promise((resolve, reject) => {
     const clientWrapper = new TargetCoreAPI()
@@ -46,18 +46,18 @@ function init (tenant, apiKey, token) {
 }
 
 /**
-* This class provides methods to call Adobe Target APIs.
-* Before calling any method initialize the instance by calling init method on it
-* with valid tenant, apiKey and auth token
-*/
+ * This class provides methods to call Adobe Target APIs.
+ * Before calling any method initialize the instance by calling init method on it
+ * with valid tenant, apiKey and auth token
+ */
 class TargetCoreAPI {
   /** Initialize sdk.
-  *
-  * @param tenant {string} Adobe Target tenant name.
-  * @param apiKey {string} Your api key
-  * @param token {string} Valid auth token
-  * @returns {TargetCoreAPI}
-  */
+   *
+   * @param tenant {string} Adobe Target tenant name
+   * @param apiKey {string} Your api key
+   * @param token {string} Valid auth token
+   * @returns {TargetCoreAPI}
+   */
   async init (tenant, apiKey, token) {
     const initErrors = []
     if (!tenant) {
@@ -89,17 +89,19 @@ class TargetCoreAPI {
   }
 
   /** List activities.
-  * Get a list of activities created in your Target account, with the ability to filter and sort by attributes.
-  *
-  * @param options {Object} to control activity search.
-  * @param options.limit Defines the number of items to return. Default value is 2147483647
-  * @param options.offset Defines the first activity to return from the list of total activities. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of activities.
-  * @param options.sortBy Defines the sorting criteria on the returned items.
-  */
-  getActivities ({ limit = 2147483647, offset = 0, sortBy } = {}) {
-    const sdkDetails = arguments[0]
+   * Get a list of activities created in your Target account, with the ability to filter and sort by attributes.
+   *
+   * @param {object} [options] to control activity search
+   * @param {number} [options.limit = 2147483647] Defines the number of items to return
+   * @param {number} [options.offset = 0] Defines the first activity to return from the list of total activities. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of activities.
+   * @param {string} [options.sortBy] Defines the sorting criteria on the returned items
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getActivities (options = { limit: 2147483647, offset: 0 }) {
+    const sdkDetails = options
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activities.getActivities(arguments[0], this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.activities.getActivities(arguments[0], this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -110,14 +112,17 @@ class TargetCoreAPI {
   }
 
   /** Create AB Activity.
-  * Creates a new AB activity with the specified contents and returns the created activity.
-  *
-  * @param body {Object} Activity JSON.
-  */
-  createABActivity (body) {
+   * Creates a new AB activity with the specified contents and returns the created activity.
+   *
+   * @param {object} body Activity JSON.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  createABActivity (body, options = {}) {
     const sdkDetails = body
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.createABActivity({}, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.abactivity.createABActivity({}, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -128,14 +133,17 @@ class TargetCoreAPI {
   }
 
   /** Create XT Activity.
-  * Creates a new XT activity with the specified contents and returns the created activity.
-  *
-  * @param body {Object} Activity JSON.
-  */
-  createXTActivity (body) {
+   * Creates a new XT activity with the specified contents and returns the created activity.
+   *
+   * @param {object} body Activity JSON.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  createXTActivity (body, options = {}) {
     const sdkDetails = body
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.createXTActivity({}, this.__createRequest(body), this.__getContentTypeHeader(ACCEPT_HEADERS.V3))
+      this.sdk.apis.xtactivity.createXTActivity({}, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -146,16 +154,19 @@ class TargetCoreAPI {
   }
 
   /** Get AB activity.
-  * Fetch the current definition of an AB activity if it is found as referenced by the id.
-  *
-  * @param id {integer} Activity id.
-  */
-  getABActivityById (id) {
+   * Fetch the current definition of an AB activity if it is found as referenced by the id.
+   *
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getABActivityById (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.getABActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.abactivity.getABActivity(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -166,16 +177,19 @@ class TargetCoreAPI {
   }
 
   /** Get XT activity.
-  * Fetch the current definition of XT activity if it is found as referenced by the id.
-  *
-  * @param id {integer} Activity id.
-  */
-  getXTActivityById (id) {
+   * Fetch the current definition of XT activity if it is found as referenced by the id.
+   *
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getXTActivityById (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.getXTActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.xtactivity.getXTActivity(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -186,16 +200,20 @@ class TargetCoreAPI {
   }
 
   /** Update AB activity.
-  * Updates the AB activity definition with the contents as provided in the request. This can change the state and behaviour of an existing activity.
-  *
-  * @param id {integer} Activity id.
-  */
-  updateABActivity (id, body) {
+   * Updates the AB activity definition with the contents as provided in the request. This can change the state and behaviour of an existing activity.
+   *
+   * @param {number} id Activity id.
+   * @param {object} body activity JSON
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  updateABActivity (id, body, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.updateABActivity(params, this.__createRequest(body))
+      this.sdk.apis.abactivity.updateABActivity(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -206,16 +224,20 @@ class TargetCoreAPI {
   }
 
   /** Update XT activity.
-  * Update the current definition of XT activity if it is found as referenced by the id.
-  *
-  * @param id {integer} Activity id.
-  */
-  updateXTActivity (id, body) {
+   * Update the current definition of XT activity if it is found as referenced by the id.
+   *
+   * @param {number} id Activity id.
+   * @param {object} body activity JSON
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  updateXTActivity (id, body, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.updateXTActivity(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.xtactivity.updateXTActivity(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -226,20 +248,23 @@ class TargetCoreAPI {
   }
 
   /** Update activity name.
-  * Updates the name of the AB activity that is referenced by the supplied id.
-  *
-  * @param id {integer} Activity id.
-  * @param name {string} New Activity name.
-  */
-  setActivityName (id, name) {
+   * Updates the name of the AB activity that is referenced by the supplied id.
+   *
+   * @param {number} id Activity id.
+   * @param {string} name New Activity name.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  setActivityName (id, name, options = {}) {
     var params = {}
     params.id = id
     var body = {
       name: name
     }
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setName(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.activity.setName(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -250,12 +275,14 @@ class TargetCoreAPI {
   }
 
   /** Update Activity state.
-  * Update state of an activity if it is found as referenced by the id.
-  *
-  * @param id {integer} Activity id.
-  * @param state {string} New Activity state.
-  */
-  setActivityState (id, state) {
+   * Update state of an activity if it is found as referenced by the id.
+   *
+   * @param {number} id Activity id.
+   * @param {string} state New Activity state.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  setActivityState (id, state, options = {}) {
     var params = {}
     params.id = id
 
@@ -263,8 +290,9 @@ class TargetCoreAPI {
       state: state
     }
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setState(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.activity.setState(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -275,12 +303,14 @@ class TargetCoreAPI {
   }
 
   /** Update Activity priority.
-  * Update priority of an activity if it is found as referenced by the id.
-  *
-  * @param id {integer} Activity id.
-  * @param priority {string} New Activity priority.
-  */
-  setActivityPriority (id, priority) {
+   * Update priority of an activity if it is found as referenced by the id.
+   *
+   * @param {number} id Activity id.
+   * @param {string} priority New Activity priority.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  setActivityPriority (id, priority, options = {}) {
     var params = {}
     params.id = id
 
@@ -288,8 +318,9 @@ class TargetCoreAPI {
       priority: priority
     }
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setPriority(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.activity.setPriority(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -300,12 +331,14 @@ class TargetCoreAPI {
   }
 
   /** Update Activity schedule.
-  * Update schedule of an activity if it is found as referenced by the id.
-  *
-  * @param id {integer} Activity id.
-  * @param schedule {string} New Activity schedule.
-  */
-  setActivitySchedule (id, schedule) {
+   * Update schedule of an activity if it is found as referenced by the id.
+   *
+   * @param {number} id Activity id.
+   * @param {string} schedule New Activity schedule.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  setActivitySchedule (id, schedule, options = {}) {
     var params = {}
     params.id = id
 
@@ -313,8 +346,9 @@ class TargetCoreAPI {
       schedule: schedule
     }
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.setSchedule(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.activity.setSchedule(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -325,16 +359,19 @@ class TargetCoreAPI {
   }
 
   /** Delete AB activity.
-  * Deletes the AB activity that is referenced by the id, if it is found.
-  *
-  * @param id {integer} Activity id.
-  */
-  deleteABActivity (id) {
+   * Deletes the AB activity that is referenced by the id, if it is found.
+   *
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  deleteABActivity (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.deleteABActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.abactivity.deleteABActivity(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -345,16 +382,19 @@ class TargetCoreAPI {
   }
 
   /** Delete XT activity.
-  * Delete the current definition of an XT activity if it is found as referenced by the id.
-  *
-  * @param id {integer} Activity id.
-  */
-  deleteXTActivity (id) {
+   * Delete the current definition of an XT activity if it is found as referenced by the id.
+   *
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  deleteXTActivity (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.deleteXTActivity(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.xtactivity.deleteXTActivity(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -365,16 +405,19 @@ class TargetCoreAPI {
   }
 
   /** Get Activity changelog.
-  * Returns the changelog for a given activity id.
-  *
-  * @param id {integer} Activity id.
-  */
-  getActivityChangeLog (id) {
+   * Returns the changelog for a given activity id.
+   *
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getActivityChangeLog (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.getChangeLog(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.activity.getChangeLog(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -385,17 +428,19 @@ class TargetCoreAPI {
   }
 
   /** List Offers.
-  * Retrieve the list of previously-created content offers. The parameters passed through the query string are optional and are used to indicate the sorting and filtering options.
-  *
-  * @param options {Object} to control offer search.
-  * @param options.limit Defines the number of items to return. Default value is 2147483647
-  * @param options.offset Defines the first offers to return from the list of Offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.
-  * @param options.sortBy Defines the sorting criteria on the returned items.
-  */
-  getOffers ({ limit = 2147483647, offset = 0, sortBy } = {}) {
-    const sdkDetails = arguments[0]
+   * Retrieve the list of previously-created content offers. The parameters passed through the query string are optional and are used to indicate the sorting and filtering options.
+   *
+   * @param {object} [options] to control offer search.
+   * @param {number} [options.limit = 2147483647] Defines the number of items to return
+   * @param {number} [options.offset = 0] Defines the first offers to return from the list of Offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.
+   * @param {string} [options.sortBy] Defines the sorting criteria on the returned items.
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getOffers (options = { limit: 2147483647, offset: 0 }) {
+    const sdkDetails = options
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offers.getOffers(arguments[0], this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
+      this.sdk.apis.offers.getOffers(arguments[0], this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -406,16 +451,19 @@ class TargetCoreAPI {
   }
 
   /** Get Offer.
-  * Retrieves the contents of an offer given an offer id.
-  *
-  * @param id {integer} Offer id.
-  */
-  getOfferById (id) {
+   * Retrieves the contents of an offer given an offer id.
+   *
+   * @param {number} id Offer id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getOfferById (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.getOfferById(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
+      this.sdk.apis.offer.getOfferById(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -426,14 +474,17 @@ class TargetCoreAPI {
   }
 
   /** Create Offer.
-  * Creates a new content offer as defined by the request data.
-  *
-  * @param body {Object} Offer JSON.
-  */
-  createOffer (body) {
+   * Creates a new content offer as defined by the request data.
+   *
+   * @param {object} body Offer JSON.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  createOffer (body, options = {}) {
     const sdkDetails = body
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offers.createOffer({}, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V2)))
+      this.sdk.apis.offers.createOffer({}, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -443,17 +494,22 @@ class TargetCoreAPI {
     })
   }
 
-  /** Update Offer.
-  * Updates the content offer referenced by the id.
-  *
-  * @param id {integer} Offer id.
-  */
-  updateOffer (id, body) {
+  /**
+   * Update Offer.
+   * Updates the content offer referenced by the id.
+   *
+   * @param {number} id Offer id.
+   * @param {object} body Offer JSON
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  updateOffer (id, body, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.updateOffer(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V2)))
+      this.sdk.apis.offer.updateOffer(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -464,16 +520,19 @@ class TargetCoreAPI {
   }
 
   /** Delete Offer.
-  * Deletes the content offer referenced by the provided id.
-  *
-  * @param id {integer} Offer id.
-  */
-  deleteOffer (id) {
+   * Deletes the content offer referenced by the provided id.
+   *
+   * @param {number} id Offer id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  deleteOffer (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.deleteOffer(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
+      this.sdk.apis.offer.deleteOffer(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -484,17 +543,19 @@ class TargetCoreAPI {
   }
 
   /** List Audiences.
-  * List all available audiences with options to filter and sort by each available field.
-  *
-  * @param options {Object} to control audience search.
-  * @param options.limit Defines the number of items to return. Default value is 2147483647
-  * @param options.offset Defines the first audience to return from the list of total offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.
-  * @param options.sortBy Defines the sorting criteria on the returned items.
-  */
-  getAudiences ({ limit = 2147483647, offset = 0, sortBy } = {}) {
-    const sdkDetails = arguments[0]
+   * List all available audiences with options to filter and sort by each available field.
+   *
+   * @param {object} [options] options to control audience search.
+   * @param {number } [options.limit = 2147483647] Defines the number of items to return. Default value is 2147483647
+   * @param {number} [options.offset = 0] Defines the first audience to return from the list of total offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.
+   * @param {string} [options.sortBy] Defines the sorting criteria on the returned items.
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getAudiences (options = { limit: 2147483647, offset: 0 }) {
+    const sdkDetails = options
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.getAudiences(arguments[0], this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.audiences.getAudiences(arguments[0], this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -505,14 +566,17 @@ class TargetCoreAPI {
   }
 
   /** Create Audience.
-  * Create a new audience as specified by the contents of the request and return the newly-created audience definition.
-  *
-  * @param body {Object} Audience JSON.
-  */
-  createAudience (body) {
+   * Create a new audience as specified by the contents of the request and return the newly-created audience definition.
+   *
+   * @param {object} body Audience JSON.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  createAudience (body, options = {}) {
     const sdkDetails = body
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.createAudience({}, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.audiences.createAudience({}, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -523,16 +587,19 @@ class TargetCoreAPI {
   }
 
   /** Get Audience.
-  * Get the audience definition specified by the provided id.
-  *
-  * @param id {integer} Audience id.
-  */
-  getAudienceById (id) {
+   * Get the audience definition specified by the provided id.
+   *
+   * @param {number} id Audience id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getAudienceById (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.getAudienceById(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.audiences.getAudienceById(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -543,16 +610,20 @@ class TargetCoreAPI {
   }
 
   /** Update Audience.
-  * Update an audience with the new rules specified by the request data.
-  *
-  * @param id {integer} Audience id.
-  */
-  updateAudience (id, body) {
+   * Update an audience with the new rules specified by the request data.
+   *
+   * @param {number} id Audience id.
+   * @param {object }body audience JSON
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  updateAudience (id, body, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = { params, body }
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audience.updateAudience(params, this.__createRequest(body, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.audience.updateAudience(params, this.__createRequest(body, headers, this.__getContentTypeHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -563,16 +634,19 @@ class TargetCoreAPI {
   }
 
   /** Delete Audience.
-  * Delete the audience referenced by the specified id.
-  *
-  * @param id {integer} Audience id.
-  */
-  deleteAudience (id) {
+   * Delete the audience referenced by the specified id.
+   *
+   * @param {number} id Audience id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  deleteAudience (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audience.deleteAudience(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.audience.deleteAudience(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -583,12 +657,16 @@ class TargetCoreAPI {
   }
 
   /** List Properties.
-  * Get a list of properties.
-  */
-  getProperties () {
-    const sdkDetails = {}
+   * Get a list of properties.
+   *
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getProperties (options = {}) {
+    const sdkDetails = options
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.properties.getProperties({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.properties.getProperties({}, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -599,16 +677,19 @@ class TargetCoreAPI {
   }
 
   /** Get Property.
-  * Retrieve property by property Id..
-  *
-  * @param id {integer} Property id.
-  */
-  getPropertyById (id) {
+   * Retrieve property by property Id..
+   *
+   * @param {number} id Property id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getPropertyById (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.properties.getAPropertyById(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.properties.getAPropertyById(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -619,12 +700,16 @@ class TargetCoreAPI {
   }
 
   /** List MBoxes.
-  * List all available mboxes for a specific client with the options to filter and sort.
-  */
-  getMBoxes () {
+   * List all available mboxes for a specific client with the options to filter and sort.
+   *
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getMBoxes (options = {}) {
     const sdkDetails = {}
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mboxes.getMBoxes({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.mboxes.getMBoxes({}, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -635,16 +720,19 @@ class TargetCoreAPI {
   }
 
   /** Get MBox by name.
-  * Get the list of mbox parameters.
-  *
-  * @param name {integer} MBox name.
-  */
-  getMBoxByName (name) {
+   * Get the list of mbox parameters.
+   *
+   * @param {string} name MBox name.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getMBoxByName (name, options = {}) {
     var params = {}
     params.mboxName = name
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mboxes.getMBoxByName(params, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.mboxes.getMBoxByName(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -655,12 +743,16 @@ class TargetCoreAPI {
   }
 
   /** Get Profile Attributes.
-  * Retrieve the list of available profile attributes and mbox parameters of type profile.
-  */
-  getMBoxProfileAttributes () {
-    const sdkDetails = {}
+   * Retrieve the list of available profile attributes and mbox parameters of type profile.
+   *
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getMBoxProfileAttributes (options = {}) {
+    const sdkDetails = options
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mbox.getProfileAttributes({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.mbox.getProfileAttributes({}, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -671,12 +763,16 @@ class TargetCoreAPI {
   }
 
   /** Get Environments.
-  * List all available environments with the options to filter and sort. Use the Environments API to retrieve the environment IDs corresponding to the various host groups set for the client.
-  */
-  getEnvironments () {
-    const sdkDetails = {}
+   * List all available environments with the options to filter and sort. Use the Environments API to retrieve the environment IDs corresponding to the various host groups set for the client.
+   *
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getEnvironments (options = {}) {
+    const sdkDetails = options
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.environments.getEnvironments({}, this.__createRequest({}, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.environments.getEnvironments({}, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -687,16 +783,19 @@ class TargetCoreAPI {
   }
 
   /** Get AB activity performance.
-  * Retrieve property by property Id.
-  *
-  * @param id {integer} Activity id.
-  */
-  getABActivityPerformance (id) {
+   * Retrieve property by property Id.
+   *
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getABActivityPerformance (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.reports.getABPerformance(params, this.__createRequest({}))
+      this.sdk.apis.reports.getABPerformance(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -707,16 +806,19 @@ class TargetCoreAPI {
   }
 
   /** Get activity performance.
-  * Retrieve property by property Id.
-  *
-  * @param id {integer} Activity id.
-  */
-  getXTActivityPerformance (id) {
+   * Retrieve property by property Id.
+   *
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getXTActivityPerformance (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.reports.getXTPerformance(params, this.__createRequest({}))
+      this.sdk.apis.reports.getXTPerformance(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -727,16 +829,19 @@ class TargetCoreAPI {
   }
 
   /** Get activity performance.
-  * Retrieve the performance report data for the Automated Personalization activity referenced by the provided id.
-  *
-  * @param id {integer} Activity id.
-  */
-  getActivityPerformance (id) {
+   * Retrieve the performance report data for the Automated Personalization activity referenced by the provided id.
+   *
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getActivityPerformance (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.reports.getABTPerformance(params, this.__createRequest({}))
+      this.sdk.apis.reports.getABTPerformance(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -747,16 +852,19 @@ class TargetCoreAPI {
   }
 
   /** Get Orders report.
-  * Retrieve the orders/audit report data for an AB, XT or Autotmated Personalization Activity.
-  *
-  * @param id {integer} Activity id.
-  */
-  getOrdersReport (id) {
+   * Retrieve the orders/audit report data for an AB, XT or Autotmated Personalization Activity.
+   *
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
+   */
+  getOrdersReport (id, options = {}) {
     var params = {}
     params.id = id
     const sdkDetails = params
+    const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.reports.getAuditReport(params, this.__createRequest({}))
+      this.sdk.apis.reports.getAuditReport(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -766,9 +874,12 @@ class TargetCoreAPI {
     })
   }
 
-  /** Execute Batch APIs.
-  * Multiple Admin APIs can be executed as a single batch request.
-  */
+  /**
+   * Execute Batch APIs.
+   * Multiple Admin APIs can be executed as a single batch request.
+   *
+   * @param {object} body json to execute batch
+   */
   executeBatch (body) {
     const sdkDetails = body
     return new Promise((resolve, reject) => {
@@ -782,7 +893,8 @@ class TargetCoreAPI {
     })
   }
 
-  __createRequest (body, headers) {
+  __createRequest (body, headers, defaultHeaders = {}) {
+    const finalHeaders = Object.assign(defaultHeaders, headers)
     return {
       requestBody: body,
       server: 'https://mc.adobe.io/{tenant-name}/target',
@@ -790,7 +902,7 @@ class TargetCoreAPI {
         'tenant-name': this.tenant
       },
       requestInterceptor: req => {
-        this.__setHeaders(req, this, headers)
+        this.__setHeaders(req, this, finalHeaders)
       }
     }
   }
@@ -806,11 +918,9 @@ class TargetCoreAPI {
     if (!req.headers['Content-Type']) {
       req.headers['Content-Type'] = 'application/json'
     }
-    if ((headers !== undefined)) {
-      Object.keys(headers).forEach(function (key) {
-        req.headers[key] = headers[key]
-      })
-    }
+    Object.keys(headers).forEach(function (key) {
+      req.headers[key] = headers[key]
+    })
   }
 
   __getAcceptHeader (value) {

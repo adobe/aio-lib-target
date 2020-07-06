@@ -1,4 +1,4 @@
 {
   "plugins": ["jest"],
-  "extends": ["standard", "plugin:jest/recommended"]
+  "extends": "@adobe/eslint-config-aio-lib-config"
 }
