@@ -8,7 +8,7 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-/* eslint-disable-next-line node/no-unpublished-require */
+
 const fetchMock = require('fetch-mock')
 const mock = require('./mock')
 const sdk = require('../src')
@@ -23,11 +23,7 @@ const ACCEPT_HEADERS = {
 }
 var sdkClient = {}
 
-/**
- * @param url
- * @param method
- * @param response
- */
+/** @private */
 function mockResponseWithMethod (url, method, response) {
   fetchMock.reset()
   fetchMock.mock((u, opts) => u === url && opts.method === method, response)
@@ -1050,13 +1046,7 @@ test('test executeBatch', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_EXECUTE_BATCH(), [obj])
 })
 
-/**
- * @param fn
- * @param url
- * @param method
- * @param error
- * @param args
- */
+/** @private */
 function checkErrorResponse (fn, url, method, error, args = []) {
   const client = sdkClient
   return new Promise((resolve, reject) => {

@@ -21,13 +21,15 @@ const ACCEPT_HEADERS = {
   V3: 'application/vnd.adobe.target.v3+json'
 }
 
+/* globals Response */
+
 /**
  * Returns a Promise that resolves with a new TargetCoreAPI object.
  *
  * @param {string} tenant tenant Adobe Target tenant name
  * @param {string} apiKey apiKey Your api key
  * @param {string} token Valid auth token
- * @returns {Promise<TargetCoreAPI>}
+ * @returns {Promise<TargetCoreAPI>} Promise resolving to a TargetCoreAPI instance
  */
 function init (tenant, apiKey, token) {
   return new Promise((resolve, reject) => {
@@ -53,10 +55,10 @@ function init (tenant, apiKey, token) {
 class TargetCoreAPI {
   /** Initialize sdk.
    *
-   * @param tenant {string} Adobe Target tenant name
-   * @param apiKey {string} Your api key
-   * @param token {string} Valid auth token
-   * @returns {TargetCoreAPI}
+   * @param {string} tenant Adobe Target tenant name
+   * @param {string} apiKey Your api key
+   * @param {string} token Valid auth token
+   * @returns {TargetCoreAPI} a TargetCoreAPI instance
    */
   async init (tenant, apiKey, token) {
     const initErrors = []
@@ -96,6 +98,7 @@ class TargetCoreAPI {
    * @param {number} [options.offset = 0] Defines the first activity to return from the list of total activities. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of activities.
    * @param {string} [options.sortBy] Defines the sorting criteria on the returned items
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getActivities (options = { limit: 2147483647, offset: 0 }) {
     const sdkDetails = options
@@ -117,6 +120,7 @@ class TargetCoreAPI {
    * @param {object} body Activity JSON.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   createABActivity (body, options = {}) {
     const sdkDetails = body
@@ -138,6 +142,7 @@ class TargetCoreAPI {
    * @param {object} body Activity JSON.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   createXTActivity (body, options = {}) {
     const sdkDetails = body
@@ -159,6 +164,7 @@ class TargetCoreAPI {
    * @param {number} id Activity id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getABActivityById (id, options = {}) {
     var params = {}
@@ -182,6 +188,7 @@ class TargetCoreAPI {
    * @param {number} id Activity id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getXTActivityById (id, options = {}) {
     var params = {}
@@ -206,6 +213,7 @@ class TargetCoreAPI {
    * @param {object} body activity JSON
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   updateABActivity (id, body, options = {}) {
     var params = {}
@@ -230,6 +238,7 @@ class TargetCoreAPI {
    * @param {object} body activity JSON
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   updateXTActivity (id, body, options = {}) {
     var params = {}
@@ -254,6 +263,7 @@ class TargetCoreAPI {
    * @param {string} name New Activity name.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   setActivityName (id, name, options = {}) {
     var params = {}
@@ -281,6 +291,7 @@ class TargetCoreAPI {
    * @param {string} state New Activity state.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   setActivityState (id, state, options = {}) {
     var params = {}
@@ -309,6 +320,7 @@ class TargetCoreAPI {
    * @param {string} priority New Activity priority.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   setActivityPriority (id, priority, options = {}) {
     var params = {}
@@ -337,6 +349,7 @@ class TargetCoreAPI {
    * @param {string} schedule New Activity schedule.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   setActivitySchedule (id, schedule, options = {}) {
     var params = {}
@@ -364,6 +377,7 @@ class TargetCoreAPI {
    * @param {number} id Activity id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   deleteABActivity (id, options = {}) {
     var params = {}
@@ -387,6 +401,7 @@ class TargetCoreAPI {
    * @param {number} id Activity id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   deleteXTActivity (id, options = {}) {
     var params = {}
@@ -410,6 +425,7 @@ class TargetCoreAPI {
    * @param {number} id Activity id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getActivityChangeLog (id, options = {}) {
     var params = {}
@@ -435,6 +451,7 @@ class TargetCoreAPI {
    * @param {number} [options.offset = 0] Defines the first offers to return from the list of Offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.
    * @param {string} [options.sortBy] Defines the sorting criteria on the returned items.
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getOffers (options = { limit: 2147483647, offset: 0 }) {
     const sdkDetails = options
@@ -456,6 +473,7 @@ class TargetCoreAPI {
    * @param {number} id Offer id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getOfferById (id, options = {}) {
     var params = {}
@@ -479,6 +497,7 @@ class TargetCoreAPI {
    * @param {object} body Offer JSON.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   createOffer (body, options = {}) {
     const sdkDetails = body
@@ -502,6 +521,7 @@ class TargetCoreAPI {
    * @param {object} body Offer JSON
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   updateOffer (id, body, options = {}) {
     var params = {}
@@ -525,6 +545,7 @@ class TargetCoreAPI {
    * @param {number} id Offer id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   deleteOffer (id, options = {}) {
     var params = {}
@@ -550,6 +571,7 @@ class TargetCoreAPI {
    * @param {number} [options.offset = 0] Defines the first audience to return from the list of total offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.
    * @param {string} [options.sortBy] Defines the sorting criteria on the returned items.
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getAudiences (options = { limit: 2147483647, offset: 0 }) {
     const sdkDetails = options
@@ -571,6 +593,7 @@ class TargetCoreAPI {
    * @param {object} body Audience JSON.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   createAudience (body, options = {}) {
     const sdkDetails = body
@@ -592,6 +615,7 @@ class TargetCoreAPI {
    * @param {number} id Audience id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getAudienceById (id, options = {}) {
     var params = {}
@@ -616,6 +640,7 @@ class TargetCoreAPI {
    * @param {object }body audience JSON
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   updateAudience (id, body, options = {}) {
     var params = {}
@@ -639,6 +664,7 @@ class TargetCoreAPI {
    * @param {number} id Audience id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   deleteAudience (id, options = {}) {
     var params = {}
@@ -661,6 +687,7 @@ class TargetCoreAPI {
    *
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getProperties (options = {}) {
     const sdkDetails = options
@@ -682,6 +709,7 @@ class TargetCoreAPI {
    * @param {number} id Property id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getPropertyById (id, options = {}) {
     var params = {}
@@ -704,6 +732,7 @@ class TargetCoreAPI {
    *
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getMBoxes (options = {}) {
     const sdkDetails = {}
@@ -725,6 +754,7 @@ class TargetCoreAPI {
    * @param {string} name MBox name.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getMBoxByName (name, options = {}) {
     var params = {}
@@ -747,6 +777,7 @@ class TargetCoreAPI {
    *
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getMBoxProfileAttributes (options = {}) {
     const sdkDetails = options
@@ -767,6 +798,7 @@ class TargetCoreAPI {
    *
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getEnvironments (options = {}) {
     const sdkDetails = options
@@ -788,6 +820,7 @@ class TargetCoreAPI {
    * @param {number} id Activity id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getABActivityPerformance (id, options = {}) {
     var params = {}
@@ -811,6 +844,7 @@ class TargetCoreAPI {
    * @param {number} id Activity id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getXTActivityPerformance (id, options = {}) {
     var params = {}
@@ -834,6 +868,7 @@ class TargetCoreAPI {
    * @param {number} id Activity id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getActivityPerformance (id, options = {}) {
     var params = {}
@@ -857,6 +892,7 @@ class TargetCoreAPI {
    * @param {number} id Activity id.
    * @param {object} [options] sdk options
    * @param {object} [options.headers] headers to pass to API call
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getOrdersReport (id, options = {}) {
     var params = {}
@@ -879,6 +915,7 @@ class TargetCoreAPI {
    * Multiple Admin APIs can be executed as a single batch request.
    *
    * @param {object} body json to execute batch
+   * @returns {Promise<Response>} a Promise resolving to a Response
    */
   executeBatch (body) {
     const sdkDetails = body

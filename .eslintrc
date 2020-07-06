@@ -1,4 +1,0 @@
-{
-  "plugins": ["jest"],
-  "extends": "@adobe/eslint-config-aio-lib-config"
-}
