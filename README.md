@@ -13,7 +13,7 @@ governing permissions and limitations under the License.
 [![Version](https://img.shields.io/npm/v/@adobe/aio-lib-target.svg)](https://npmjs.org/package/@adobe/aio-lib-target)
 [![Downloads/week](https://img.shields.io/npm/dw/@adobe/aio-lib-target.svg)](https://npmjs.org/package/@adobe/aio-lib-target)
 [![Build Status](https://travis-ci.com/adobe/aio-lib-target.svg?branch=master)](https://travis-ci.com/adobe/aio-lib-target)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Greenkeeper badge](https://badges.greenkeeper.io/adobe/aio-lib-target.svg)](https://greenkeeper.io/)
 [![Codecov Coverage](https://img.shields.io/codecov/c/github/adobe/aio-lib-target/master.svg?style=flat-square)](https://codecov.io/gh/adobe/aio-lib-target/)
 
 # I/O Adobe Target SDK
@@ -97,39 +97,39 @@ with valid tenant, apiKey and auth token
 * [TargetCoreAPI](#TargetCoreAPI)
     * [.init(tenant, apiKey, token)](#TargetCoreAPI+init) ⇒ [<code>TargetCoreAPI</code>](#TargetCoreAPI)
     * [.getActivities(options)](#TargetCoreAPI+getActivities)
-    * [.createABActivity(body)](#TargetCoreAPI+createABActivity)
-    * [.createXTActivity(body)](#TargetCoreAPI+createXTActivity)
-    * [.getABActivityById(id)](#TargetCoreAPI+getABActivityById)
-    * [.getXTActivityById(id)](#TargetCoreAPI+getXTActivityById)
-    * [.updateABActivity(id)](#TargetCoreAPI+updateABActivity)
-    * [.updateXTActivity(id)](#TargetCoreAPI+updateXTActivity)
-    * [.setActivityName(id, name)](#TargetCoreAPI+setActivityName)
-    * [.setActivityState(id, state)](#TargetCoreAPI+setActivityState)
-    * [.setActivityPriority(id, priority)](#TargetCoreAPI+setActivityPriority)
-    * [.setActivitySchedule(id, schedule)](#TargetCoreAPI+setActivitySchedule)
-    * [.deleteABActivity(id)](#TargetCoreAPI+deleteABActivity)
-    * [.deleteXTActivity(id)](#TargetCoreAPI+deleteXTActivity)
-    * [.getActivityChangeLog(id)](#TargetCoreAPI+getActivityChangeLog)
+    * [.createABActivity(body, options)](#TargetCoreAPI+createABActivity)
+    * [.createXTActivity(body, options)](#TargetCoreAPI+createXTActivity)
+    * [.getABActivityById(id, options)](#TargetCoreAPI+getABActivityById)
+    * [.getXTActivityById(id, options)](#TargetCoreAPI+getXTActivityById)
+    * [.updateABActivity(id, body, options)](#TargetCoreAPI+updateABActivity)
+    * [.updateXTActivity(id, body, options)](#TargetCoreAPI+updateXTActivity)
+    * [.setActivityName(id, name, options)](#TargetCoreAPI+setActivityName)
+    * [.setActivityState(id, state, options)](#TargetCoreAPI+setActivityState)
+    * [.setActivityPriority(id, priority, options)](#TargetCoreAPI+setActivityPriority)
+    * [.setActivitySchedule(id, schedule, options)](#TargetCoreAPI+setActivitySchedule)
+    * [.deleteABActivity(id, options)](#TargetCoreAPI+deleteABActivity)
+    * [.deleteXTActivity(id, options)](#TargetCoreAPI+deleteXTActivity)
+    * [.getActivityChangeLog(id, options)](#TargetCoreAPI+getActivityChangeLog)
     * [.getOffers(options)](#TargetCoreAPI+getOffers)
-    * [.getOfferById(id)](#TargetCoreAPI+getOfferById)
-    * [.createOffer(body)](#TargetCoreAPI+createOffer)
-    * [.updateOffer(id)](#TargetCoreAPI+updateOffer)
-    * [.deleteOffer(id)](#TargetCoreAPI+deleteOffer)
+    * [.getOfferById(id, options)](#TargetCoreAPI+getOfferById)
+    * [.createOffer(body, options)](#TargetCoreAPI+createOffer)
+    * [.updateOffer(id, options)](#TargetCoreAPI+updateOffer)
+    * [.deleteOffer(id, options)](#TargetCoreAPI+deleteOffer)
     * [.getAudiences(options)](#TargetCoreAPI+getAudiences)
-    * [.createAudience(body)](#TargetCoreAPI+createAudience)
-    * [.getAudienceById(id)](#TargetCoreAPI+getAudienceById)
-    * [.updateAudience(id)](#TargetCoreAPI+updateAudience)
-    * [.deleteAudience(id)](#TargetCoreAPI+deleteAudience)
-    * [.getProperties()](#TargetCoreAPI+getProperties)
-    * [.getPropertyById(id)](#TargetCoreAPI+getPropertyById)
-    * [.getMBoxes()](#TargetCoreAPI+getMBoxes)
-    * [.getMBoxByName(name)](#TargetCoreAPI+getMBoxByName)
-    * [.getMBoxProfileAttributes()](#TargetCoreAPI+getMBoxProfileAttributes)
-    * [.getEnvironments()](#TargetCoreAPI+getEnvironments)
-    * [.getABActivityPerformance(id)](#TargetCoreAPI+getABActivityPerformance)
-    * [.getXTActivityPerformance(id)](#TargetCoreAPI+getXTActivityPerformance)
-    * [.getActivityPerformance(id)](#TargetCoreAPI+getActivityPerformance)
-    * [.getOrdersReport(id)](#TargetCoreAPI+getOrdersReport)
+    * [.createAudience(body, options)](#TargetCoreAPI+createAudience)
+    * [.getAudienceById(id, options)](#TargetCoreAPI+getAudienceById)
+    * [.updateAudience(id, body, options)](#TargetCoreAPI+updateAudience)
+    * [.deleteAudience(id, options)](#TargetCoreAPI+deleteAudience)
+    * [.getProperties(options)](#TargetCoreAPI+getProperties)
+    * [.getPropertyById(id, options)](#TargetCoreAPI+getPropertyById)
+    * [.getMBoxes(options)](#TargetCoreAPI+getMBoxes)
+    * [.getMBoxByName(name, options)](#TargetCoreAPI+getMBoxByName)
+    * [.getMBoxProfileAttributes(options)](#TargetCoreAPI+getMBoxProfileAttributes)
+    * [.getEnvironments(options)](#TargetCoreAPI+getEnvironments)
+    * [.getABActivityPerformance(id, options)](#TargetCoreAPI+getABActivityPerformance)
+    * [.getXTActivityPerformance(id, options)](#TargetCoreAPI+getXTActivityPerformance)
+    * [.getActivityPerformance(id, options)](#TargetCoreAPI+getActivityPerformance)
+    * [.getOrdersReport(id, options)](#TargetCoreAPI+getOrdersReport)
     * [.executeBatch()](#TargetCoreAPI+executeBatch)
 
 <a name="TargetCoreAPI+init"></a>
@@ -158,11 +158,12 @@ Get a list of activities created in your Target account, with the ability to fil
 | options | <code>Object</code> | to control activity search. |
 | options.limit |  | Defines the number of items to return. Default value is 2147483647 |
 | options.offset |  | Defines the first activity to return from the list of total activities. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of activities. |
-| options.sortBy |  | Defines the sorting criteria on the returned items. |
+| options.sortBy |  | Defines the sorting criteria on the returned items |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+createABActivity"></a>
 
-### targetCoreAPI.createABActivity(body)
+### targetCoreAPI.createABActivity(body, options)
 Create AB Activity.
 Creates a new AB activity with the specified contents and returns the created activity.
 
@@ -171,10 +172,12 @@ Creates a new AB activity with the specified contents and returns the created ac
 | Param | Type | Description |
 | --- | --- | --- |
 | body | <code>Object</code> | Activity JSON. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+createXTActivity"></a>
 
-### targetCoreAPI.createXTActivity(body)
+### targetCoreAPI.createXTActivity(body, options)
 Create XT Activity.
 Creates a new XT activity with the specified contents and returns the created activity.
 
@@ -183,10 +186,12 @@ Creates a new XT activity with the specified contents and returns the created ac
 | Param | Type | Description |
 | --- | --- | --- |
 | body | <code>Object</code> | Activity JSON. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getABActivityById"></a>
 
-### targetCoreAPI.getABActivityById(id)
+### targetCoreAPI.getABActivityById(id, options)
 Get AB activity.
 Fetch the current definition of an AB activity if it is found as referenced by the id.
 
@@ -195,10 +200,12 @@ Fetch the current definition of an AB activity if it is found as referenced by t
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getXTActivityById"></a>
 
-### targetCoreAPI.getXTActivityById(id)
+### targetCoreAPI.getXTActivityById(id, options)
 Get XT activity.
 Fetch the current definition of XT activity if it is found as referenced by the id.
 
@@ -207,10 +214,12 @@ Fetch the current definition of XT activity if it is found as referenced by the 
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+updateABActivity"></a>
 
-### targetCoreAPI.updateABActivity(id)
+### targetCoreAPI.updateABActivity(id, body, options)
 Update AB activity.
 Updates the AB activity definition with the contents as provided in the request. This can change the state and behaviour of an existing activity.
 
@@ -219,10 +228,13 @@ Updates the AB activity definition with the contents as provided in the request.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
+| body |  | activity JSON |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+updateXTActivity"></a>
 
-### targetCoreAPI.updateXTActivity(id)
+### targetCoreAPI.updateXTActivity(id, body, options)
 Update XT activity.
 Update the current definition of XT activity if it is found as referenced by the id.
 
@@ -231,10 +243,13 @@ Update the current definition of XT activity if it is found as referenced by the
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
+| body |  | activity JSON |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+setActivityName"></a>
 
-### targetCoreAPI.setActivityName(id, name)
+### targetCoreAPI.setActivityName(id, name, options)
 Update activity name.
 Updates the name of the AB activity that is referenced by the supplied id.
 
@@ -244,10 +259,12 @@ Updates the name of the AB activity that is referenced by the supplied id.
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
 | name | <code>string</code> | New Activity name. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+setActivityState"></a>
 
-### targetCoreAPI.setActivityState(id, state)
+### targetCoreAPI.setActivityState(id, state, options)
 Update Activity state.
 Update state of an activity if it is found as referenced by the id.
 
@@ -257,10 +274,12 @@ Update state of an activity if it is found as referenced by the id.
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
 | state | <code>string</code> | New Activity state. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+setActivityPriority"></a>
 
-### targetCoreAPI.setActivityPriority(id, priority)
+### targetCoreAPI.setActivityPriority(id, priority, options)
 Update Activity priority.
 Update priority of an activity if it is found as referenced by the id.
 
@@ -270,10 +289,12 @@ Update priority of an activity if it is found as referenced by the id.
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
 | priority | <code>string</code> | New Activity priority. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+setActivitySchedule"></a>
 
-### targetCoreAPI.setActivitySchedule(id, schedule)
+### targetCoreAPI.setActivitySchedule(id, schedule, options)
 Update Activity schedule.
 Update schedule of an activity if it is found as referenced by the id.
 
@@ -283,10 +304,12 @@ Update schedule of an activity if it is found as referenced by the id.
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
 | schedule | <code>string</code> | New Activity schedule. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+deleteABActivity"></a>
 
-### targetCoreAPI.deleteABActivity(id)
+### targetCoreAPI.deleteABActivity(id, options)
 Delete AB activity.
 Deletes the AB activity that is referenced by the id, if it is found.
 
@@ -295,10 +318,12 @@ Deletes the AB activity that is referenced by the id, if it is found.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+deleteXTActivity"></a>
 
-### targetCoreAPI.deleteXTActivity(id)
+### targetCoreAPI.deleteXTActivity(id, options)
 Delete XT activity.
 Delete the current definition of an XT activity if it is found as referenced by the id.
 
@@ -307,10 +332,12 @@ Delete the current definition of an XT activity if it is found as referenced by 
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getActivityChangeLog"></a>
 
-### targetCoreAPI.getActivityChangeLog(id)
+### targetCoreAPI.getActivityChangeLog(id, options)
 Get Activity changelog.
 Returns the changelog for a given activity id.
 
@@ -319,6 +346,8 @@ Returns the changelog for a given activity id.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getOffers"></a>
 
@@ -334,10 +363,11 @@ Retrieve the list of previously-created content offers. The parameters passed th
 | options.limit |  | Defines the number of items to return. Default value is 2147483647 |
 | options.offset |  | Defines the first offers to return from the list of Offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers. |
 | options.sortBy |  | Defines the sorting criteria on the returned items. |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getOfferById"></a>
 
-### targetCoreAPI.getOfferById(id)
+### targetCoreAPI.getOfferById(id, options)
 Get Offer.
 Retrieves the contents of an offer given an offer id.
 
@@ -346,10 +376,12 @@ Retrieves the contents of an offer given an offer id.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Offer id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+createOffer"></a>
 
-### targetCoreAPI.createOffer(body)
+### targetCoreAPI.createOffer(body, options)
 Create Offer.
 Creates a new content offer as defined by the request data.
 
@@ -358,10 +390,12 @@ Creates a new content offer as defined by the request data.
 | Param | Type | Description |
 | --- | --- | --- |
 | body | <code>Object</code> | Offer JSON. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+updateOffer"></a>
 
-### targetCoreAPI.updateOffer(id)
+### targetCoreAPI.updateOffer(id, options)
 Update Offer.
 Updates the content offer referenced by the id.
 
@@ -370,10 +404,12 @@ Updates the content offer referenced by the id.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Offer id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+deleteOffer"></a>
 
-### targetCoreAPI.deleteOffer(id)
+### targetCoreAPI.deleteOffer(id, options)
 Delete Offer.
 Deletes the content offer referenced by the provided id.
 
@@ -382,6 +418,8 @@ Deletes the content offer referenced by the provided id.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Offer id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getAudiences"></a>
 
@@ -397,10 +435,11 @@ List all available audiences with options to filter and sort by each available f
 | options.limit |  | Defines the number of items to return. Default value is 2147483647 |
 | options.offset |  | Defines the first audience to return from the list of total offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers. |
 | options.sortBy |  | Defines the sorting criteria on the returned items. |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+createAudience"></a>
 
-### targetCoreAPI.createAudience(body)
+### targetCoreAPI.createAudience(body, options)
 Create Audience.
 Create a new audience as specified by the contents of the request and return the newly-created audience definition.
 
@@ -409,10 +448,12 @@ Create a new audience as specified by the contents of the request and return the
 | Param | Type | Description |
 | --- | --- | --- |
 | body | <code>Object</code> | Audience JSON. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getAudienceById"></a>
 
-### targetCoreAPI.getAudienceById(id)
+### targetCoreAPI.getAudienceById(id, options)
 Get Audience.
 Get the audience definition specified by the provided id.
 
@@ -421,10 +462,12 @@ Get the audience definition specified by the provided id.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Audience id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+updateAudience"></a>
 
-### targetCoreAPI.updateAudience(id)
+### targetCoreAPI.updateAudience(id, body, options)
 Update Audience.
 Update an audience with the new rules specified by the request data.
 
@@ -433,10 +476,13 @@ Update an audience with the new rules specified by the request data.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Audience id. |
+| body |  | audience JSON |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+deleteAudience"></a>
 
-### targetCoreAPI.deleteAudience(id)
+### targetCoreAPI.deleteAudience(id, options)
 Delete Audience.
 Delete the audience referenced by the specified id.
 
@@ -445,17 +491,25 @@ Delete the audience referenced by the specified id.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Audience id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getProperties"></a>
 
-### targetCoreAPI.getProperties()
+### targetCoreAPI.getProperties(options)
 List Properties.
 Get a list of properties.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
+
 <a name="TargetCoreAPI+getPropertyById"></a>
 
-### targetCoreAPI.getPropertyById(id)
+### targetCoreAPI.getPropertyById(id, options)
 Get Property.
 Retrieve property by property Id..
 
@@ -464,17 +518,25 @@ Retrieve property by property Id..
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Property id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getMBoxes"></a>
 
-### targetCoreAPI.getMBoxes()
+### targetCoreAPI.getMBoxes(options)
 List MBoxes.
 List all available mboxes for a specific client with the options to filter and sort.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
+
 <a name="TargetCoreAPI+getMBoxByName"></a>
 
-### targetCoreAPI.getMBoxByName(name)
+### targetCoreAPI.getMBoxByName(name, options)
 Get MBox by name.
 Get the list of mbox parameters.
 
@@ -483,24 +545,38 @@ Get the list of mbox parameters.
 | Param | Type | Description |
 | --- | --- | --- |
 | name | <code>integer</code> | MBox name. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getMBoxProfileAttributes"></a>
 
-### targetCoreAPI.getMBoxProfileAttributes()
+### targetCoreAPI.getMBoxProfileAttributes(options)
 Get Profile Attributes.
 Retrieve the list of available profile attributes and mbox parameters of type profile.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
+
 <a name="TargetCoreAPI+getEnvironments"></a>
 
-### targetCoreAPI.getEnvironments()
+### targetCoreAPI.getEnvironments(options)
 Get Environments.
 List all available environments with the options to filter and sort. Use the Environments API to retrieve the environment IDs corresponding to the various host groups set for the client.
 
 **Kind**: instance method of [<code>TargetCoreAPI</code>](#TargetCoreAPI)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
+
 <a name="TargetCoreAPI+getABActivityPerformance"></a>
 
-### targetCoreAPI.getABActivityPerformance(id)
+### targetCoreAPI.getABActivityPerformance(id, options)
 Get AB activity performance.
 Retrieve property by property Id.
 
@@ -509,10 +585,12 @@ Retrieve property by property Id.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getXTActivityPerformance"></a>
 
-### targetCoreAPI.getXTActivityPerformance(id)
+### targetCoreAPI.getXTActivityPerformance(id, options)
 Get activity performance.
 Retrieve property by property Id.
 
@@ -521,10 +599,12 @@ Retrieve property by property Id.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getActivityPerformance"></a>
 
-### targetCoreAPI.getActivityPerformance(id)
+### targetCoreAPI.getActivityPerformance(id, options)
 Get activity performance.
 Retrieve the performance report data for the Automated Personalization activity referenced by the provided id.
 
@@ -533,10 +613,12 @@ Retrieve the performance report data for the Automated Personalization activity 
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+getOrdersReport"></a>
 
-### targetCoreAPI.getOrdersReport(id)
+### targetCoreAPI.getOrdersReport(id, options)
 Get Orders report.
 Retrieve the orders/audit report data for an AB, XT or Autotmated Personalization Activity.
 
@@ -545,6 +627,8 @@ Retrieve the orders/audit report data for an AB, XT or Autotmated Personalizatio
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>integer</code> | Activity id. |
+| options | <code>Object</code> | sdk options |
+| options.headers |  | headers to pass to API call |
 
 <a name="TargetCoreAPI+executeBatch"></a>
 
