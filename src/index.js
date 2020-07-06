@@ -91,11 +91,11 @@ class TargetCoreAPI {
   /** List activities.
    * Get a list of activities created in your Target account, with the ability to filter and sort by attributes.
    *
-   * @param {Object} [options] to control activity search
+   * @param {object} [options] to control activity search
    * @param {number} [options.limit = 2147483647] Defines the number of items to return
    * @param {number} [options.offset = 0] Defines the first activity to return from the list of total activities. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of activities.
    * @param {string} [options.sortBy] Defines the sorting criteria on the returned items
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {object} [options.headers] headers to pass to API call
    */
   getActivities (options = { limit: 2147483647, offset: 0 }) {
     const sdkDetails = options
@@ -114,9 +114,9 @@ class TargetCoreAPI {
   /** Create AB Activity.
    * Creates a new AB activity with the specified contents and returns the created activity.
    *
-   * @param body {Object} Activity JSON.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {object} body Activity JSON.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   createABActivity (body, options = {}) {
     const sdkDetails = body
@@ -135,9 +135,9 @@ class TargetCoreAPI {
   /** Create XT Activity.
    * Creates a new XT activity with the specified contents and returns the created activity.
    *
-   * @param body {Object} Activity JSON.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {object} body Activity JSON.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   createXTActivity (body, options = {}) {
     const sdkDetails = body
@@ -156,9 +156,9 @@ class TargetCoreAPI {
   /** Get AB activity.
    * Fetch the current definition of an AB activity if it is found as referenced by the id.
    *
-   * @param id {integer} Activity id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getABActivityById (id, options = {}) {
     var params = {}
@@ -179,9 +179,9 @@ class TargetCoreAPI {
   /** Get XT activity.
    * Fetch the current definition of XT activity if it is found as referenced by the id.
    *
-   * @param id {integer} Activity id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getXTActivityById (id, options = {}) {
     var params = {}
@@ -202,10 +202,10 @@ class TargetCoreAPI {
   /** Update AB activity.
    * Updates the AB activity definition with the contents as provided in the request. This can change the state and behaviour of an existing activity.
    *
-   * @param id {integer} Activity id.
-   * @param body activity JSON
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {object} body activity JSON
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   updateABActivity (id, body, options = {}) {
     var params = {}
@@ -226,10 +226,10 @@ class TargetCoreAPI {
   /** Update XT activity.
    * Update the current definition of XT activity if it is found as referenced by the id.
    *
-   * @param id {integer} Activity id.
-   * @param body activity JSON
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {object} body activity JSON
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   updateXTActivity (id, body, options = {}) {
     var params = {}
@@ -250,10 +250,10 @@ class TargetCoreAPI {
   /** Update activity name.
    * Updates the name of the AB activity that is referenced by the supplied id.
    *
-   * @param id {integer} Activity id.
-   * @param name {string} New Activity name.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {string} name New Activity name.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   setActivityName (id, name, options = {}) {
     var params = {}
@@ -277,10 +277,10 @@ class TargetCoreAPI {
   /** Update Activity state.
    * Update state of an activity if it is found as referenced by the id.
    *
-   * @param id {integer} Activity id.
-   * @param state {string} New Activity state.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {string} state New Activity state.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   setActivityState (id, state, options = {}) {
     var params = {}
@@ -305,10 +305,10 @@ class TargetCoreAPI {
   /** Update Activity priority.
    * Update priority of an activity if it is found as referenced by the id.
    *
-   * @param id {integer} Activity id.
-   * @param priority {string} New Activity priority.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {string} priority New Activity priority.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   setActivityPriority (id, priority, options = {}) {
     var params = {}
@@ -333,10 +333,10 @@ class TargetCoreAPI {
   /** Update Activity schedule.
    * Update schedule of an activity if it is found as referenced by the id.
    *
-   * @param id {integer} Activity id.
-   * @param schedule {string} New Activity schedule.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {string} schedule New Activity schedule.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   setActivitySchedule (id, schedule, options = {}) {
     var params = {}
@@ -361,9 +361,9 @@ class TargetCoreAPI {
   /** Delete AB activity.
    * Deletes the AB activity that is referenced by the id, if it is found.
    *
-   * @param id {integer} Activity id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   deleteABActivity (id, options = {}) {
     var params = {}
@@ -384,9 +384,9 @@ class TargetCoreAPI {
   /** Delete XT activity.
    * Delete the current definition of an XT activity if it is found as referenced by the id.
    *
-   * @param id {integer} Activity id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   deleteXTActivity (id, options = {}) {
     var params = {}
@@ -407,9 +407,9 @@ class TargetCoreAPI {
   /** Get Activity changelog.
    * Returns the changelog for a given activity id.
    *
-   * @param id {integer} Activity id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getActivityChangeLog (id, options = {}) {
     var params = {}
@@ -430,11 +430,11 @@ class TargetCoreAPI {
   /** List Offers.
    * Retrieve the list of previously-created content offers. The parameters passed through the query string are optional and are used to indicate the sorting and filtering options.
    *
-   * @param options {Object} to control offer search.
-   * @param options.limit Defines the number of items to return. Default value is 2147483647
-   * @param options.offset Defines the first offers to return from the list of Offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.
-   * @param options.sortBy Defines the sorting criteria on the returned items.
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {object} [options] to control offer search.
+   * @param {number} [options.limit = 2147483647] Defines the number of items to return
+   * @param {number} [options.offset = 0] Defines the first offers to return from the list of Offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.
+   * @param {string} [options.sortBy] Defines the sorting criteria on the returned items.
+   * @param {object} [options.headers] headers to pass to API call
    */
   getOffers (options = { limit: 2147483647, offset: 0 }) {
     const sdkDetails = options
@@ -453,9 +453,9 @@ class TargetCoreAPI {
   /** Get Offer.
    * Retrieves the contents of an offer given an offer id.
    *
-   * @param id {integer} Offer id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Offer id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getOfferById (id, options = {}) {
     var params = {}
@@ -476,9 +476,9 @@ class TargetCoreAPI {
   /** Create Offer.
    * Creates a new content offer as defined by the request data.
    *
-   * @param body {Object} Offer JSON.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {object} body Offer JSON.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   createOffer (body, options = {}) {
     const sdkDetails = body
@@ -498,10 +498,10 @@ class TargetCoreAPI {
    * Update Offer.
    * Updates the content offer referenced by the id.
    *
-   * @param id {integer} Offer id.
-   * @param {Object} [options] sdk options
-   * @param body
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Offer id.
+   * @param {object} body Offer JSON
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   updateOffer (id, body, options = {}) {
     var params = {}
@@ -522,9 +522,9 @@ class TargetCoreAPI {
   /** Delete Offer.
    * Deletes the content offer referenced by the provided id.
    *
-   * @param id {integer} Offer id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Offer id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   deleteOffer (id, options = {}) {
     var params = {}
@@ -545,11 +545,11 @@ class TargetCoreAPI {
   /** List Audiences.
    * List all available audiences with options to filter and sort by each available field.
    *
-   * @param options {Object} to control audience search.
-   * @param options.limit Defines the number of items to return. Default value is 2147483647
-   * @param options.offset Defines the first audience to return from the list of total offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.
-   * @param options.sortBy Defines the sorting criteria on the returned items.
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {object} [options] options to control audience search.
+   * @param {number } [options.limit = 2147483647] Defines the number of items to return. Default value is 2147483647
+   * @param {number} [options.offset = 0] Defines the first audience to return from the list of total offers. Used in conjunction with limit, you can provide pagination in your application for users to browse through a large set of offers.
+   * @param {string} [options.sortBy] Defines the sorting criteria on the returned items.
+   * @param {object} [options.headers] headers to pass to API call
    */
   getAudiences (options = { limit: 2147483647, offset: 0 }) {
     const sdkDetails = options
@@ -568,9 +568,9 @@ class TargetCoreAPI {
   /** Create Audience.
    * Create a new audience as specified by the contents of the request and return the newly-created audience definition.
    *
-   * @param body {Object} Audience JSON.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {object} body Audience JSON.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   createAudience (body, options = {}) {
     const sdkDetails = body
@@ -589,9 +589,9 @@ class TargetCoreAPI {
   /** Get Audience.
    * Get the audience definition specified by the provided id.
    *
-   * @param id {integer} Audience id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Audience id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getAudienceById (id, options = {}) {
     var params = {}
@@ -612,10 +612,10 @@ class TargetCoreAPI {
   /** Update Audience.
    * Update an audience with the new rules specified by the request data.
    *
-   * @param id {integer} Audience id.
-   * @param body audience JSON
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Audience id.
+   * @param {object }body audience JSON
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   updateAudience (id, body, options = {}) {
     var params = {}
@@ -636,9 +636,9 @@ class TargetCoreAPI {
   /** Delete Audience.
    * Delete the audience referenced by the specified id.
    *
-   * @param id {integer} Audience id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Audience id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   deleteAudience (id, options = {}) {
     var params = {}
@@ -659,8 +659,8 @@ class TargetCoreAPI {
   /** List Properties.
    * Get a list of properties.
    *
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getProperties (options = {}) {
     const sdkDetails = options
@@ -679,9 +679,9 @@ class TargetCoreAPI {
   /** Get Property.
    * Retrieve property by property Id..
    *
-   * @param id {integer} Property id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Property id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getPropertyById (id, options = {}) {
     var params = {}
@@ -702,8 +702,8 @@ class TargetCoreAPI {
   /** List MBoxes.
    * List all available mboxes for a specific client with the options to filter and sort.
    *
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getMBoxes (options = {}) {
     const sdkDetails = {}
@@ -722,9 +722,9 @@ class TargetCoreAPI {
   /** Get MBox by name.
    * Get the list of mbox parameters.
    *
-   * @param name {integer} MBox name.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {string} name MBox name.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getMBoxByName (name, options = {}) {
     var params = {}
@@ -745,8 +745,8 @@ class TargetCoreAPI {
   /** Get Profile Attributes.
    * Retrieve the list of available profile attributes and mbox parameters of type profile.
    *
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getMBoxProfileAttributes (options = {}) {
     const sdkDetails = options
@@ -765,8 +765,8 @@ class TargetCoreAPI {
   /** Get Environments.
    * List all available environments with the options to filter and sort. Use the Environments API to retrieve the environment IDs corresponding to the various host groups set for the client.
    *
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getEnvironments (options = {}) {
     const sdkDetails = options
@@ -785,9 +785,9 @@ class TargetCoreAPI {
   /** Get AB activity performance.
    * Retrieve property by property Id.
    *
-   * @param id {integer} Activity id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getABActivityPerformance (id, options = {}) {
     var params = {}
@@ -808,9 +808,9 @@ class TargetCoreAPI {
   /** Get activity performance.
    * Retrieve property by property Id.
    *
-   * @param id {integer} Activity id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getXTActivityPerformance (id, options = {}) {
     var params = {}
@@ -831,9 +831,9 @@ class TargetCoreAPI {
   /** Get activity performance.
    * Retrieve the performance report data for the Automated Personalization activity referenced by the provided id.
    *
-   * @param id {integer} Activity id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getActivityPerformance (id, options = {}) {
     var params = {}
@@ -854,9 +854,9 @@ class TargetCoreAPI {
   /** Get Orders report.
    * Retrieve the orders/audit report data for an AB, XT or Autotmated Personalization Activity.
    *
-   * @param id {integer} Activity id.
-   * @param {Object} [options] sdk options
-   * @param {Object} [options.headers] headers to pass to API call
+   * @param {number} id Activity id.
+   * @param {object} [options] sdk options
+   * @param {object} [options.headers] headers to pass to API call
    */
   getOrdersReport (id, options = {}) {
     var params = {}
@@ -878,7 +878,7 @@ class TargetCoreAPI {
    * Execute Batch APIs.
    * Multiple Admin APIs can be executed as a single batch request.
    *
-   * @param body
+   * @param {object} body json to execute batch
    */
   executeBatch (body) {
     const sdkDetails = body

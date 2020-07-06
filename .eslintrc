@@ -1,7 +1,4 @@
 {
   "plugins": ["jest"],
-  "extends": "@adobe/eslint-config-aio-lib-config",
-  "rules": {
-      "node/no-unpublished-require": 0
-  }
+  "extends": "@adobe/eslint-config-aio-lib-config"
 }
