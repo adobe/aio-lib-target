@@ -23,11 +23,7 @@ const ACCEPT_HEADERS = {
 }
 var sdkClient = {}
 
-/**
- * @param url
- * @param method
- * @param response
- */
+/** @private */
 function mockResponseWithMethod (url, method, response) {
   fetchMock.reset()
   fetchMock.mock((u, opts) => u === url && opts.method === method, response)
@@ -1050,13 +1046,7 @@ test('test executeBatch', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_EXECUTE_BATCH(), [obj])
 })
 
-/**
- * @param fn
- * @param url
- * @param method
- * @param error
- * @param args
- */
+/** @private */
 function checkErrorResponse (fn, url, method, error, args = []) {
   const client = sdkClient
   return new Promise((resolve, reject) => {
