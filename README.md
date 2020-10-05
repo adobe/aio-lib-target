@@ -30,9 +30,12 @@ $ npm install
 
 The Adobe Target 1.0 APIs need to set an `Accepts` header for them to work properly. With version `2.x` or greater of this SDK, we set the proper `Accepts` header for the calls as [documented](https://developers.adobetarget.com/api/). Previous versions of this SDK may or may not work since for some Target API calls the `Accepts` header is not enforced consistently.
 
-### Role Requirements
+### User-based OAuth Tokens and Role Requirements
 
-The user needs to have the appropriate Role in Adobe Target to use these admin APIs. The roles required are, the `Reviewer` or `Approver` role. Use the Adobe I/O Admin Console to edit user Roles.
+For scenarios in which user-based OAuth tokens are used instead of a JWT technical account ones, the user may require specific roles/permissions to be assigned in Adobe Target in order to successfully perform API calls.
+Otherwise, the Adobe Target API calls performed by the API Client will result in 500 errors.
+
+For more detailed information, please read the [Adobe Target Enterprise user permissions documentation](https://docs.adobe.com/content/help/en/target/using/administer/manage-users/enterprise/property-channel.html).
 
 ### Usage
 1) Initialize the SDK
