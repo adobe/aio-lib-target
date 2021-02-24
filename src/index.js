@@ -104,7 +104,7 @@ class TargetCoreAPI {
     const sdkDetails = options
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activities.getActivities(arguments[0], this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.activities.getActivities(arguments[0], this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -172,7 +172,7 @@ class TargetCoreAPI {
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.abactivity.getABActivity(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.abactivity.getABActivity(params, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -196,7 +196,7 @@ class TargetCoreAPI {
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.xtactivity.getXTActivity(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.xtactivity.getXTActivity(params, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -433,7 +433,7 @@ class TargetCoreAPI {
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.activity.getChangeLog(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.activity.getChangeLog(params, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -457,7 +457,7 @@ class TargetCoreAPI {
     const sdkDetails = options
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offers.getOffers(arguments[0], this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
+      this.sdk.apis.offers.getOffers(arguments[0], this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -481,7 +481,7 @@ class TargetCoreAPI {
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.offer.getOfferById(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
+      this.sdk.apis.offer.getOfferById(params, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V2)))
         .then(response => {
           resolve(response)
         })
@@ -577,7 +577,7 @@ class TargetCoreAPI {
     const sdkDetails = options
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.getAudiences(arguments[0], this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.audiences.getAudiences(arguments[0], this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -623,7 +623,7 @@ class TargetCoreAPI {
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.audiences.getAudienceById(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.audiences.getAudienceById(params, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -693,7 +693,7 @@ class TargetCoreAPI {
     const sdkDetails = options
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.properties.getProperties({}, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.properties.getProperties({}, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -717,7 +717,7 @@ class TargetCoreAPI {
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.properties.getAPropertyById(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.properties.getAPropertyById(params, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -738,7 +738,7 @@ class TargetCoreAPI {
     const sdkDetails = {}
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mboxes.getMBoxes({}, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.mboxes.getMBoxes({}, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -762,7 +762,7 @@ class TargetCoreAPI {
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mboxes.getMBoxByName(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.mboxes.getMBoxByName(params, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -783,7 +783,7 @@ class TargetCoreAPI {
     const sdkDetails = options
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.mbox.getProfileAttributes({}, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.mbox.getProfileAttributes({}, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -804,7 +804,7 @@ class TargetCoreAPI {
     const sdkDetails = options
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.environments.getEnvironments({}, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
+      this.sdk.apis.environments.getEnvironments({}, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V1)))
         .then(response => {
           resolve(response)
         })
@@ -828,7 +828,7 @@ class TargetCoreAPI {
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.reports.getABPerformance(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.reports.getABPerformance(params, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -852,7 +852,7 @@ class TargetCoreAPI {
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.reports.getXTPerformance(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.reports.getXTPerformance(params, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -876,7 +876,7 @@ class TargetCoreAPI {
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.reports.getABTPerformance(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.reports.getABTPerformance(params, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
@@ -900,7 +900,7 @@ class TargetCoreAPI {
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
     return new Promise((resolve, reject) => {
-      this.sdk.apis.reports.getAuditReport(params, this.__createRequest({}, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
+      this.sdk.apis.reports.getAuditReport(params, this.__createRequest(null, headers, this.__getAcceptHeader(ACCEPT_HEADERS.V3)))
         .then(response => {
           resolve(response)
         })
