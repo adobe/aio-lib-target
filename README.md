@@ -17,7 +17,7 @@ governing permissions and limitations under the License.
 [![Codecov Coverage](https://img.shields.io/codecov/c/github/adobe/aio-lib-target/master.svg?style=flat-square)](https://codecov.io/gh/adobe/aio-lib-target/)
 
 # I/O Adobe Target SDK
-Javascript Core SDK wrapping [Adobe Target APIs](https://developers.adobetarget.com/api/).
+Node Javascript Core SDK wrapping [Adobe Target APIs](https://developers.adobetarget.com/api/).
 
 
 ### Installing
