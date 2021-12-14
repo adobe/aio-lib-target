@@ -14,21 +14,21 @@
     "validate": "bin/validate_spec.js spec/target_api.json"
   },
   "dependencies": {
-    "swagger-client": "3.13.5",
     "@adobe/aio-lib-core-errors": "^3.0.0",
-    "@adobe/aio-lib-core-logging": "^1.1.2"
+    "@adobe/aio-lib-core-logging": "^1.1.2",
+    "swagger-client": "3.13.5"
   },
   "devDependencies": {
-    "@adobe/eslint-config-aio-lib-config": "^1.2.0",
+    "@adobe/eslint-config-aio-lib-config": "^1.4.0",
     "codecov": "^3.6.1",
     "dotenv": "^8.1.0",
-    "eslint": "^6.0.0",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jest": "^23.18.0",
-    "eslint-plugin-jsdoc": "^21.0.0",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-promise": "^4.2.1",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-jsdoc": "^37.2.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-standard": "^5.0.0",
     "fetch-mock": "^9.10.3",
     "jest": "^24.1.0",
@@ -36,7 +36,8 @@
     "jest-junit": "^10.0.0",
     "jest-plugin-fs": "^2.9.0",
     "jsdoc-to-markdown": "^5.0.0",
-    "openapi-schema-validator": "^3.0.3"
+    "openapi-schema-validator": "^3.0.3",
+    "typescript": "^4.5.4"
   },
   "jest": {
     "testPathIgnorePatterns": [

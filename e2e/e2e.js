@@ -16,7 +16,7 @@ const path = require('path')
 // load .env values in the e2e folder, if any
 require('dotenv').config({ path: path.join(__dirname, '.env') })
 
-var sdkClient = {}
+let sdkClient = {}
 const tenant = process.env.TARGET_TENANT
 const apiKey = process.env.TARGET_APIKEY
 const token = process.env.TARGET_TOKEN
@@ -34,7 +34,7 @@ test('sdk init test', async () => {
 })
 
 test('test getActivities and getABActivityById', async () => {
-  var res = await sdkClient.getActivities()
+  let res = await sdkClient.getActivities()
   expect(res.status).toEqual(200)
   if (res.body.total > 0) {
     const activities = res.body.activities
@@ -57,7 +57,7 @@ test('test getActivities and getABActivityById', async () => {
 })
 
 test('test getOffers and getOfferById', async () => {
-  var res = await sdkClient.getOffers()
+  let res = await sdkClient.getOffers()
   expect(res.status).toEqual(200)
   if (res.body.total > 0) {
     const offers = res.body.offers
@@ -75,7 +75,7 @@ test('test getOffers and getOfferById', async () => {
 })
 
 test('test getAudiences and getAudienceById', async () => {
-  var res = await sdkClient.getAudiences()
+  let res = await sdkClient.getAudiences()
   expect(res.status).toEqual(200)
   if (res.body.total > 0) {
     const audiences = res.body.audiences
@@ -88,7 +88,7 @@ test('test getAudiences and getAudienceById', async () => {
 })
 
 test('test getProperties and getPropertyById', async () => {
-  var res = await sdkClient.getProperties()
+  let res = await sdkClient.getProperties()
   expect(res.status).toEqual(200)
   if (res.body.total > 0) {
     const properties = res.body.properties
@@ -100,14 +100,14 @@ test('test getProperties and getPropertyById', async () => {
 })
 
 test('test getMBoxes', async () => {
-  var res = await sdkClient.getMBoxes()
+  const res = await sdkClient.getMBoxes()
   expect(res.status).toEqual(200)
 })
 test('test getMBoxProfileAttributes', async () => {
-  var res = await sdkClient.getMBoxProfileAttributes()
+  const res = await sdkClient.getMBoxProfileAttributes()
   expect(res.status).toEqual(200)
 })
 test('test getEnvironments', async () => {
-  var res = await sdkClient.getEnvironments()
+  const res = await sdkClient.getEnvironments()
   expect(res.status).toEqual(200)
 })

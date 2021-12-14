@@ -21,7 +21,7 @@ const ACCEPT_HEADERS = {
   V2: 'application/vnd.adobe.target.v2+json',
   V3: 'application/vnd.adobe.target.v3+json'
 }
-var sdkClient = {}
+let sdkClient = {}
 
 /** @private */
 function mockResponseWithMethod (url, method, response) {
@@ -56,7 +56,7 @@ test('test getActivities', async () => {
 
   mockResponseWithMethod(url, method, mock.data.activities)
   // check success response
-  var res = await sdkClient.getActivities()
+  let res = await sdkClient.getActivities()
   expect(res.body.total).toBe(2)
   expect(res.body.limit).toBe(10)
   expect(res.body.activities.length).toBe(2)
@@ -79,7 +79,7 @@ test('test createABActivity', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/ab'
   const method = 'POST'
   const api = 'createABActivity'
-  var obj = {
+  const obj = {
     name: 'New API Activity',
     startsAt: '2017-05-01T08:00Z',
     endsAt: '2017-09-01T07:59:59Z',
@@ -101,7 +101,7 @@ test('test createABActivity', async () => {
 
   mockResponseWithMethod(url, method, mock.data.abActivity)
   // check success response
-  var res = await sdkClient.createABActivity(obj)
+  let res = await sdkClient.createABActivity(obj)
   expect(res.body.id).toBe(123)
 
   res = await sdkClient.createABActivity(obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -120,7 +120,7 @@ test('test createXTActivity', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/xt'
   const method = 'POST'
   const api = 'createXTActivity'
-  var obj = {
+  const obj = {
     name: 'New XT Activity',
     startsAt: '2017-05-01T08:00Z',
     endsAt: '2017-09-01T07:59:59Z',
@@ -142,7 +142,7 @@ test('test createXTActivity', async () => {
 
   mockResponseWithMethod(url, method, mock.data.xtActivity)
   // check success response
-  var res = await sdkClient.createXTActivity(obj)
+  let res = await sdkClient.createXTActivity(obj)
   expect(res.body.id).toBe(321)
 
   res = await sdkClient.createXTActivity(obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -164,7 +164,7 @@ test('test getABActivityById', async () => {
 
   mockResponseWithMethod(url, method, mock.data.abActivity)
   // check success response
-  var res = await sdkClient.getABActivityById(123)
+  let res = await sdkClient.getABActivityById(123)
   expect(res.body.id).toBe(123)
 
   res = await sdkClient.getABActivityById(123, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -188,7 +188,7 @@ test('test getXTActivityById', async () => {
 
   mockResponseWithMethod(url, method, mock.data.xtActivity)
   // check success response
-  var res = await sdkClient.getXTActivityById(321)
+  let res = await sdkClient.getXTActivityById(321)
   expect(res.body.id).toBe(321)
 
   res = await sdkClient.getXTActivityById(321, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -210,7 +210,7 @@ test('test updateABActivity', async () => {
   const method = 'PUT'
   const api = 'updateABActivity'
 
-  var obj = {
+  const obj = {
     name: 'Updated API Activity',
     startsAt: '2017-05-01T08:00Z',
     endsAt: '2017-09-01T07:59:59Z',
@@ -232,7 +232,7 @@ test('test updateABActivity', async () => {
 
   mockResponseWithMethod(url, method, mock.data.abActivityUpdated)
   // check success response
-  var res = await sdkClient.updateABActivity(123, obj)
+  let res = await sdkClient.updateABActivity(123, obj)
   expect(res.body.id).toBe(123)
 
   res = await sdkClient.updateABActivity(123, obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -252,7 +252,7 @@ test('test updateXTActivity', async () => {
   const method = 'PUT'
   const api = 'updateXTActivity'
 
-  var obj = {
+  const obj = {
     name: 'Updated XT Activity',
     startsAt: '2017-05-01T08:00Z',
     endsAt: '2017-09-01T07:59:59Z',
@@ -274,7 +274,7 @@ test('test updateXTActivity', async () => {
 
   mockResponseWithMethod(url, method, mock.data.xtActivityUpdated)
   // check success response
-  var res = await sdkClient.updateXTActivity(321, obj)
+  let res = await sdkClient.updateXTActivity(321, obj)
   expect(res.body.id).toBe(321)
 
   res = await sdkClient.updateXTActivity(321, obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -296,7 +296,7 @@ test('test setActivityName', async () => {
 
   mockResponseWithMethod(url, method, mock.data.nameActivity)
   // check success response
-  var res = await sdkClient.setActivityName(123, 'new name')
+  let res = await sdkClient.setActivityName(123, 'new name')
   expect(res.body.id).toBe(123)
   expect(res.body.name).toBe('new name')
 
@@ -320,7 +320,7 @@ test('test setActivityState', async () => {
 
   mockResponseWithMethod(url, method, mock.data.nameActivity)
   // check success response
-  var res = await sdkClient.setActivityState(123, 'activated')
+  let res = await sdkClient.setActivityState(123, 'activated')
   expect(res.body.id).toBe(123)
   expect(res.body.state).toBe('activated')
 
@@ -344,7 +344,7 @@ test('test setActivityPriority', async () => {
 
   mockResponseWithMethod(url, method, mock.data.nameActivity)
   // check success response
-  var res = await sdkClient.setActivityPriority(123, '5')
+  let res = await sdkClient.setActivityPriority(123, '5')
   expect(res.body.id).toBe(123)
   expect(res.body.priority).toBe('5')
 
@@ -366,14 +366,14 @@ test('test setActivitySchedule', async () => {
   const method = 'PUT'
   const api = 'setActivitySchedule'
 
-  var obj = {
+  const obj = {
     startsAt: '2017-05-01T08:00Z',
     endsAt: '2017-09-01T07:59:59Z'
   }
 
   mockResponseWithMethod(url, method, mock.data.nameActivity)
   // check success response
-  var res = await sdkClient.setActivitySchedule(123, obj)
+  let res = await sdkClient.setActivitySchedule(123, obj)
   expect(res.body.id).toBe(123)
   expect(res.body.startsAt).toBe('2017-05-01T08:00Z')
   expect(res.body.endsAt).toBe('2017-09-01T07:59:59Z')
@@ -399,7 +399,7 @@ test('test deleteABActivity', async () => {
 
   mockResponseWithMethod(url, method, mock.data.abActivity)
   // check success response
-  var res = await sdkClient.deleteABActivity(123)
+  let res = await sdkClient.deleteABActivity(123)
   expect(res.body.id).toBe(123)
 
   res = await sdkClient.deleteABActivity(123, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -423,7 +423,7 @@ test('test deleteXTActivity', async () => {
 
   mockResponseWithMethod(url, method, mock.data.xtActivity)
   // check success response
-  var res = await sdkClient.deleteXTActivity(321)
+  let res = await sdkClient.deleteXTActivity(321)
   expect(res.body.id).toBe(321)
 
   res = await sdkClient.deleteXTActivity(321, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -447,7 +447,7 @@ test('test getActivityChangeLog', async () => {
 
   mockResponseWithMethod(url, method, mock.data.changeLog)
   // check success response
-  var res = await sdkClient.getActivityChangeLog(123)
+  let res = await sdkClient.getActivityChangeLog(123)
   expect(res.body.total).toBe(2)
   expect(res.body.activityChangelogs.length).toBe(2)
 
@@ -473,7 +473,7 @@ test('test getOffers', async () => {
 
   mockResponseWithMethod(url, method, mock.data.offers)
   // check success response
-  var res = await sdkClient.getOffers()
+  let res = await sdkClient.getOffers()
   expect(res.body.total).toBe(2)
   expect(res.body.limit).toBe(10)
   expect(res.body.offers.length).toBe(2)
@@ -499,7 +499,7 @@ test('test getOfferById', async () => {
 
   mockResponseWithMethod(url, method, mock.data.offer)
   // check success response
-  var res = await sdkClient.getOfferById(111)
+  let res = await sdkClient.getOfferById(111)
   expect(res.body.id).toBe(111)
 
   res = await sdkClient.getOfferById(111, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -521,7 +521,7 @@ test('test createOffer', async () => {
   const method = 'POST'
   const api = 'createOffer'
 
-  var obj = {
+  const obj = {
     name: 'My new offer',
     content: '<div>The content of the offer</div>',
     workspace: '1234567'
@@ -529,7 +529,7 @@ test('test createOffer', async () => {
 
   mockResponseWithMethod(url, method, mock.data.newOffer)
   // check success response
-  var res = await sdkClient.createOffer(obj)
+  let res = await sdkClient.createOffer(obj)
   expect(res.body.id).toBe(123)
 
   res = await sdkClient.createOffer(obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -549,14 +549,14 @@ test('test updateOffer', async () => {
   const method = 'PUT'
   const api = 'updateOffer'
 
-  var obj = {
+  const obj = {
     name: 'Your existing offer',
     content: '<div>Updated content</div>'
   }
 
   mockResponseWithMethod(url, method, mock.data.updatedOffer)
   // check success response
-  var res = await sdkClient.updateOffer(123, obj)
+  let res = await sdkClient.updateOffer(123, obj)
   expect(res.body.content).toBe('<div>Updated content</div>')
 
   res = await sdkClient.updateOffer(123, obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -578,7 +578,7 @@ test('test deleteOffer', async () => {
 
   mockResponseWithMethod(url, method, mock.data.offer)
   // check success response
-  var res = await sdkClient.deleteOffer(111)
+  let res = await sdkClient.deleteOffer(111)
   expect(res.body.id).toBe(111)
 
   res = await sdkClient.deleteOffer(111, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -602,7 +602,7 @@ test('test getAudiences', async () => {
 
   mockResponseWithMethod(url, method, mock.data.audiences)
   // check success response
-  var res = await sdkClient.getAudiences()
+  let res = await sdkClient.getAudiences()
   expect(res.body.total).toBe(2)
   expect(res.body.limit).toBe(10)
   expect(res.body.audiences.length).toBe(2)
@@ -626,7 +626,7 @@ test('test createAudience', async () => {
   const method = 'POST'
   const api = 'createAudience'
 
-  var obj = {
+  const obj = {
     name: 'Homepage visitors from California',
     description: 'Description for my audience',
     targetRule: {
@@ -650,7 +650,7 @@ test('test createAudience', async () => {
 
   mockResponseWithMethod(url, method, mock.data.newOffer)
   // check success response
-  var res = await sdkClient.createAudience(obj)
+  let res = await sdkClient.createAudience(obj)
   expect(res.body.id).toBe(123)
 
   res = await sdkClient.createAudience(obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -672,7 +672,7 @@ test('test getAudienceById', async () => {
 
   mockResponseWithMethod(url, method, mock.data.audience)
   // check success response
-  var res = await sdkClient.getAudienceById(111)
+  let res = await sdkClient.getAudienceById(111)
   expect(res.body.id).toBe(111)
 
   res = await sdkClient.getAudienceById(111, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -694,14 +694,14 @@ test('test updateAudience', async () => {
   const method = 'PUT'
   const api = 'updateAudience'
 
-  var obj = {
+  const obj = {
     name: 'Updated Gold Members in Califo-1495136673062',
     description: 'Description for my audience'
   }
 
   mockResponseWithMethod(url, method, mock.data.updatedAudience)
   // check success response
-  var res = await sdkClient.updateAudience(123, obj)
+  let res = await sdkClient.updateAudience(123, obj)
   expect(res.body.name).toBe('Updated Gold Members in Califo-1495136673062')
 
   res = await sdkClient.updateAudience(123, obj, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -723,7 +723,7 @@ test('test deleteAudience', async () => {
 
   mockResponseWithMethod(url, method, mock.data.audience)
   // check success response
-  var res = await sdkClient.deleteAudience(111)
+  let res = await sdkClient.deleteAudience(111)
   expect(res.body.id).toBe(111)
 
   res = await sdkClient.deleteAudience(111, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -747,7 +747,7 @@ test('test getProperties', async () => {
 
   mockResponseWithMethod(url, method, mock.data.properties)
   // check success response
-  var res = await sdkClient.getProperties()
+  let res = await sdkClient.getProperties()
   expect(res.body.total).toBe(2)
   expect(res.body.limit).toBe(10)
   expect(res.body.properties.length).toBe(2)
@@ -773,7 +773,7 @@ test('test getPropertyById', async () => {
 
   mockResponseWithMethod(url, method, mock.data.property)
   // check success response
-  var res = await sdkClient.getPropertyById(111)
+  let res = await sdkClient.getPropertyById(111)
   expect(res.body.id).toBe(111)
 
   res = await sdkClient.getPropertyById(111, { headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -797,7 +797,7 @@ test('test getMBoxes', async () => {
 
   mockResponseWithMethod(url, method, mock.data.mboxes)
   // check success response
-  var res = await sdkClient.getMBoxes()
+  let res = await sdkClient.getMBoxes()
   expect(res.body.total).toBe(2)
   expect(res.body.limit).toBe(5)
   expect(res.body.mboxes.length).toBe(2)
@@ -823,7 +823,7 @@ test('test getMBoxByName', async () => {
 
   mockResponseWithMethod(url, method, mock.data.mbox)
   // check success response
-  var res = await sdkClient.getMBoxByName('a1-mobile-mboxparams')
+  let res = await sdkClient.getMBoxByName('a1-mobile-mboxparams')
   expect(res.body.name).toBe('a1-mobile-mboxparams')
   expect(res.body.mboxParameters.length).toBe(3)
 
@@ -849,7 +849,7 @@ test('test getMBoxProfileAttributes', async () => {
 
   mockResponseWithMethod(url, method, mock.data.mboxParams)
   // check success response
-  var res = await sdkClient.getMBoxProfileAttributes()
+  let res = await sdkClient.getMBoxProfileAttributes()
   expect(res.body.mboxParameters.length).toBe(3)
 
   res = await sdkClient.getMBoxProfileAttributes({ headers: { accept: ACCEPT_HEADERS.V1 } })
@@ -871,7 +871,7 @@ test('test getEnvironments', async () => {
 
   mockResponseWithMethod(url, method, mock.data.environments)
   // check success response
-  var res = await sdkClient.getEnvironments()
+  let res = await sdkClient.getEnvironments()
   expect(res.body.total).toBe(3)
   expect(res.body.limit).toBe(2147483647)
   expect(res.body.environments.length).toBe(3)
@@ -897,7 +897,7 @@ test('test getABActivityPerformance', async () => {
 
   mockResponseWithMethod(url, method, mock.data.abPerformance)
   // check success response
-  var res = await sdkClient.getABActivityPerformance(111)
+  let res = await sdkClient.getABActivityPerformance(111)
   expect(res.body.reportParameters.activityId).toBe(111)
   expect(res.body.activity.metrics.length).toBe(1)
   expect(res.body.activity.experiences.length).toBe(1)
@@ -923,7 +923,7 @@ test('test getXTActivityPerformance', async () => {
 
   mockResponseWithMethod(url, method, mock.data.xtPerformance)
   // check success response
-  var res = await sdkClient.getXTActivityPerformance(123)
+  let res = await sdkClient.getXTActivityPerformance(123)
   expect(res.body.reportParameters.activityId).toBe(123)
   expect(res.body.activity.metrics.length).toBe(1)
   expect(res.body.activity.experiences.length).toBe(1)
@@ -949,7 +949,7 @@ test('test getActivityPerformance', async () => {
 
   mockResponseWithMethod(url, method, mock.data.performance)
   // check success response
-  var res = await sdkClient.getActivityPerformance(123)
+  let res = await sdkClient.getActivityPerformance(123)
   expect(res.body.reportParameters.activityId).toBe(123)
   expect(res.body.activity.metrics.length).toBe(1)
   expect(res.body.activity.experiences.length).toBe(1)
@@ -975,7 +975,7 @@ test('test getOrdersReport', async () => {
 
   mockResponseWithMethod(url, method, mock.data.report)
   // check success response
-  var res = await sdkClient.getOrdersReport(123)
+  let res = await sdkClient.getOrdersReport(123)
   expect(res.body.reportParameters.activityId).toBe(123)
   expect(res.body.activity.metrics.length).toBe(1)
   expect(res.body.activity.experiences.length).toBe(1)
@@ -1013,7 +1013,7 @@ test('test executeBatch', async () => {
   const method = 'POST'
   const api = 'executeBatch'
 
-  var obj = {
+  const obj = {
     operations: [
       {
         operationId: 1,
@@ -1034,7 +1034,7 @@ test('test executeBatch', async () => {
   }
   mockResponseWithMethod(url, method, mock.data.batch)
   // check success response
-  var res = await sdkClient.executeBatch(obj)
+  let res = await sdkClient.executeBatch(obj)
   expect(res.body.results.length).toBe(1)
 
   // check error responses

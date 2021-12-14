@@ -53,7 +53,8 @@ function init (tenant, apiKey, token) {
  * with valid tenant, apiKey and auth token
  */
 class TargetCoreAPI {
-  /** Initialize sdk.
+  /**
+   * Initialize sdk.
    *
    * @param {string} tenant Adobe Target tenant name
    * @param {string} apiKey Your api key
@@ -90,7 +91,8 @@ class TargetCoreAPI {
     }
   }
 
-  /** List activities.
+  /**
+   * List activities.
    * Get a list of activities created in your Target account, with the ability to filter and sort by attributes.
    *
    * @param {object} [options] to control activity search
@@ -114,7 +116,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Create AB Activity.
+  /**
+   * Create AB Activity.
    * Creates a new AB activity with the specified contents and returns the created activity.
    *
    * @param {object} body Activity JSON.
@@ -136,7 +139,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Create XT Activity.
+  /**
+   * Create XT Activity.
    * Creates a new XT activity with the specified contents and returns the created activity.
    *
    * @param {object} body Activity JSON.
@@ -158,7 +162,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get AB activity.
+  /**
+   * Get AB activity.
    * Fetch the current definition of an AB activity if it is found as referenced by the id.
    *
    * @param {number} id Activity id.
@@ -167,7 +172,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getABActivityById (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -182,7 +187,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get XT activity.
+  /**
+   * Get XT activity.
    * Fetch the current definition of XT activity if it is found as referenced by the id.
    *
    * @param {number} id Activity id.
@@ -191,7 +197,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getXTActivityById (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -206,7 +212,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Update AB activity.
+  /**
+   * Update AB activity.
    * Updates the AB activity definition with the contents as provided in the request. This can change the state and behaviour of an existing activity.
    *
    * @param {number} id Activity id.
@@ -216,7 +223,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   updateABActivity (id, body, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = { params, body }
     const headers = options.headers ? options.headers : {}
@@ -231,7 +238,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Update XT activity.
+  /**
+   * Update XT activity.
    * Update the current definition of XT activity if it is found as referenced by the id.
    *
    * @param {number} id Activity id.
@@ -241,7 +249,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   updateXTActivity (id, body, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -256,7 +264,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Update activity name.
+  /**
+   * Update activity name.
    * Updates the name of the AB activity that is referenced by the supplied id.
    *
    * @param {number} id Activity id.
@@ -266,9 +275,9 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   setActivityName (id, name, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
-    var body = {
+    const body = {
       name: name
     }
     const sdkDetails = { params, body }
@@ -284,7 +293,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Update Activity state.
+  /**
+   * Update Activity state.
    * Update state of an activity if it is found as referenced by the id.
    *
    * @param {number} id Activity id.
@@ -294,10 +304,10 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   setActivityState (id, state, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
 
-    var body = {
+    const body = {
       state: state
     }
     const sdkDetails = { params, body }
@@ -313,7 +323,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Update Activity priority.
+  /**
+   * Update Activity priority.
    * Update priority of an activity if it is found as referenced by the id.
    *
    * @param {number} id Activity id.
@@ -323,10 +334,10 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   setActivityPriority (id, priority, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
 
-    var body = {
+    const body = {
       priority: priority
     }
     const sdkDetails = { params, body }
@@ -342,7 +353,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Update Activity schedule.
+  /**
+   * Update Activity schedule.
    * Update schedule of an activity if it is found as referenced by the id.
    *
    * @param {number} id Activity id.
@@ -352,10 +364,10 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   setActivitySchedule (id, schedule, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
 
-    var body = {
+    const body = {
       schedule: schedule
     }
     const sdkDetails = { params, body }
@@ -371,7 +383,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Delete AB activity.
+  /**
+   * Delete AB activity.
    * Deletes the AB activity that is referenced by the id, if it is found.
    *
    * @param {number} id Activity id.
@@ -380,7 +393,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   deleteABActivity (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -395,7 +408,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Delete XT activity.
+  /**
+   * Delete XT activity.
    * Delete the current definition of an XT activity if it is found as referenced by the id.
    *
    * @param {number} id Activity id.
@@ -404,7 +418,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   deleteXTActivity (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -419,7 +433,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get Activity changelog.
+  /**
+   * Get Activity changelog.
    * Returns the changelog for a given activity id.
    *
    * @param {number} id Activity id.
@@ -428,7 +443,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getActivityChangeLog (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -443,7 +458,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** List Offers.
+  /**
+   * List Offers.
    * Retrieve the list of previously-created content offers. The parameters passed through the query string are optional and are used to indicate the sorting and filtering options.
    *
    * @param {object} [options] to control offer search.
@@ -467,7 +483,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get Offer.
+  /**
+   * Get Offer.
    * Retrieves the contents of an offer given an offer id.
    *
    * @param {number} id Offer id.
@@ -476,7 +493,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getOfferById (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -491,7 +508,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Create Offer.
+  /**
+   * Create Offer.
    * Creates a new content offer as defined by the request data.
    *
    * @param {object} body Offer JSON.
@@ -524,7 +542,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   updateOffer (id, body, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = { params, body }
     const headers = options.headers ? options.headers : {}
@@ -539,7 +557,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Delete Offer.
+  /**
+   * Delete Offer.
    * Deletes the content offer referenced by the provided id.
    *
    * @param {number} id Offer id.
@@ -548,7 +567,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   deleteOffer (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -563,7 +582,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** List Audiences.
+  /**
+   * List Audiences.
    * List all available audiences with options to filter and sort by each available field.
    *
    * @param {object} [options] options to control audience search.
@@ -587,7 +607,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Create Audience.
+  /**
+   * Create Audience.
    * Create a new audience as specified by the contents of the request and return the newly-created audience definition.
    *
    * @param {object} body Audience JSON.
@@ -609,7 +630,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get Audience.
+  /**
+   * Get Audience.
    * Get the audience definition specified by the provided id.
    *
    * @param {number} id Audience id.
@@ -618,7 +640,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getAudienceById (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -633,7 +655,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Update Audience.
+  /**
+   * Update Audience.
    * Update an audience with the new rules specified by the request data.
    *
    * @param {number} id Audience id.
@@ -643,7 +666,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   updateAudience (id, body, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = { params, body }
     const headers = options.headers ? options.headers : {}
@@ -658,7 +681,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Delete Audience.
+  /**
+   * Delete Audience.
    * Delete the audience referenced by the specified id.
    *
    * @param {number} id Audience id.
@@ -667,7 +691,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   deleteAudience (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -682,7 +706,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** List Properties.
+  /**
+   * List Properties.
    * Get a list of properties.
    *
    * @param {object} [options] sdk options
@@ -703,7 +728,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get Property.
+  /**
+   * Get Property.
    * Retrieve property by property Id..
    *
    * @param {number} id Property id.
@@ -712,7 +738,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getPropertyById (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -727,7 +753,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** List MBoxes.
+  /**
+   * List MBoxes.
    * List all available mboxes for a specific client with the options to filter and sort.
    *
    * @param {object} [options] sdk options
@@ -748,7 +775,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get MBox by name.
+  /**
+   * Get MBox by name.
    * Get the list of mbox parameters.
    *
    * @param {string} name MBox name.
@@ -757,7 +785,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getMBoxByName (name, options = {}) {
-    var params = {}
+    const params = {}
     params.mboxName = name
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -772,7 +800,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get Profile Attributes.
+  /**
+   * Get Profile Attributes.
    * Retrieve the list of available profile attributes and mbox parameters of type profile.
    *
    * @param {object} [options] sdk options
@@ -793,7 +822,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get Environments.
+  /**
+   * Get Environments.
    * List all available environments with the options to filter and sort. Use the Environments API to retrieve the environment IDs corresponding to the various host groups set for the client.
    *
    * @param {object} [options] sdk options
@@ -814,7 +844,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get AB activity performance.
+  /**
+   * Get AB activity performance.
    * Retrieve property by property Id.
    *
    * @param {number} id Activity id.
@@ -823,7 +854,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getABActivityPerformance (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -838,7 +869,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get activity performance.
+  /**
+   * Get activity performance.
    * Retrieve property by property Id.
    *
    * @param {number} id Activity id.
@@ -847,7 +879,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getXTActivityPerformance (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -862,7 +894,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get activity performance.
+  /**
+   * Get activity performance.
    * Retrieve the performance report data for the Automated Personalization activity referenced by the provided id.
    *
    * @param {number} id Activity id.
@@ -871,7 +904,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getActivityPerformance (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
@@ -886,7 +919,8 @@ class TargetCoreAPI {
     })
   }
 
-  /** Get Orders report.
+  /**
+   * Get Orders report.
    * Retrieve the orders/audit report data for an AB, XT or Autotmated Personalization Activity.
    *
    * @param {number} id Activity id.
@@ -895,7 +929,7 @@ class TargetCoreAPI {
    * @returns {Promise<Response>} a Promise resolving to a Response
    */
   getOrdersReport (id, options = {}) {
-    var params = {}
+    const params = {}
     params.id = id
     const sdkDetails = params
     const headers = options.headers ? options.headers : {}
