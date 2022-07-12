@@ -47,5 +47,8 @@
     "setupFilesAfterEnv": [
       "<rootDir>/test/jest.setup.js"
     ]
+  },
+  "engines": {
+    "node": "^14.18 || ^16.13 || >=18"
   }
 }
