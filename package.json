@@ -1,6 +1,6 @@
 {
   "name": "@adobe/aio-lib-target",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "Adobe Target SDK",
   "repository": "https://github.com/adobe/aio-lib-target",
   "main": "src/index.js",
