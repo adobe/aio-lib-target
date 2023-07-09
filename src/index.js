@@ -80,7 +80,7 @@ class TargetCoreAPI {
       // init swagger client
       const spec = require('../spec/target_api.json')
       const swagger = new Swagger({
-        spec: spec,
+        spec,
         usePromise: true
       })
       this.sdk = (await swagger)
@@ -278,7 +278,7 @@ class TargetCoreAPI {
     const params = {}
     params.id = id
     const body = {
-      name: name
+      name
     }
     const sdkDetails = { params, body }
     const headers = options.headers ? options.headers : {}
@@ -308,7 +308,7 @@ class TargetCoreAPI {
     params.id = id
 
     const body = {
-      state: state
+      state
     }
     const sdkDetails = { params, body }
     const headers = options.headers ? options.headers : {}
@@ -338,7 +338,7 @@ class TargetCoreAPI {
     params.id = id
 
     const body = {
-      priority: priority
+      priority
     }
     const sdkDetails = { params, body }
     const headers = options.headers ? options.headers : {}
@@ -368,7 +368,7 @@ class TargetCoreAPI {
     params.id = id
 
     const body = {
-      schedule: schedule
+      schedule
     }
     const sdkDetails = { params, body }
     const headers = options.headers ? options.headers : {}
@@ -1004,5 +1004,5 @@ class TargetCoreAPI {
 }
 
 module.exports = {
-  init: init
+  init
 }
