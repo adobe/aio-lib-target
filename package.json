@@ -35,7 +35,7 @@
     "jest-junit": "^10.0.0",
     "jest-plugin-fs": "^2.9.0",
     "jsdoc-to-markdown": "^5.0.0",
-    "openapi-schema-validator": "^3.0.3",
+    "openapi-schema-validator": "^12.1.0",
     "typescript": "^4.5.4"
   },
   "jest": {
