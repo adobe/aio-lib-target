@@ -49,7 +49,7 @@ test('sdk init error, no token passed', async () => {
   await expect(sdk.init(tenant, apiKey)).rejects.toThrow('[TargetSDK:ERROR_SDK_INITIALIZATION] SDK initialization error(s). Missing arguments: token')
 })
 
-test('test getActivities', async () => {
+test('getActivities', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities'
   const method = 'GET'
   const api = 'getActivities'
@@ -75,7 +75,7 @@ test('test getActivities', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITIES())
 })
 
-test('test createABActivity', async () => {
+test('createABActivity', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/ab'
   const method = 'POST'
   const api = 'createABActivity'
@@ -116,7 +116,7 @@ test('test createABActivity', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_AB_ACTIVITY())
 })
 
-test('test createXTActivity', async () => {
+test('createXTActivity', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/xt'
   const method = 'POST'
   const api = 'createXTActivity'
@@ -157,7 +157,7 @@ test('test createXTActivity', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_XT_ACTIVITY())
 })
 
-test('test getABActivityById', async () => {
+test('getABActivityById', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/ab/123'
   const method = 'GET'
   const api = 'getABActivityById'
@@ -181,7 +181,7 @@ test('test getABActivityById', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AB_ACTIVITY_BY_ID(), [123])
 })
 
-test('test getXTActivityById', async () => {
+test('getXTActivityById', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/xt/321'
   const method = 'GET'
   const api = 'getXTActivityById'
@@ -205,7 +205,7 @@ test('test getXTActivityById', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_XT_ACTIVITY_BY_ID(), [321])
 })
 
-test('test updateABActivity', async () => {
+test('updateABActivity', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/ab/123'
   const method = 'PUT'
   const api = 'updateABActivity'
@@ -247,7 +247,7 @@ test('test updateABActivity', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_AB_ACTIVITY(), [123, obj])
 })
 
-test('test updateXTActivity', async () => {
+test('updateXTActivity', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/xt/321'
   const method = 'PUT'
   const api = 'updateXTActivity'
@@ -289,7 +289,7 @@ test('test updateXTActivity', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_XT_ACTIVITY(), [321, obj])
 })
 
-test('test setActivityName', async () => {
+test('setActivityName', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/123/name'
   const method = 'PUT'
   const api = 'setActivityName'
@@ -313,7 +313,7 @@ test('test setActivityName', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_NAME(), [123, 'new name'])
 })
 
-test('test setActivityState', async () => {
+test('setActivityState', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/123/state'
   const method = 'PUT'
   const api = 'setActivityState'
@@ -337,7 +337,7 @@ test('test setActivityState', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_STATE(), [123, 'activated'])
 })
 
-test('test setActivityPriority', async () => {
+test('setActivityPriority', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/123/priority'
   const method = 'PUT'
   const api = 'setActivityPriority'
@@ -361,7 +361,7 @@ test('test setActivityPriority', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_PRIORITY(), [123, '5'])
 })
 
-test('test setActivitySchedule', async () => {
+test('setActivitySchedule', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/123/schedule'
   const method = 'PUT'
   const api = 'setActivitySchedule'
@@ -392,7 +392,7 @@ test('test setActivitySchedule', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_SET_ACTIVITY_SCHEDULE(), [123, obj])
 })
 
-test('test deleteABActivity', async () => {
+test('deleteABActivity', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/ab/123'
   const method = 'DELETE'
   const api = 'deleteABActivity'
@@ -416,7 +416,7 @@ test('test deleteABActivity', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_AB_ACTIVITY(), [123])
 })
 
-test('test deleteXTActivity', async () => {
+test('deleteXTActivity', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/xt/321'
   const method = 'DELETE'
   const api = 'deleteXTActivity'
@@ -440,7 +440,7 @@ test('test deleteXTActivity', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_XT_ACTIVITY(), [321])
 })
 
-test('test getActivityChangeLog', async () => {
+test('getActivityChangeLog', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/123/changelog'
   const method = 'GET'
   const api = 'getActivityChangeLog'
@@ -466,7 +466,7 @@ test('test getActivityChangeLog', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITY_CHANGELOG(), [123])
 })
 
-test('test getOffers', async () => {
+test('getOffers', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/offers'
   const method = 'GET'
   const api = 'getOffers'
@@ -492,7 +492,7 @@ test('test getOffers', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_OFFERS())
 })
 
-test('test getOfferById', async () => {
+test('getOfferById', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/offers/content/111'
   const method = 'GET'
   const api = 'getOfferById'
@@ -516,7 +516,7 @@ test('test getOfferById', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_OFFER_BY_ID(), [111])
 })
 
-test('test createOffer', async () => {
+test('createOffer', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/offers/content'
   const method = 'POST'
   const api = 'createOffer'
@@ -544,7 +544,7 @@ test('test createOffer', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_OFFER(), [obj])
 })
 
-test('test updateOffer', async () => {
+test('updateOffer', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/offers/content/123'
   const method = 'PUT'
   const api = 'updateOffer'
@@ -571,7 +571,7 @@ test('test updateOffer', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_OFFER(), [123, obj])
 })
 
-test('test deleteOffer', async () => {
+test('deleteOffer', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/offers/content/111'
   const method = 'DELETE'
   const api = 'deleteOffer'
@@ -595,7 +595,7 @@ test('test deleteOffer', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_OFFER(), [111])
 })
 
-test('test getAudiences', async () => {
+test('getAudiences', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/audiences'
   const method = 'GET'
   const api = 'getAudiences'
@@ -621,7 +621,7 @@ test('test getAudiences', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AUDIENCES())
 })
 
-test('test createAudience', async () => {
+test('createAudience', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/audiences'
   const method = 'POST'
   const api = 'createAudience'
@@ -665,7 +665,7 @@ test('test createAudience', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_CREATE_AUDIENCE(), [obj])
 })
 
-test('test getAudienceById', async () => {
+test('getAudienceById', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/audiences/111'
   const method = 'GET'
   const api = 'getAudienceById'
@@ -689,7 +689,7 @@ test('test getAudienceById', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AUDIENCE_BY_ID(), [111])
 })
 
-test('test updateAudience', async () => {
+test('updateAudience', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/audiences/123'
   const method = 'PUT'
   const api = 'updateAudience'
@@ -716,7 +716,7 @@ test('test updateAudience', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_UPDATE_AUDIENCE(), [123, obj])
 })
 
-test('test deleteAudience', async () => {
+test('deleteAudience', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/audiences/111'
   const method = 'DELETE'
   const api = 'deleteAudience'
@@ -740,7 +740,7 @@ test('test deleteAudience', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_DELETE_AUDIENCE(), [111])
 })
 
-test('test getProperties', async () => {
+test('getProperties', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/properties'
   const method = 'GET'
   const api = 'getProperties'
@@ -766,7 +766,7 @@ test('test getProperties', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_PROPERTIES())
 })
 
-test('test getPropertyById', async () => {
+test('getPropertyById', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/properties/111'
   const method = 'GET'
   const api = 'getPropertyById'
@@ -790,7 +790,7 @@ test('test getPropertyById', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_PROPERTY_BY_ID(), [111])
 })
 
-test('test getMBoxes', async () => {
+test('getMBoxes', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/mboxes'
   const method = 'GET'
   const api = 'getMBoxes'
@@ -816,7 +816,7 @@ test('test getMBoxes', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOXES())
 })
 
-test('test getMBoxByName', async () => {
+test('getMBoxByName', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/mbox/a1-mobile-mboxparams'
   const method = 'GET'
   const api = 'getMBoxByName'
@@ -842,7 +842,7 @@ test('test getMBoxByName', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOX_BY_NAME(), ['a1-mobile-mboxparams'])
 })
 
-test('test getMBoxProfileAttributes', async () => {
+test('getMBoxProfileAttributes', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/profileattributes/mbox'
   const method = 'GET'
   const api = 'getMBoxProfileAttributes'
@@ -864,7 +864,7 @@ test('test getMBoxProfileAttributes', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_MBOX_PROFILE_ATTRIBUTES())
 })
 
-test('test getEnvironments', async () => {
+test('getEnvironments', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/environments'
   const method = 'GET'
   const api = 'getEnvironments'
@@ -890,7 +890,7 @@ test('test getEnvironments', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ENVIRONMENTS())
 })
 
-test('test getABActivityPerformance', async () => {
+test('getABActivityPerformance', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/ab/111/report/performance'
   const method = 'GET'
   const api = 'getABActivityPerformance'
@@ -916,7 +916,7 @@ test('test getABActivityPerformance', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_AB_ACTIVITY_PERFORMANCE(), [111])
 })
 
-test('test getXTActivityPerformance', async () => {
+test('getXTActivityPerformance', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/xt/123/report/performance'
   const method = 'GET'
   const api = 'getXTActivityPerformance'
@@ -942,7 +942,7 @@ test('test getXTActivityPerformance', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_XT_ACTIVITY_PERFORMANCE(), [123])
 })
 
-test('test getActivityPerformance', async () => {
+test('getActivityPerformance', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/abt/123/report/performance'
   const method = 'GET'
   const api = 'getActivityPerformance'
@@ -968,7 +968,7 @@ test('test getActivityPerformance', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ACTIVITY_PERFORMANCE(), [123])
 })
 
-test('test getOrdersReport', async () => {
+test('getOrdersReport', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/activities/ab/123/report/orders'
   const method = 'GET'
   const api = 'getOrdersReport'
@@ -994,21 +994,21 @@ test('test getOrdersReport', async () => {
   res = await checkErrorResponse(api, url, method, new errorSDK.codes.ERROR_GET_ORDERS_REPORT(), [123])
 })
 
-test('test __setHeader preset api key header', async () => {
+test('__setHeader preset api key header', async () => {
   sdkClient = await sdk.init(tenant, apiKey, token)
   const req = { headers: { 'x-api-key': 'test' } }
   sdkClient.__setHeaders(req, sdkClient, {})
   expect(req.headers['x-api-key']).toBe('test')
 })
 
-test('test __setHeader preset authorization header', async () => {
+test('__setHeader preset authorization header', async () => {
   sdkClient = await sdk.init(tenant, apiKey, token)
   const req = { headers: { Authorization: 'test' } }
   sdkClient.__setHeaders(req, sdkClient, {})
   expect(req.headers.Authorization).toBe('test')
 })
 
-test('test executeBatch', async () => {
+test('executeBatch', async () => {
   const url = 'https://mc.adobe.io/test-tenant/target/batch'
   const method = 'POST'
   const api = 'executeBatch'
@@ -1047,17 +1047,17 @@ test('test executeBatch', async () => {
 })
 
 /** @private */
-function checkErrorResponse (fn, url, method, error, args = []) {
-  const client = sdkClient
-  return new Promise((resolve, reject) => {
-    (client[fn](args[0], args[1]))
-      .then(res => {
-        reject(new Error(' No error response'))
-      })
-      .catch(e => {
-        expect(e.name).toEqual(error.name)
-        expect(e.code).toEqual(error.code)
-        resolve()
-      })
-  })
+async function checkErrorResponse (fn, url, method, error, args = []) {
+  let e
+  try {
+    const client = sdkClient
+    await client[fn](args[0], args[1])
+    // should never get here
+    e = new Error('No error response')
+  } catch (err) {
+    e = err
+  }
+
+  expect(e.name).toEqual(error.name)
+  expect(e.code).toEqual(error.code)
 }
