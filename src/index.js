@@ -11,6 +11,11 @@ governing permissions and limitations under the License.
 
 'use strict'
 
+// polyfill for node < 15
+if (!global.AggregateError) {
+  global.AggregateError = require('es-aggregate-error')
+}
+
 const Swagger = require('swagger-client')
 const { codes } = require('./SDKErrors')
 const logger = require('@adobe/aio-lib-core-logging')('aio-lib-target', { level: process.env.LOG_LEVEL })
