@@ -12,9 +12,8 @@ governing permissions and limitations under the License.
 'use strict'
 
 // polyfill for node < 15
-if (!global.AggregateError) {
-  global.AggregateError = require('es-aggregate-error')
-}
+const AggregateError = require('es-aggregate-error')
+AggregateError.shim() // noop if not needed
 
 const Swagger = require('swagger-client')
 const { codes } = require('./SDKErrors')
