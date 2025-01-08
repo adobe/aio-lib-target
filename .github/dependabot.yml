@@ -5,7 +5,10 @@
 
 version: 2
 updates:
-    - package-ecosystem: "npm"
-      directory: "/"
-      schedule:
-          interval: "weekly"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    ignore:
+      - dependency-name: "node-fetch"
+        versions: ["3.x"]
