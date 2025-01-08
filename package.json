@@ -1,6 +1,6 @@
 {
   "name": "@adobe/aio-lib-target",
-  "version": "3.0.3",
+  "version": "4.0.1",
   "description": "Adobe Target SDK",
   "repository": "https://github.com/adobe/aio-lib-target",
   "main": "src/index.js",
@@ -14,21 +14,21 @@
     "validate": "bin/validate_spec.js spec/target_api.json"
   },
   "dependencies": {
-    "@adobe/aio-lib-core-errors": "^3.1.0",
-    "@adobe/aio-lib-core-logging": "^2.0.0",
+    "@adobe/aio-lib-core-errors": "^4",
+    "@adobe/aio-lib-core-logging": "^3",
     "swagger-client": "^3.19.10"
   },
   "devDependencies": {
-    "@adobe/eslint-config-aio-lib-config": "^2.0.1",
+    "@adobe/eslint-config-aio-lib-config": "^4.0.0",
     "dotenv": "^16.3.1",
-    "eslint": "^8.46.0",
+    "eslint": "^8.57.1",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.28.0",
-    "eslint-plugin-jest": "^27.2.3",
-    "eslint-plugin-jsdoc": "^42.0.0",
-    "eslint-plugin-n": "^15.7",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jest": "^27.9.0",
+    "eslint-plugin-jsdoc": "^48.11.0",
+    "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-promise": "^6.6.0",
     "eslint-plugin-standard": "^5.0.0",
     "fetch-mock": "^9.10.3",
     "jest": "^29.6.1",
@@ -50,6 +50,6 @@
     ]
   },
   "engines": {
-    "node": "^14.16 || ^16.13 || >=18"
+    "node": ">=18"
   }
 }
