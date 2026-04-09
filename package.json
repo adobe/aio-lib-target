@@ -35,7 +35,7 @@
     "jest-cli": "^29.5.0",
     "jest-junit": "^16.0.0",
     "jest-plugin-fs": "^2.9.0",
-    "jsdoc-to-markdown": "^8.0.0",
+    "jsdoc-to-markdown": "^9.1.1",
     "node-fetch": "^2.6.0",
     "openapi-schema-validator": "^12.1.0",
     "typescript": "^5.1.6"
